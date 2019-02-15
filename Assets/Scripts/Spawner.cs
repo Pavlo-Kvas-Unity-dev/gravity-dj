@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     public float SpawnRadius;
 
     public Transform SpawnCenter;
+    public int InitialSpeed = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,8 @@ public class Spawner : MonoBehaviour
     {
         var spawnPos = (Vector2)SpawnCenter.position + Random.insideUnitCircle * SpawnRadius;
 
-        Instantiate(FlyingAgentPrefab, spawnPos, Quaternion.identity);
+        var movement = Instantiate(FlyingAgentPrefab, spawnPos, Quaternion.identity).GetComponent<Movement>();
+        movement.Init(InitialSpeed);
     }
 
     void Update()

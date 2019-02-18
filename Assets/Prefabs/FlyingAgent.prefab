@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 980078423730225944}
+  - component: {fileID: 5020876621976913412}
+  - component: {fileID: 179399542433517784}
   - component: {fileID: 8726632387316289591}
   - component: {fileID: 6995656617790603771}
   - component: {fileID: 4710109291720696979}
   - component: {fileID: 2248786658513959372}
-  - component: {fileID: 5020876621976913412}
   m_Layer: 0
   m_Name: FlyingAgent
   m_TagString: Untagged
@@ -35,6 +36,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5020876621976913412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460188742633554749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3e29e1c844e32479b599e20519e2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &179399542433517784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460188742633554749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ede08996898b12448d1186d0f3233fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &8726632387316289591
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -117,15 +142,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5020876621976913412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 460188742633554749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d3e29e1c844e32479b599e20519e2a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

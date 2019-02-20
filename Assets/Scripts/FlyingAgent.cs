@@ -13,12 +13,10 @@ public class FlyingAgent : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy(this.gameObject);
-    }
-
-    private void OnDestroy()
-    {
         NumAgents--;
-        GameObject.FindObjectOfType<Spawner>().Spawn(); //todo
+        Destroy(this.gameObject);
+
+        var spawner = GameObject.FindObjectOfType<Spawner>();
+        spawner?.Spawn();
     }
 }

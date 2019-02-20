@@ -23,17 +23,19 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (FlyingAgent.NumAgents > 0)
-        {
-            Debug.Log("agent is already on screen");
-            return;
-        }
+        StartCoroutine(SpawnCoroutine());
+    }
+
+    private IEnumerator SpawnCoroutine()
+    {
+        yield return null;
 
         //spawn only if no Agent is on the screen
-        var spawnPos = (Vector2)SpawnCenter.position + Random.insideUnitCircle * SpawnRadius;
+        var spawnPos = (Vector2) SpawnCenter.position + Random.insideUnitCircle * SpawnRadius;
 
         var movement = Instantiate(FlyingAgentPrefab, spawnPos, Quaternion.identity).GetComponent<Movement>();
         movement.Init(InitialSpeed);
+        yield break;
     }
 
     void Update()

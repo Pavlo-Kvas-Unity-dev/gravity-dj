@@ -5,7 +5,13 @@ using UnityEngine;
 public class GravityController : MonoBehaviour
 {
     public double M = 500000;
-    
+    private float gravityStrengthCoef = 1.0f;
+
+    public void OnGravityStrengthChanged(float gravityStrengthCoef)
+    {
+        this.gravityStrengthCoef = gravityStrengthCoef;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("gravity contact");
@@ -15,7 +21,7 @@ public class GravityController : MonoBehaviour
         var distance = ((Vector2)transform.position - agentsCenterOfMass);
         //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
         double G = 6.67408E-11;
-        double acceleration = G * M / (distance.magnitude * distance.magnitude);
+        double acceleration = G * M * gravityStrengthCoef / (distance.magnitude * distance.magnitude);
         collision.attachedRigidbody.velocity += (distance.normalized * (float)acceleration * Time.deltaTime);
     }
 

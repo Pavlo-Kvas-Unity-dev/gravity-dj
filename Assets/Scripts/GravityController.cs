@@ -6,10 +6,19 @@ public class GravityController : MonoBehaviour
 {
     public double M = 500000;
     private float gravityStrengthCoef = 1.0f;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
 
     public void OnGravityStrengthChanged(float gravityStrengthCoef)
     {
         this.gravityStrengthCoef = gravityStrengthCoef;
+        var spriteRendererColor = spriteRenderer.color;
+        spriteRendererColor.a = gravityStrengthCoef;
+        spriteRenderer.color = spriteRendererColor;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

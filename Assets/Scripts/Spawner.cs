@@ -9,6 +9,18 @@ public class Spawner : MonoBehaviour
 {
     public GameObject FlyingAgentPrefab;
 
+    private float ObjectRadius
+    {
+        get
+        {
+            if (agentsCircleCollider2D == null)
+            {
+                agentsCircleCollider2D = FlyingAgentPrefab.GetComponentInChildren<CircleCollider2D>();
+            }
+            return agentsCircleCollider2D.radius;
+        }
+    }
+
     public float FieldSize = 5;
     private float FieldHalfSize => FieldSize / 2;
 
@@ -17,9 +29,10 @@ public class Spawner : MonoBehaviour
     public Transform SpawnCenter;
     public int InitialSpeed = 5;
     public bool SpawnOnStart = true;
-
+    CircleCollider2D agentsCircleCollider2D;
 
     // Start is called before the first frame update
+
 
     void Start()
     {
@@ -28,6 +41,20 @@ public class Spawner : MonoBehaviour
             Spawn();
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        DrawSpawnBoundary();
+    }
+
+    private void DrawSpawnBoundary()
+    {
+        var prevColor = Gizmos.color;
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Vector3.zero, MinAllowedDistanceFromCenter(ObjectRadius));
+        Gizmos.color = prevColor;
+    }
+
 
     public void Spawn()
     {
@@ -42,21 +69,24 @@ public class Spawner : MonoBehaviour
         yield break;
     }
 
+    private float MinAllowedDistanceFromCenter(float objectRadius)
+    {
+        return FieldHalfSize - MaxDistanceFromBoundary + objectRadius;
+    }
+
     private void SpawnImmediate()
     {
-        float objectRadius = FlyingAgentPrefab.GetComponentInChildren<CircleCollider2D>().radius;
-        Assert.IsTrue(MaxDistanceFromBoundary > objectRadius);
+        Assert.IsTrue(MaxDistanceFromBoundary > ObjectRadius);
 
         var xPos = Random.Range(0, FieldSize);
         var yPos = Random.Range(0, FieldSize);
 
-        CheckBoundaries(ref xPos, objectRadius, FieldSize);
-        CheckBoundaries(ref yPos, objectRadius, FieldSize);
+        CheckBoundaries(ref xPos, ObjectRadius, FieldSize);
+        CheckBoundaries(ref yPos, ObjectRadius, FieldSize);
 
         var spawnPos = new Vector2(xPos, yPos);
         spawnPos -= Vector2.one * FieldHalfSize;
-        float minAllowedDistanceFromCenter = FieldHalfSize - MaxDistanceFromBoundary;
-        float cappedMagnitude = Mathf.Max(spawnPos.magnitude, minAllowedDistanceFromCenter);
+        float cappedMagnitude = Mathf.Max(spawnPos.magnitude, MinAllowedDistanceFromCenter(ObjectRadius) + ObjectRadius);
         spawnPos = spawnPos.normalized * cappedMagnitude;
 
         //spawn only if no Agent is on the screen

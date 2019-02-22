@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public GameObject FlyingAgentPrefab;
+    public FieldController fieldController;
 
     private float ObjectRadius
     {
@@ -21,8 +22,8 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public float FieldSize = 5;
-    private float FieldHalfSize => FieldSize / 2;
+    private float fieldSize = 5;
+    private float FieldHalfSize => fieldController.FieldSize / 2;
 
     public float MaxDistanceFromBoundary = 1;
 
@@ -78,11 +79,11 @@ public class Spawner : MonoBehaviour
     {
         Assert.IsTrue(MaxDistanceFromBoundary > ObjectRadius);
 
-        var xPos = Random.Range(0, FieldSize);
-        var yPos = Random.Range(0, FieldSize);
+        var xPos = Random.Range(0, fieldController.FieldSize);
+        var yPos = Random.Range(0, fieldController.FieldSize);
 
-        CheckBoundaries(ref xPos, ObjectRadius, FieldSize);
-        CheckBoundaries(ref yPos, ObjectRadius, FieldSize);
+        CheckBoundaries(ref xPos, ObjectRadius, fieldController.FieldSize);
+        CheckBoundaries(ref yPos, ObjectRadius, fieldController.FieldSize);
 
         var spawnPos = new Vector2(xPos, yPos);
         spawnPos -= Vector2.one * FieldHalfSize;

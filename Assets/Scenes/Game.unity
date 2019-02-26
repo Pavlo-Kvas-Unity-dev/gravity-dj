@@ -1467,7 +1467,7 @@ MonoBehaviour:
   fieldController: {fileID: 154322509}
   MaxDistanceFromBoundary: 1.7
   SpawnCenter: {fileID: 1115030002}
-  InitialSpeed: 0
+  InitialSpeed: 5
   SpawnOnStart: 1
 --- !u!4 &1701100094
 Transform:

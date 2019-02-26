@@ -230,6 +230,7 @@ MonoBehaviour:
   FieldController: {fileID: 154322509}
   gravitySizeSlider: {fileID: 889204256}
   M: 1000000000000
+  ChangeSizeSensitivity: 1.4
 --- !u!212 &243806708
 SpriteRenderer:
   m_ObjectHideFlags: 0

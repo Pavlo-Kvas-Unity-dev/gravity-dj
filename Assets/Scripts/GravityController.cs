@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,10 +14,18 @@ public class GravityController : MonoBehaviour
     public double M = 500000;
     private float gravityStrengthCoef = 1.0f;
     private SpriteRenderer spriteRenderer;
+    private CircleCollider2D collider;
+    public float ChangeSizeSensitivity = 1.5f;
 
     private void Awake()
     {
+        collider = GetComponentInChildren<CircleCollider2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        
+    }
+
+    private void Start()
+    {
         gravitySizeSlider.onValueChanged.AddListener(SetSize);
         gravitySizeSlider.value = initialSizeNorm;
     }
@@ -30,7 +40,6 @@ public class GravityController : MonoBehaviour
 
     public void SetSize(float sizeNorm)
     {
-        var collider = GetComponentInChildren<CircleCollider2D>();
         collider.transform.localScale = FieldController.FieldSize * sizeNorm * Vector3.one;
     }
 
@@ -47,4 +56,17 @@ public class GravityController : MonoBehaviour
         collision.attachedRigidbody.velocity += (distance.normalized * (float)acceleration * Time.deltaTime);
     }
 
+    private void Update()
+    {
+        var hor = Input.GetAxis("Horizontal");
+        if (Math.Abs(hor) > Mathf.Epsilon)
+        {
+            float sizeNorm = GetSizeNorm() + hor * ChangeSizeSensitivity * Time.deltaTime;
+             
+            sizeNorm = Mathf.Clamp01(sizeNorm);
+            SetSize(sizeNorm);
+        }
+    }
+
+    private float GetSizeNorm() => collider.transform.localScale.x / FieldController.FieldSize;
 }

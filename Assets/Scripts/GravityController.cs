@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -35,10 +36,10 @@ public class GravityController : MonoBehaviour
         get { return gravityStrengthNorm; }
         set
         {
-            gravityStrengthNorm = value;
+            gravityStrengthNorm = Mathf.Clamp01(value);
             
             var color = spriteRenderer.color;
-            color.a = value;
+            color.a = gravityStrengthNorm;
             spriteRenderer.color = color;
         }
     }

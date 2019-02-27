@@ -79,8 +79,8 @@ public class Spawner : MonoBehaviour
     {
         Assert.IsTrue(MaxDistanceFromBoundary > ObjectRadius);
 
-        var xPos = Random.Range(0, fieldController.FieldSize);
-        var yPos = Random.Range(0, fieldController.FieldSize);
+        var xPos = Random.Range(0f, fieldController.FieldSize);
+        var yPos = Random.Range(0f, fieldController.FieldSize);
 
         CheckBoundaries(ref xPos, ObjectRadius, fieldController.FieldSize);
         CheckBoundaries(ref yPos, ObjectRadius, fieldController.FieldSize);
@@ -95,7 +95,7 @@ public class Spawner : MonoBehaviour
         movement.Init(InitialSpeed);
     }
 
-    private void CheckBoundaries(ref float coord, float objectRadius, float fieldSize)
+    private void CheckBoundaries(ref float coord, float objectRadius, int fieldSize)
     {
         coord = Mathf.Max(coord, objectRadius);
         coord = Mathf.Min(coord, fieldSize - objectRadius);

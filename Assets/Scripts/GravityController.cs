@@ -1,21 +1,46 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GravityController : MonoBehaviour
 {
     public FieldController FieldController;
-    public Slider gravitySizeSlider;
+    
+    [SerializeField] private Slider gravitySizeSlider;
+    
+    [FormerlySerializedAs("gravityDensitySlider")]
+    [SerializeField] private Slider gravityStrengthSlider;
+    
     private float initialSizeNorm = .5f;
 
     public double M = 500000;
-    private float gravityStrengthCoef = 1.0f;
+    /// <summary>
+    /// the value is in range (0,1)
+    /// </summary>
+    private float gravityStrengthNorm = 1.0f;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D collider;
     public float ChangeSizeSensitivity = 1.5f;
+
+    /// <summary>
+    /// the value is in range (0,1)
+    /// </summary>
+    public float GravityStrengthNorm
+    {
+        get { return gravityStrengthNorm; }
+        set
+        {
+            gravityStrengthNorm = value;
+            
+            var color = spriteRenderer.color;
+            color.a = value;
+            spriteRenderer.color = color;
+        }
+    }
 
     private void Awake()
     {
@@ -28,14 +53,14 @@ public class GravityController : MonoBehaviour
     {
         gravitySizeSlider.onValueChanged.AddListener(SetSize);
         gravitySizeSlider.value = initialSizeNorm;
+        
+        gravityStrengthSlider.onValueChanged.AddListener(OnGravityStrengthChanged);
+        gravityStrengthSlider.value = GravityStrengthNorm;
     }
 
     public void OnGravityStrengthChanged(float gravityStrengthCoef)
     {
-        this.gravityStrengthCoef = gravityStrengthCoef;
-        var spriteRendererColor = spriteRenderer.color;
-        spriteRendererColor.a = gravityStrengthCoef;
-        spriteRenderer.color = spriteRendererColor;
+        GravityStrengthNorm = gravityStrengthCoef;
     }
 
     public void SetSize(float sizeNorm)
@@ -52,7 +77,7 @@ public class GravityController : MonoBehaviour
         var distance = ((Vector2)transform.position - agentsCenterOfMass);
         //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
         double G = 6.67408E-11;
-        double acceleration = G * M * gravityStrengthCoef / (distance.magnitude * distance.magnitude);
+        double acceleration = G * M * GravityStrengthNorm / (distance.magnitude * distance.magnitude);
         collision.attachedRigidbody.velocity += (distance.normalized * (float)acceleration * Time.deltaTime);
     }
 

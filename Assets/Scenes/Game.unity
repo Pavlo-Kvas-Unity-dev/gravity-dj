@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FieldController: {fileID: 154322509}
   gravitySizeSlider: {fileID: 889204256}
+  gravityDensitySlider: {fileID: 1483235939}
   M: 1000000000000
   ChangeSizeSensitivity: 1.4
 --- !u!212 &243806708
@@ -1316,18 +1317,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 243806707}
-        m_MethodName: OnGravityStrengthChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1635659369

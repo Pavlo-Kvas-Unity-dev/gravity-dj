@@ -229,9 +229,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FieldController: {fileID: 154322509}
   gravitySizeSlider: {fileID: 889204256}
-  gravityDensitySlider: {fileID: 1483235939}
+  gravityStrengthSlider: {fileID: 1483235939}
   M: 1000000000000
   ChangeSizeSensitivity: 1.4
+  gravityStrengthChangeSpeed: 1.4
 --- !u!212 &243806708
 SpriteRenderer:
   m_ObjectHideFlags: 0

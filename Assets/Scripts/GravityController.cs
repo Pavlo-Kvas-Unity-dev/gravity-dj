@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
@@ -25,6 +25,7 @@ public class GravityController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D collider;
     public float ChangeSizeSensitivity = 1.5f;
+    [SerializeField] private float gravityStrengthChangeSpeed;
 
     /// <summary>
     /// the value is in range (0,1)
@@ -83,6 +84,7 @@ public class GravityController : MonoBehaviour
 
     private void Update()
     {
+        //read input for changing gravity extents
         var hor = Input.GetAxis("Horizontal");
         if (Math.Abs(hor) > Mathf.Epsilon)
         {
@@ -90,6 +92,15 @@ public class GravityController : MonoBehaviour
              
             sizeNorm = Mathf.Clamp01(sizeNorm);
             SetSize(sizeNorm);
+        }
+        
+        //read input for changing gravity density
+        var vert = Input.GetAxis("Vertical");
+        if (Mathf.Abs(vert) > Mathf.Epsilon)
+        {
+            var deltaStrength = Time.deltaTime * gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
+            GravityStrengthNorm += deltaStrength;
+            Debug.Log(deltaStrength);
         }
     }
 

@@ -22,8 +22,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private float fieldSize = 5;
-    private float FieldHalfSize => fieldController.FieldSize / 2;
+     
 
     public float MaxDistanceFromBoundary = 1;
 
@@ -74,7 +73,7 @@ public class Spawner : MonoBehaviour
 
     private float MinAllowedDistanceFromCenter(float objectRadius)
     {
-        return FieldHalfSize - MaxDistanceFromBoundary + objectRadius;
+        return fieldController.FieldSize/2 - fieldController.BorderSize - MaxDistanceFromBoundary + objectRadius;
     }
 
     private void SpawnImmediate()
@@ -88,7 +87,7 @@ public class Spawner : MonoBehaviour
         CheckBoundaries(ref yPos, ObjectRadius, fieldController.FieldSize);
 
         var spawnPos = new Vector2(xPos, yPos);
-        spawnPos -= Vector2.one * FieldHalfSize;
+        spawnPos -= Vector2.one * (fieldController.FieldSize/2 - fieldController.BorderSize);
         float cappedMagnitude = Mathf.Max(spawnPos.magnitude, MinAllowedDistanceFromCenter(ObjectRadius) + ObjectRadius);
         spawnPos = spawnPos.normalized * cappedMagnitude;
 

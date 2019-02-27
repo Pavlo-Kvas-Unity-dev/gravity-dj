@@ -9,7 +9,10 @@ public class FieldController : MonoBehaviour
 
     [SerializeField] private Transform spawnCenter;
 
-    [SerializeField] private float cellSize = 1f;
+    [SerializeField] public float cellSize = 1f;
+
+    public float BorderSize => cellSize;
+    
     [SerializeField] private List<Vector2Int>  holeCoordList = new List<Vector2Int>();
     private GameObject[,] field;
 

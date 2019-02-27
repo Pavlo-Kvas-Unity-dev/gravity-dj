@@ -10,24 +10,40 @@ public class FieldController : MonoBehaviour
     [SerializeField] private Transform spawnCenter;
 
     [SerializeField] private float cellSize = 1f;
+    [SerializeField] private List<Vector2Int>  holeCoordList = new List<Vector2Int>();
+    private GameObject[,] field;
 
+    public GameObject this[Vector2Int coord]
+    {
+        get { return field[coord.x, coord.y]; }
+        set { field[coord.x, coord.y] = value; }      
+    }
+    
     // Start is called before the first frame update
     void Awake()
     {
-        //spawn upper and lower boundaries
-        for (int x = 0; x < FieldSize; x++)
+        field = new GameObject[FieldSize,FieldSize];
+        for (int x = 0, y = 0; x < FieldSize && y < FieldSize; x++, y++)
         {
-            
-            Instantiate(boundaryPrefab, GetPosByFieldCoordinates(x, FieldSize - 1), Quaternion.identity);
-            Instantiate(boundaryPrefab, GetPosByFieldCoordinates(x, 0), Quaternion.identity);
+            SpawnBorderTile(x, FieldSize - 1);
+            SpawnBorderTile(x, 0);
+            SpawnBorderTile(0, y);
+            SpawnBorderTile(FieldSize-1, y);
         }
-        
-        //spawn left and right boundaries
-        for (int y = 0; y < FieldSize; y++)
+
+        foreach (var holeCoord in holeCoordList)
         {
-            Instantiate(boundaryPrefab, GetPosByFieldCoordinates(0, y), Quaternion.identity);
-            Instantiate(boundaryPrefab, GetPosByFieldCoordinates(FieldSize - 1, y), Quaternion.identity);
+            var borderTile = this[holeCoord];
+            if (borderTile != null)
+            {
+                Destroy(borderTile);   
+            }
         }
+    }
+
+    private void SpawnBorderTile(int x, int y)
+    {
+        field[x,y] = Instantiate(boundaryPrefab, GetPosByFieldCoordinates(x, y), Quaternion.identity);
     }
 
     private Vector2 GetPosByFieldCoordinates(int x, int y)

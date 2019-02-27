@@ -146,6 +146,8 @@ MonoBehaviour:
     type: 3}
   spawnCenter: {fileID: 1115030002}
   cellSize: 1
+  holeCoordList:
+  - {x: 5, y: 0}
 --- !u!4 &154322510
 Transform:
   m_ObjectHideFlags: 0

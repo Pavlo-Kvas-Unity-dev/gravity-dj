@@ -1,9 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FlyingAgent : MonoBehaviour
 {
+    public delegate void OnAgentFlyThroughHoleEventHandler(FlyingAgent sender);
+
+    public event OnAgentFlyThroughHoleEventHandler flyAway;
+    
     public static int NumAgents { get; private set; } = 0;
 
     void Awake()
@@ -15,8 +20,6 @@ public class FlyingAgent : MonoBehaviour
     {
         NumAgents--;
         Destroy(this.gameObject);
-
-        var spawner = GameObject.FindObjectOfType<Spawner>();
-        spawner?.Spawn();
+        flyAway.Invoke(this);
     }
 }

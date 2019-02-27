@@ -32,6 +32,8 @@ public class Spawner : MonoBehaviour
     public bool SpawnOnStart = true;
     CircleCollider2D agentsCircleCollider2D;
 
+    [SerializeField] private GameController gameController;
+
     // Start is called before the first frame update
 
 
@@ -91,7 +93,15 @@ public class Spawner : MonoBehaviour
         spawnPos = spawnPos.normalized * cappedMagnitude;
 
         //spawn only if no Agent is on the screen
-        var movement = Instantiate(FlyingAgentPrefab, spawnPos, Quaternion.identity).GetComponent<Movement>();
+        var flyingAgentGO = Instantiate(FlyingAgentPrefab, spawnPos, Quaternion.identity);
+        var movement = flyingAgentGO.GetComponent<Movement>();
+        var flyingAgent = flyingAgentGO.GetComponent<FlyingAgent>();
+
+        flyingAgent.flyAway += new FlyingAgent.OnAgentFlyThroughHoleEventHandler(sender =>
+        {
+            gameController.OnAgentFlewAway(sender);
+            Spawn();
+        });
         movement.Init(InitialSpeed);
     }
 

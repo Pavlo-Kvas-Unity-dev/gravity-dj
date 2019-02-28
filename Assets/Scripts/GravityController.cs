@@ -13,7 +13,6 @@ public class GravityController : MonoBehaviour
     
     [SerializeField] private Slider gravitySizeSlider;
     
-    [FormerlySerializedAs("gravityDensitySlider")]
     [SerializeField] private Slider gravityStrengthSlider;
     
     private float initialSizeNorm = .5f;
@@ -53,21 +52,40 @@ public class GravityController : MonoBehaviour
 
     private void Start()
     {
-        gravitySizeSlider.onValueChanged.AddListener(SetSize);
+        gravitySizeSlider.onValueChanged.AddListener(OnGravitySizeSliderValueChanged);
         gravitySizeSlider.value = initialSizeNorm;
         
-        gravityStrengthSlider.onValueChanged.AddListener(OnGravityStrengthChanged);
+        gravityStrengthSlider.onValueChanged.AddListener(OnGravityStrengthSliderValueChanged);
         gravityStrengthSlider.value = GravityStrengthNorm;
     }
 
-    public void OnGravityStrengthChanged(float gravityStrengthCoef)
+    public void OnGravityStrengthSliderValueChanged(float gravityStrengthNorm)
     {
-        GravityStrengthNorm = gravityStrengthCoef;
+        SetGravityStrength(gravityStrengthNorm, false);
+    }
+    
+    public void SetGravityStrength(float gravityStrengthNorm, bool updateUI)
+    {
+        GravityStrengthNorm = gravityStrengthNorm;
+        if (updateUI)
+        {
+            gravityStrengthSlider.value = GravityStrengthNorm;
+        }
     }
 
-    public void SetSize(float sizeNorm)
+    public void OnGravitySizeSliderValueChanged(float sizeNorm)
+    {
+        SetSize(sizeNorm, false);
+    }
+    
+    public void SetSize(float sizeNorm, bool updateUI)
     {
         collider.transform.localScale = FieldController.FieldSize * sizeNorm * Vector3.one;
+        
+        if (updateUI)
+        {
+            gravitySizeSlider.value = sizeNorm;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -92,7 +110,7 @@ public class GravityController : MonoBehaviour
             float sizeNorm = GetSizeNorm() + hor * ChangeSizeSensitivity * Time.deltaTime;
              
             sizeNorm = Mathf.Clamp01(sizeNorm);
-            SetSize(sizeNorm);
+            SetSize(sizeNorm, true);
         }
         
         //read input for changing gravity density
@@ -100,7 +118,7 @@ public class GravityController : MonoBehaviour
         if (Mathf.Abs(vert) > Mathf.Epsilon)
         {
             var deltaStrength = Time.deltaTime * gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
-            GravityStrengthNorm += deltaStrength;
+            SetGravityStrength(GravityStrengthNorm+deltaStrength, true);
             Debug.Log(deltaStrength);
         }
     }

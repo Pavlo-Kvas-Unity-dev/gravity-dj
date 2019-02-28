@@ -27,22 +27,6 @@ public class GravityController : MonoBehaviour
     public float ChangeSizeSensitivity = 1.5f;
     [SerializeField] private float gravityStrengthChangeSpeed;
 
-    /// <summary>
-    /// the value is in range (0,1)
-    /// </summary>
-    public float GravityStrengthNorm
-    {
-        get { return gravityStrengthNorm; }
-        set
-        {
-            gravityStrengthNorm = Mathf.Clamp01(value);
-            
-            var color = spriteRenderer.color;
-            color.a = gravityStrengthNorm;
-            spriteRenderer.color = color;
-        }
-    }
-
     private void Awake()
     {
         collider = GetComponentInChildren<CircleCollider2D>();
@@ -56,7 +40,7 @@ public class GravityController : MonoBehaviour
         gravitySizeSlider.value = initialSizeNorm;
         
         gravityStrengthSlider.onValueChanged.AddListener(OnGravityStrengthSliderValueChanged);
-        gravityStrengthSlider.value = GravityStrengthNorm;
+        gravityStrengthSlider.value = gravityStrengthNorm;
     }
 
     public void OnGravityStrengthSliderValueChanged(float gravityStrengthNorm)
@@ -66,10 +50,15 @@ public class GravityController : MonoBehaviour
     
     public void SetGravityStrength(float gravityStrengthNorm, bool updateUI)
     {
-        GravityStrengthNorm = gravityStrengthNorm;
+        this.gravityStrengthNorm = gravityStrengthNorm = Mathf.Clamp01(gravityStrengthNorm);
+        
+        var color = spriteRenderer.color;
+        color.a = gravityStrengthNorm;
+        spriteRenderer.color = color;
+        
         if (updateUI)
         {
-            gravityStrengthSlider.value = GravityStrengthNorm;
+            gravityStrengthSlider.value = gravityStrengthNorm;
         }
     }
 
@@ -97,7 +86,7 @@ public class GravityController : MonoBehaviour
         var distance = ((Vector2)transform.position - agentsCenterOfMass);
         //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
         double G = 6.67408E-11;
-        double acceleration = G * M * GravityStrengthNorm / (distance.magnitude * distance.magnitude);
+        double acceleration = G * M * gravityStrengthNorm / (distance.magnitude * distance.magnitude);
         collision.attachedRigidbody.velocity += (distance.normalized * (float)acceleration * Time.deltaTime);
     }
 
@@ -118,7 +107,7 @@ public class GravityController : MonoBehaviour
         if (Mathf.Abs(vert) > Mathf.Epsilon)
         {
             var deltaStrength = Time.deltaTime * gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
-            SetGravityStrength(GravityStrengthNorm+deltaStrength, true);
+            SetGravityStrength(gravityStrengthNorm+deltaStrength, true);
             Debug.Log(deltaStrength);
         }
     }

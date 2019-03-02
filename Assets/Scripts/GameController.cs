@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private Text scoreText;
     [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private GameOverScreen gameOverScreen;
+    
     private int score = 0;
     private bool isGamePlaing = false;
     private float timeLeft;
@@ -43,8 +45,12 @@ public class GameController : MonoBehaviour
         {
             countdownText.text = $"Time left: {(int) timeLeft}";
             timeLeft -= Time.deltaTime;
-            
-            if (timeLeft < 0) isGamePlaing = false;
+
+            if (timeLeft < 0)
+            {
+                isGamePlaing = false;
+                gameOverScreen.Show(score);
+            }
         }
     }
 }

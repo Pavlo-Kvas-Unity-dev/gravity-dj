@@ -26,6 +26,9 @@ public class GravityController : MonoBehaviour
     private CircleCollider2D collider;
     public float ChangeSizeSensitivity = 1.5f;
     [SerializeField] private float gravityStrengthChangeSpeed;
+    public int gravitationFalloffCoef = 2;
+    public bool capAcceleration;
+    public float maxAcceleration = 50;
 
     private void Awake()
     {
@@ -86,7 +89,13 @@ public class GravityController : MonoBehaviour
         var distance = ((Vector2)transform.position - agentsCenterOfMass);
         //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
         double G = 6.67408E-11;
-        double acceleration = G * M * gravityStrengthNorm / (distance.magnitude * distance.magnitude);
+        double acceleration = G * M * gravityStrengthNorm / (Mathf.Pow(distance.magnitude,gravitationFalloffCoef));
+        if (capAcceleration)
+        {
+            acceleration = Math.Min(acceleration, maxAcceleration);
+        }
+        Debug.Log(acceleration);
+        
         collision.attachedRigidbody.velocity += (distance.normalized * (float)acceleration * Time.deltaTime);
     }
 

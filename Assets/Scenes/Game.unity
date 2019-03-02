@@ -237,6 +237,9 @@ MonoBehaviour:
   M: 1000000000000
   ChangeSizeSensitivity: 1.4
   gravityStrengthChangeSpeed: 1.4
+  gravitationFalloffCoef: 2
+  capAcceleration: 1
+  maxAcceleration: 150
 --- !u!212 &243806708
 SpriteRenderer:
   m_ObjectHideFlags: 0

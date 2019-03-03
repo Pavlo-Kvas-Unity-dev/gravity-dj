@@ -24,7 +24,7 @@ public class GameOverScreen : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Show(int score)
+    public void Show(int score, int bestScore)
     {
         gameObject.SetActive(true);
         gameOverText.text = $"Game over. \nYou scored {score} points";

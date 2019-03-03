@@ -3,9 +3,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Text scoreText;
+    [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private GameOverScreen gameOverScreen;
     
@@ -13,39 +15,49 @@ public class GameController : MonoBehaviour
     private bool isGamePlaing = false;
     private float timeLeft;
     [SerializeField] private float gameDuration = 100f;
-  
+    
+    private int? highScore;
 
     // Start is called before the first frame update
-    void Start()
+    private int HighScore
     {
-         
-        StartGame();
+        get
+        {
+            TryUpdateHighScore();
+            
+            return highScore.Value;
+        }
+        set
+        {
+            highScore = value;
+            SaveHighScore(value);
+        }
     }
 
-    private void StartGame()
+    [ContextMenu("ClearHighScore")]
+    public void ClearHighScore()
     {
-        Time.timeScale = 1;
-        score = 0;
-        UpdateScoreUI();
-        timeLeft = gameDuration;
-        isGamePlaing = true;
-    }
-
-    public void OnRestart()
-    {
-//        StartGame(); 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        HighScore = 0;
     }
     
-    public void OnAgentFlewAway(FlyingAgent flyingAgent)
+    private void SaveHighScore(int value)
     {
-        score++;
-        UpdateScoreUI();
+        PlayerPrefs.SetInt(nameof(highScore), value);
     }
 
-    private void UpdateScoreUI()
+    public int Score
     {
-        scoreText.text = $"Score: {score}";
+        get { return score; }
+        set
+        {
+            score = value;
+            TryUpdateHighScore();
+        }
+    }
+
+    void Start()
+    {
+        StartGame();
     }
 
     private void FixedUpdate()
@@ -62,10 +74,63 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void StartGame()
+    {
+        Time.timeScale = 1;
+        Score = 0;
+        UpdateScore();
+        timeLeft = gameDuration;
+        isGamePlaing = true;
+        
+        UpdateHighScoreUI();
+    }
+
+    private void UpdateHighScoreUI()
+    {
+        bestScoreText.text = $"Best score: {HighScore}";
+    }
+
+    private void TryUpdateHighScore()
+    {
+        ReadHighScoreIfNull();
+        if (Score > highScore)
+        {
+            highScore = Score;
+            SaveHighScore(highScore.Value);
+        }
+    }
+
+    private void ReadHighScoreIfNull()
+    {
+        if (!highScore.HasValue)
+        {
+            highScore = PlayerPrefs.GetInt(nameof(highScore), 0);
+        }
+    }
+
+    public void OnRestart()
+    {
+//        StartGame(); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnAgentFlewAway(FlyingAgent flyingAgent)
+    {
+        Score++;
+        UpdateScore();
+    }
+
+    private void UpdateScore()
+    {
+        scoreText.text = $"Score: {Score}";
+    }
+
     private void GameOver()
     {
+        
         Time.timeScale = 0;
         isGamePlaing = false;
-        gameOverScreen.Show(score);
+        UpdateHighScoreUI();
+        gameOverScreen.Show(Score, HighScore);
     }
 }

@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
+        Time.timeScale = 1;
         score = 0;
         UpdateScoreUI();
         timeLeft = gameDuration;
@@ -54,9 +55,15 @@ public class GameController : MonoBehaviour
 
             if (timeLeft < 0)
             {
-                isGamePlaing = false;
-                gameOverScreen.Show(score);
+                GameOver();
             }
         }
+    }
+
+    private void GameOver()
+    {
+        Time.timeScale = 0;
+        isGamePlaing = false;
+        gameOverScreen.Show(score);
     }
 }

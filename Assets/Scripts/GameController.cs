@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,20 +12,28 @@ public class GameController : MonoBehaviour
     private bool isGamePlaing = false;
     private float timeLeft;
     [SerializeField] private float gameDuration = 100f;
+  
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdateScoreUI();
+         
         StartGame();
     }
 
     private void StartGame()
     {
+        score = 0;
+        UpdateScoreUI();
         timeLeft = gameDuration;
         isGamePlaing = true;
     }
 
+    public void OnRestart()
+    {
+        StartGame();
+    }
+    
     public void OnAgentFlewAway(FlyingAgent flyingAgent)
     {
         score++;

@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -32,7 +33,8 @@ public class GameController : MonoBehaviour
 
     public void OnRestart()
     {
-        StartGame();
+//        StartGame(); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     public void OnAgentFlewAway(FlyingAgent flyingAgent)

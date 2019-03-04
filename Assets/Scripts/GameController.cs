@@ -1,9 +1,10 @@
 ﻿using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Text scoreText;
@@ -34,13 +35,14 @@ public class GameController : MonoBehaviour
         }
     }
 
-    [ContextMenu("ClearHighScore")]
-    public void ClearHighScore()
+    [MenuItem("Edit/GravityDJ/ClearHighScore")]
+    
+    public static void ClearHighScore()
     {
-        HighScore = 0;
+        SaveHighScore(0);
     }
     
-    private void SaveHighScore(int value)
+    private static void SaveHighScore(int value)
     {
         PlayerPrefs.SetInt(nameof(highScore), value);
     }

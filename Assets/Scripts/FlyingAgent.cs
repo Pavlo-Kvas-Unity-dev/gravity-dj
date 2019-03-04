@@ -11,22 +11,13 @@ public class FlyingAgent : MonoBehaviour
     
     public static int NumAgents { get; private set; } = 0;
 
-    private bool isQuitting = false;
-
     void Awake()
     {
         NumAgents++;
     }
 
-    void OnApplicationQuit()
+    public void OnFliedThroughTheHole()
     {
-        isQuitting = true;
-    }
-
-    private void OnBecameInvisible()
-    {
-        if (isQuitting) return;
-       
         NumAgents--;
         Destroy(this.gameObject);
         flyAway.Invoke(this);

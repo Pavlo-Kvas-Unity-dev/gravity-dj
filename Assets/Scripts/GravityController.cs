@@ -73,9 +73,12 @@ public class GravityController : MonoBehaviour
         this.gravityStrengthNorm = gravityStrengthNorm = Mathf.Clamp(gravityStrengthNorm, gravityStrengthRange.x, gravityStrengthRange.y);
         var posColor = Color.green;
         var negColor = Color.red;
+        var neutralColor = Color.gray;
+
+        var color = gravityStrengthNorm > 0 ?
+            Color.Lerp(neutralColor, posColor, gravityStrengthNorm) : 
+            Color.Lerp(neutralColor, negColor, Math.Abs(gravityStrengthNorm));
         
-        var color = gravityStrengthNorm > 0 ? posColor : negColor;
-        color.a = Mathf.Abs(gravityStrengthNorm);
         spriteRenderer.color = color;
         
         if (updateUI)

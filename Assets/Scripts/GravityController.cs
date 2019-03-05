@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
@@ -29,6 +29,8 @@ public class GravityController : MonoBehaviour
     public int gravitationFalloffCoef = 2;
     public bool capAcceleration;
     public float maxAcceleration = 50;
+    [SerializeField] private Vector2 gravityStrengthRange;
+    [SerializeField] private Vector2 gravitySizeRange;
 
     private void Awake()
     {
@@ -39,9 +41,27 @@ public class GravityController : MonoBehaviour
 
     private void Start()
     {
-        gravitySizeSlider.value = initialSizeNorm;
-        
-        gravityStrengthSlider.value = gravityStrengthNorm;
+        InitSliders();
+    }
+
+    private void InitSliders()
+    {
+        InitSlider(gravitySizeSlider, gravitySizeRange, initialSizeNorm);
+
+        InitSlider(gravityStrengthSlider, gravityStrengthRange, gravityStrengthNorm);
+
+        void InitSlider(Slider slider, Vector2 allowedValueRange, float curValue)
+        {
+            if (Math.Abs(slider.minValue - allowedValueRange.x) > Mathf.Epsilon ||
+                Math.Abs(slider.maxValue - allowedValueRange.y) > Mathf.Epsilon)
+            {
+                Debug.LogWarning($"slider's min/max values on {slider.gameObject.name} doesn't match settings, fixing it");
+                slider.minValue = allowedValueRange.x;
+                slider.maxValue = allowedValueRange.y;
+            }
+
+            slider.value = curValue;
+        }
     }
 
     public void OnStrengthChanged(float gravityStrengthNorm)
@@ -51,11 +71,12 @@ public class GravityController : MonoBehaviour
     
     public void SetGravityStrength(float gravityStrengthNorm, bool updateUI)
     {
-        this.gravityStrengthNorm = gravityStrengthNorm = Mathf.Clamp01(gravityStrengthNorm);
+        this.gravityStrengthNorm = gravityStrengthNorm = Mathf.Clamp(gravityStrengthNorm, gravityStrengthRange.x, gravityStrengthRange.y);
         
         var color = spriteRenderer.color;
         color.a = gravityStrengthNorm;
         spriteRenderer.color = color;
+        
         
         if (updateUI)
         {

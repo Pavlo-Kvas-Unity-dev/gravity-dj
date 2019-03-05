@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
@@ -39,7 +39,6 @@ public class GravityController : MonoBehaviour
 
     private void Start()
     {
-        gravitySizeSlider.onValueChanged.AddListener(OnGravitySizeSliderValueChanged);
         gravitySizeSlider.value = initialSizeNorm;
         
         gravityStrengthSlider.value = gravityStrengthNorm;
@@ -64,7 +63,7 @@ public class GravityController : MonoBehaviour
         }
     }
 
-    public void OnGravitySizeSliderValueChanged(float sizeNorm)
+    public void OnSizeChanged(float sizeNorm)
     {
         SetSize(sizeNorm, false);
     }

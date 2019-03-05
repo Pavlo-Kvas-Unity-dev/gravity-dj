@@ -45,11 +45,12 @@ public class GravityController : MonoBehaviour
 
     private void InitSliders()
     {
-        InitSlider(gravitySizeSlider, gravitySizeRange, initialSizeNorm);
+        InitSlider(gravitySizeSlider, gravitySizeRange);
 
-        InitSlider(gravityStrengthSlider, gravityStrengthRange, gravityStrengthNorm);
+        InitSlider(gravityStrengthSlider, gravityStrengthRange);
+        SetGravityStrength(gravityStrengthNorm, true);
 
-        void InitSlider(Slider slider, Vector2 allowedValueRange, float curValue)
+        void InitSlider(Slider slider, Vector2 allowedValueRange)
         {
             if (Math.Abs(slider.minValue - allowedValueRange.x) > Mathf.Epsilon ||
                 Math.Abs(slider.maxValue - allowedValueRange.y) > Mathf.Epsilon)
@@ -58,8 +59,6 @@ public class GravityController : MonoBehaviour
                 slider.minValue = allowedValueRange.x;
                 slider.maxValue = allowedValueRange.y;
             }
-
-            slider.value = curValue;
         }
     }
 

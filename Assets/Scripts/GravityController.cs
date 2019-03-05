@@ -18,19 +18,18 @@ public class GravityController : MonoBehaviour
     private float initialSizeNorm = .5f;
 
     public double M = 500000;
-    /// <summary>
-    /// the value is in range (0,1)
-    /// </summary>
-    private float gravityStrengthNorm = 1.0f;
+    
+    private float gravityStrengthNorm = 0f;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D collider;
     public float ChangeSizeSensitivity = 1.5f;
     [SerializeField] private float gravityStrengthChangeSpeed;
     public int gravitationFalloffCoef = 2;
     public bool capAcceleration;
-    public float maxAcceleration = 50;
     [SerializeField] private Vector2 gravityStrengthRange;
     [SerializeField] private Vector2 gravitySizeRange;
+    [SerializeField] private Vector2 allowedAccelerationRange;
+    private readonly double gravityConstant = 6.67408E-11;
 
     private void Awake()
     {
@@ -72,11 +71,12 @@ public class GravityController : MonoBehaviour
     public void SetGravityStrength(float gravityStrengthNorm, bool updateUI)
     {
         this.gravityStrengthNorm = gravityStrengthNorm = Mathf.Clamp(gravityStrengthNorm, gravityStrengthRange.x, gravityStrengthRange.y);
+        var posColor = Color.green;
+        var negColor = Color.red;
         
-        var color = spriteRenderer.color;
-        color.a = gravityStrengthNorm;
+        var color = gravityStrengthNorm > 0 ? posColor : negColor;
+        color.a = Mathf.Abs(gravityStrengthNorm);
         spriteRenderer.color = color;
-        
         
         if (updateUI)
         {
@@ -107,11 +107,10 @@ public class GravityController : MonoBehaviour
         //acceleration due to gravity g = GM/r2
         var distance = ((Vector2)transform.position - agentsCenterOfMass);
         //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
-        double G = 6.67408E-11;
-        double acceleration = G * M * gravityStrengthNorm / (Mathf.Pow(distance.magnitude,gravitationFalloffCoef));
+        float acceleration = (float)(gravityConstant * M * gravityStrengthNorm / (Mathf.Pow(distance.magnitude,gravitationFalloffCoef)));
         if (capAcceleration)
         {
-            acceleration = Math.Min(acceleration, maxAcceleration);
+            acceleration = Mathf.Clamp(acceleration, allowedAccelerationRange.x, allowedAccelerationRange.y);
         }
         Debug.Log(acceleration);
         

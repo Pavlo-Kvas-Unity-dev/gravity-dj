@@ -470,8 +470,9 @@ MonoBehaviour:
   gravityStrengthChangeSpeed: 1.4
   gravitationFalloffCoef: 2
   capAcceleration: 1
-  maxAcceleration: 150
-  gravityStrengthRange: {x: 0, y: 1}
+  gravityStrengthRange: {x: -1, y: 1}
+  gravitySizeRange: {x: 0, y: 1}
+  allowedAccelerationRange: {x: -150, y: 150}
 --- !u!212 &243806708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1758,10 +1759,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 246381912}
   m_HandleRect: {fileID: 736675678}
   m_Direction: 2
-  m_MinValue: 0
+  m_MinValue: -1
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

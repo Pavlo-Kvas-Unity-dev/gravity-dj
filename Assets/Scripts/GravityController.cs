@@ -42,11 +42,10 @@ public class GravityController : MonoBehaviour
         gravitySizeSlider.onValueChanged.AddListener(OnGravitySizeSliderValueChanged);
         gravitySizeSlider.value = initialSizeNorm;
         
-        gravityStrengthSlider.onValueChanged.AddListener(OnGravityStrengthSliderValueChanged);
         gravityStrengthSlider.value = gravityStrengthNorm;
     }
 
-    public void OnGravityStrengthSliderValueChanged(float gravityStrengthNorm)
+    public void OnStrengthChanged(float gravityStrengthNorm)
     {
         SetGravityStrength(gravityStrengthNorm, false);
     }

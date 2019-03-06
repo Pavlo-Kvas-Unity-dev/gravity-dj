@@ -10,24 +10,18 @@ using UnityEngine.UI;
 public class GravityController : MonoBehaviour
 {
     public FieldController FieldController;
-    
-    [SerializeField] private Slider gravitySizeSlider;
-    
+
     [SerializeField] private Slider gravityStrengthSlider;
-    
-    private float initialSizeNorm = .5f;
 
     public double M = 500000;
     
     private float gravityStrengthNorm = 0f;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D collider;
-    public float ChangeSizeSensitivity = 1.5f;
     [SerializeField] private float gravityStrengthChangeSpeed;
     public int gravitationFalloffCoef = 2;
     public bool capAcceleration;
     [SerializeField] private Vector2 gravityStrengthRange;
-    [SerializeField] private Vector2 gravitySizeRange;
     [SerializeField] private Vector2 allowedAccelerationRange;
     private readonly double gravityConstant = 6.67408E-11;
 
@@ -35,7 +29,6 @@ public class GravityController : MonoBehaviour
     {
         collider = GetComponentInChildren<CircleCollider2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        
     }
 
     private void Start()
@@ -45,8 +38,6 @@ public class GravityController : MonoBehaviour
 
     private void InitSliders()
     {
-        InitSlider(gravitySizeSlider, gravitySizeRange);
-
         InitSlider(gravityStrengthSlider, gravityStrengthRange);
         SetGravityStrength(gravityStrengthNorm, true);
 
@@ -86,21 +77,6 @@ public class GravityController : MonoBehaviour
         }
     }
 
-    public void OnSizeChanged(float sizeNorm)
-    {
-        SetSize(sizeNorm, false);
-    }
-    
-    public void SetSize(float sizeNorm, bool updateUI)
-    {
-        collider.transform.localScale = FieldController.FieldSize * sizeNorm * Vector3.one;
-        
-        if (updateUI)
-        {
-            gravitySizeSlider.value = sizeNorm;
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("gravity contact");
@@ -123,13 +99,6 @@ public class GravityController : MonoBehaviour
     {
         //read input for changing gravity extents
         var hor = Input.GetAxis("Horizontal");
-        if (Math.Abs(hor) > Mathf.Epsilon)
-        {
-            float sizeNorm = GetSizeNorm() + hor * ChangeSizeSensitivity * Time.deltaTime;
-             
-            sizeNorm = Mathf.Clamp01(sizeNorm);
-            SetSize(sizeNorm, true);
-        }
         
         //read input for changing gravity density
         var vert = Input.GetAxis("Vertical");
@@ -140,6 +109,4 @@ public class GravityController : MonoBehaviour
             Debug.Log(deltaStrength);
         }
     }
-
-    private float GetSizeNorm() => collider.transform.localScale.x / FieldController.FieldSize;
 }

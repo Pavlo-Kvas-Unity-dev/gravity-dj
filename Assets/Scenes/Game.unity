@@ -573,7 +573,7 @@ MonoBehaviour:
   gravityStrengthSlider: {fileID: 1483235939}
   M: 1000000000000
   gravityStrengthChangeSpeed: 1.4
-  gravitationFalloffCoef: 2
+  gravitationFalloffCoef: 1.5
   capAcceleration: 1
   gravityStrengthRange: {x: -1, y: 1}
   allowedAccelerationRange: {x: -150, y: 150}

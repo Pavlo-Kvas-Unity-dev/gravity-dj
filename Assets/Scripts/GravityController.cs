@@ -19,7 +19,7 @@ public class GravityController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D collider;
     [SerializeField] private float gravityStrengthChangeSpeed;
-    public int gravitationFalloffCoef = 2;
+    public float gravitationFalloffCoef = 2;
     public bool capAcceleration;
     [SerializeField] private Vector2 gravityStrengthRange;
     [SerializeField] private Vector2 allowedAccelerationRange;

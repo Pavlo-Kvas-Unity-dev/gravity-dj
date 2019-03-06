@@ -577,6 +577,7 @@ MonoBehaviour:
   capAcceleration: 1
   gravityStrengthRange: {x: -1, y: 1}
   allowedAccelerationRange: {x: -150, y: 150}
+  gravitySliderZeroThreshold: 0.15
 --- !u!212 &243806708
 SpriteRenderer:
   m_ObjectHideFlags: 0

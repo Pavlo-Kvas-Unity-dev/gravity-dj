@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Schema;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GravityController : MonoBehaviour
@@ -15,7 +10,8 @@ public class GravityController : MonoBehaviour
 
     public double M = 500000;
     
-    private float gravityStrengthNorm = 0f;
+    private float gravityStrengthZeroShiftModified = 0f;
+    private float gravityStrengthSliderValue;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D collider;
     [SerializeField] private float gravityStrengthChangeSpeed;
@@ -24,6 +20,7 @@ public class GravityController : MonoBehaviour
     [SerializeField] private Vector2 gravityStrengthRange;
     [SerializeField] private Vector2 allowedAccelerationRange;
     private readonly double gravityConstant = 6.67408E-11;
+    [SerializeField] private float gravitySliderZeroThreshold = .15f;
 
     private void Awake()
     {
@@ -39,7 +36,7 @@ public class GravityController : MonoBehaviour
     private void InitSliders()
     {
         InitSlider(gravityStrengthSlider, gravityStrengthRange);
-        SetGravityStrength(gravityStrengthNorm, true);
+        SetGravityStrength(gravityStrengthZeroShiftModified, true);
 
         void InitSlider(Slider slider, Vector2 allowedValueRange)
         {
@@ -58,22 +55,33 @@ public class GravityController : MonoBehaviour
         SetGravityStrength(gravityStrengthNorm, false);
     }
     
-    public void SetGravityStrength(float gravityStrengthNorm, bool updateUI)
+    public void SetGravityStrength(float newGravityStrengthNorm, bool updateUI)
     {
-        this.gravityStrengthNorm = gravityStrengthNorm = Mathf.Clamp(gravityStrengthNorm, gravityStrengthRange.x, gravityStrengthRange.y);
+        gravityStrengthZeroShiftModified = gravityStrengthSliderValue = Mathf.Clamp(newGravityStrengthNorm, gravityStrengthRange.x, gravityStrengthRange.y);
+        
+        //interpret near zero values as zero
+        if (gravityStrengthZeroShiftModified > 0)
+        {
+            gravityStrengthZeroShiftModified = Mathf.InverseLerp(gravitySliderZeroThreshold, gravityStrengthRange.y, gravityStrengthZeroShiftModified);
+        }
+        else
+        {
+            gravityStrengthZeroShiftModified = -1 * Mathf.InverseLerp(-gravitySliderZeroThreshold, gravityStrengthRange.x, gravityStrengthZeroShiftModified);
+        }
+        
         var posColor = Color.green;
         var negColor = Color.red;
         var neutralColor = Color.gray;
 
-        var color = gravityStrengthNorm > 0 ?
-            Color.Lerp(neutralColor, posColor, gravityStrengthNorm) : 
-            Color.Lerp(neutralColor, negColor, Math.Abs(gravityStrengthNorm));
+        var color = gravityStrengthZeroShiftModified > 0 ?
+            Color.Lerp(neutralColor, posColor, gravityStrengthZeroShiftModified) : 
+            Color.Lerp(neutralColor, negColor, Math.Abs(gravityStrengthZeroShiftModified));
         
         spriteRenderer.color = color;
         
         if (updateUI)
         {
-            gravityStrengthSlider.value = gravityStrengthNorm;
+            gravityStrengthSlider.value = gravityStrengthSliderValue;
         }
     }
 
@@ -85,7 +93,7 @@ public class GravityController : MonoBehaviour
         //acceleration due to gravity g = GM/r2
         var distance = ((Vector2)transform.position - agentsCenterOfMass);
         //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
-        float acceleration = (float)(gravityConstant * M * gravityStrengthNorm / (Mathf.Pow(distance.magnitude,gravitationFalloffCoef)));
+        float acceleration = (float)(gravityConstant * M * gravityStrengthZeroShiftModified / (Mathf.Pow(distance.magnitude,gravitationFalloffCoef)));
         if (capAcceleration)
         {
             acceleration = Mathf.Clamp(acceleration, allowedAccelerationRange.x, allowedAccelerationRange.y);
@@ -105,7 +113,7 @@ public class GravityController : MonoBehaviour
         if (Mathf.Abs(vert) > Mathf.Epsilon)
         {
             var deltaStrength = Time.deltaTime * gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
-            SetGravityStrength(gravityStrengthNorm+deltaStrength, true);
+            SetGravityStrength(gravityStrengthSliderValue+deltaStrength, true);
             Debug.Log(deltaStrength);
         }
     }

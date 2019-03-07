@@ -453,7 +453,6 @@ MonoBehaviour:
   holeCoordList:
   - {x: 5, y: 0}
   - {x: 6, y: 0}
-  - {x: 7, y: 0}
 --- !u!4 &154322510
 Transform:
   m_ObjectHideFlags: 0

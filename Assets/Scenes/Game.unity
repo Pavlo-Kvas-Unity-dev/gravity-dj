@@ -2155,7 +2155,7 @@ MonoBehaviour:
   bestScoreText: {fileID: 1846949046}
   countdownText: {fileID: 921902159}
   gameOverScreen: {fileID: 1256457968}
-  gameDuration: 20
+  gameDuration: 60
 --- !u!1 &1483235937
 GameObject:
   m_ObjectHideFlags: 0

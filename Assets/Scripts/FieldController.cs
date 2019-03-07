@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FieldController : MonoBehaviour
 {
+    [SerializeField] private Transform boundaryParent;
     public int FieldSize = 12;
     [SerializeField] private GameObject boundaryPrefab;
 
@@ -12,17 +13,19 @@ public class FieldController : MonoBehaviour
     [SerializeField] public float cellSize = 1f;
 
     public float BorderSize => cellSize;
-    
+
     [SerializeField] private List<Vector2Int>  holeCoordList = new List<Vector2Int>();
     private GameObject[,] field;
+
 
     public GameObject this[Vector2Int coord]
     {
         get { return field[coord.x, coord.y]; }
         set { field[coord.x, coord.y] = value; }      
     }
-    
+
     // Start is called before the first frame update
+
     void Awake()
     {
         field = new GameObject[FieldSize,FieldSize];
@@ -46,7 +49,9 @@ public class FieldController : MonoBehaviour
 
     private void SpawnBorderTile(int x, int y)
     {
-        field[x,y] = Instantiate(boundaryPrefab, GetPosByFieldCoordinates(x, y), Quaternion.identity);
+        var boundaryTile = Instantiate(boundaryPrefab, GetPosByFieldCoordinates(x, y), Quaternion.identity);
+        boundaryTile.transform.parent = boundaryParent;
+        field[x,y] = boundaryTile;
     }
 
     private Vector2 GetPosByFieldCoordinates(int x, int y)

@@ -60,24 +60,6 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        StartCoroutine(SpawnCoroutine());
-    }
-
-    private IEnumerator SpawnCoroutine()
-    {
-        yield return null;
-
-        SpawnImmediate();
-        yield break;
-    }
-
-    private float MinAllowedDistanceFromCenter(float objectRadius)
-    {
-        return fieldController.FieldSize/2 - fieldController.BorderSize - MaxDistanceFromBoundary + objectRadius;
-    }
-
-    private void SpawnImmediate()
-    {
         Assert.IsTrue(MaxDistanceFromBoundary > ObjectRadius);
 
         var xPos = Random.Range(0f, fieldController.FieldSize);
@@ -102,6 +84,11 @@ public class Spawner : MonoBehaviour
             Spawn();
         });
         movement.Init(InitialSpeed);
+    }
+
+    private float MinAllowedDistanceFromCenter(float objectRadius)
+    {
+        return fieldController.FieldSize/2 - fieldController.BorderSize - MaxDistanceFromBoundary + objectRadius;
     }
 
     private void CheckBoundaries(ref float coord, float objectRadius, int fieldSize)

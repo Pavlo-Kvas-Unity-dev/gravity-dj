@@ -17,14 +17,11 @@ public class FieldController : MonoBehaviour
     [SerializeField] private List<Vector2Int>  holeCoordList = new List<Vector2Int>();
     private GameObject[,] field;
 
-
     public GameObject this[Vector2Int coord]
     {
         get { return field[coord.x, coord.y]; }
         set { field[coord.x, coord.y] = value; }      
     }
-
-    // Start is called before the first frame update
 
     void Awake()
     {
@@ -62,11 +59,5 @@ public class FieldController : MonoBehaviour
     private Vector2 GetBottomLeftCoord()
     {
         return (Vector2)spawnCenter.transform.position + (Vector2.down  + Vector2.left)*(FieldSize/2 - cellSize/2);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

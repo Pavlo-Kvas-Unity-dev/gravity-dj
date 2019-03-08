@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
     {
         get
         {
-            TryUpdateHighScore();
+            ReadHighScoreIfNull();
             
             return highScore.Value;
         }
@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
         {
             highScore = value;
             SaveHighScore(value);
+            UpdateHighScoreUI();
         }
     }
 
@@ -53,7 +54,7 @@ public class GameController : MonoBehaviour
         set
         {
             score = value;
-            TryUpdateHighScore();
+            UpdateHighScore();
         }
     }
 
@@ -76,6 +77,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void UpdateHighScore()
+    {
+        if (HighScore < Score)
+        {
+            HighScore = Score;
+        }
+    }
+
     private void StartGame()
     {
         Time.timeScale = 1;
@@ -90,16 +99,6 @@ public class GameController : MonoBehaviour
     private void UpdateHighScoreUI()
     {
         bestScoreText.text = $"Best score: {HighScore}";
-    }
-
-    private void TryUpdateHighScore()
-    {
-        ReadHighScoreIfNull();
-        if (Score > highScore)
-        {
-            highScore = Score;
-            SaveHighScore(highScore.Value);
-        }
     }
 
     private void ReadHighScoreIfNull()

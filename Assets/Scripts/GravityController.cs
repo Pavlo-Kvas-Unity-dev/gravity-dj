@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +17,12 @@ public class GravityController : MonoBehaviour
     private CircleCollider2D collider;
     [SerializeField] private float gravityStrengthChangeSpeed;
     public float gravitationFalloffCoef = 2;
-    public bool capAcceleration;
-    [SerializeField] private Vector2 gravityStrengthRange;
     [SerializeField] private Vector2 allowedAccelerationRange;
+    [SerializeField] private Vector2 gravityStrengthRange;
     private readonly double gravityConstant = 6.67408E-11;
     [SerializeField] private float gravitySliderZeroThreshold = .15f;
+    [SerializeField] private List<Circle> circles;
+
 
     private void Awake()
     {
@@ -54,7 +56,7 @@ public class GravityController : MonoBehaviour
     {
         SetGravityStrength(gravityStrengthNorm, false);
     }
-    
+
     public void SetGravityStrength(float newGravityStrengthNorm, bool updateUI)
     {
         gravityStrengthZeroShiftModified = gravityStrengthSliderValue = Mathf.Clamp(newGravityStrengthNorm, gravityStrengthRange.x, gravityStrengthRange.y);
@@ -71,13 +73,38 @@ public class GravityController : MonoBehaviour
         
         var posColor = Color.green;
         var negColor = Color.red;
-        var neutralColor = Color.gray;
+        var neutralColor = Color.white;
 
-        var color = gravityStrengthZeroShiftModified > 0 ?
+        var sliderColor = gravityStrengthZeroShiftModified > 0 ?
             Color.Lerp(neutralColor, posColor, gravityStrengthZeroShiftModified) : 
             Color.Lerp(neutralColor, negColor, Math.Abs(gravityStrengthZeroShiftModified));
+
+        float minDist = 1f;
+        float maxDist = Mathf.Sqrt(2)*(FieldController.FieldSize / 2 - FieldController.cellSize);
+        float farthestDistCoef = CalcDistanceCoef(maxDist);
+        float closestDistCoef  = CalcDistanceCoef(minDist);
+
+        float CalcDistanceCoef(float dist)
+        {
+            return 1.0f/Mathf.Pow(dist, gravitationFalloffCoef);
+        }
+
+        foreach (var circle in circles)
+        {
+            var distanceCoef = CalcDistanceCoef(circle.radius);
+            
+            float t = Mathf.InverseLerp(farthestDistCoef, closestDistCoef, distanceCoef);
+
+            var targetColor = gravityStrengthZeroShiftModified > 0 ? posColor : negColor;
+
+            var circleColor = Color.Lerp(neutralColor, targetColor, t);
+            
+            circleColor.a = Mathf.Abs(gravityStrengthZeroShiftModified);
+            
+            circle.SetColor(circleColor);
+        }
         
-        spriteRenderer.color = color;
+        spriteRenderer.color = sliderColor;
         
         if (updateUI)
         {
@@ -93,14 +120,19 @@ public class GravityController : MonoBehaviour
         //acceleration due to gravity g = GM/r2
         var distance = ((Vector2)transform.position - agentsCenterOfMass);
         //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
-        float acceleration = (float)(gravityConstant * M * gravityStrengthZeroShiftModified / (Mathf.Pow(distance.magnitude,gravitationFalloffCoef)));
-        if (capAcceleration)
-        {
-            acceleration = Mathf.Clamp(acceleration, allowedAccelerationRange.x, allowedAccelerationRange.y);
-        }
+        float acceleration = CalcAcceleration(distance.magnitude);
         Debug.Log(acceleration);
         
-        collision.attachedRigidbody.velocity += (distance.normalized * (float)acceleration * Time.deltaTime);
+        collision.attachedRigidbody.velocity += (distance.normalized * acceleration * Time.deltaTime);
+    }
+
+    private float CalcAcceleration(float distance)
+    {
+        float acceleration = (float) (gravityConstant * M * gravityStrengthZeroShiftModified /
+                                      (Mathf.Pow(distance, gravitationFalloffCoef)));
+
+        acceleration = Mathf.Clamp(acceleration, allowedAccelerationRange.x, allowedAccelerationRange.y);
+        return acceleration;
     }
 
     private void Update()

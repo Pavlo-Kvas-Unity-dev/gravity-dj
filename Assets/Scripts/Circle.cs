@@ -15,6 +15,7 @@ public class Circle : MonoBehaviour
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         SetupCircle();
     }
 
@@ -55,5 +56,12 @@ public class Circle : MonoBehaviour
             oldPos = transform.position + pos;
             theta += deltaTheta;
         }
+    }
+
+    public void SetColor(Color color)
+    {
+        lineRenderer.material.color = color;
+        lineRenderer.endColor = color;
+        lineRenderer.startColor = color;
     }
 }

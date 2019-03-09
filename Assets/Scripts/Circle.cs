@@ -11,7 +11,12 @@ public class Circle : MonoBehaviour
     public bool cirleFillscreen;
 
     private LineRenderer lineRenderer;
-    
+
+    private void OnValidate()
+    {
+        SetWidth(lineWidth);
+    }
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -21,7 +26,7 @@ public class Circle : MonoBehaviour
 
     private void SetupCircle()
     {
-        lineRenderer.widthMultiplier = lineWidth;
+        SetWidth(lineWidth);
 
         if (cirleFillscreen)
         {
@@ -40,6 +45,13 @@ public class Circle : MonoBehaviour
             lineRenderer.SetPosition(i, pos);
             theta += deltaTheta;
         }
+    }
+
+    private void SetWidth(float circleWidth)
+    {
+        if (lineRenderer == null) return;
+        
+        lineRenderer.widthMultiplier = circleWidth;
     }
 
 

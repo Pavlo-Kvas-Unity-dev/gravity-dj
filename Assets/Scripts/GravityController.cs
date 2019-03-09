@@ -74,6 +74,7 @@ public class GravityController : MonoBehaviour
         var posColor = Color.green;
         var negColor = Color.red;
         var neutralColor = Color.white;
+        var targetColor = gravityStrengthZeroShiftModified > 0 ? posColor : negColor;
 
         var sliderColor = gravityStrengthZeroShiftModified > 0 ?
             Color.Lerp(neutralColor, posColor, gravityStrengthZeroShiftModified) : 
@@ -83,6 +84,7 @@ public class GravityController : MonoBehaviour
         float maxDist = Mathf.Sqrt(2)*(FieldController.FieldSize / 2 - FieldController.cellSize);
         float farthestDistCoef = CalcDistanceCoef(maxDist);
         float closestDistCoef  = CalcDistanceCoef(minDist);
+
 
         float CalcDistanceCoef(float dist)
         {
@@ -94,8 +96,6 @@ public class GravityController : MonoBehaviour
             var distanceCoef = CalcDistanceCoef(circle.radius);
             
             float t = Mathf.InverseLerp(farthestDistCoef, closestDistCoef, distanceCoef);
-
-            var targetColor = gravityStrengthZeroShiftModified > 0 ? posColor : negColor;
 
             var circleColor = Color.Lerp(neutralColor, targetColor, t);
             

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GravityController : MonoBehaviour
 {
+    [SerializeField] private GravityStrengthSliderController gravityStrengthSliderController;
     public FieldController FieldController;
 
     [SerializeField] private Slider gravityStrengthSlider;
@@ -33,6 +34,7 @@ public class GravityController : MonoBehaviour
     private void Start()
     {
         InitSliders();
+        gravityStrengthSliderController.SetZeroThreshold(gravitySliderZeroThreshold);
     }
 
     private void InitSliders()
@@ -116,6 +118,7 @@ public class GravityController : MonoBehaviour
     {
         Debug.Log("gravity contact");
         //add pulling force
+        
         var agentsCenterOfMass = collision.attachedRigidbody.worldCenterOfMass;
         //acceleration due to gravity g = GM/r2
         var distance = ((Vector2)transform.position - agentsCenterOfMass);

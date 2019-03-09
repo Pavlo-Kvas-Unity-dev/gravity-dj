@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 6.33
   cirleFillscreen: 0
 --- !u!1 &154322508
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 1.23
   cirleFillscreen: 0
 --- !u!1 &519420028
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 4.12
   cirleFillscreen: 0
 --- !u!1 &729048784
@@ -1415,10 +1415,10 @@ RectTransform:
   m_Father: {fileID: 747854729}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 215.5, y: -180}
-  m_SizeDelta: {x: 409, y: 360}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921902159
 MonoBehaviour:
@@ -1889,7 +1889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 7.31
   cirleFillscreen: 0
 --- !u!1 &1254236967
@@ -1937,7 +1937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 0.5
   cirleFillscreen: 0
 --- !u!120 &1254236970
@@ -2267,7 +2267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 1.73
   cirleFillscreen: 0
 --- !u!1 &1322026595
@@ -2557,7 +2557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 5.49
   cirleFillscreen: 0
 --- !u!1 &1599704556
@@ -2796,7 +2796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 4.74
   cirleFillscreen: 0
 --- !u!1 &1630630738
@@ -2831,10 +2831,10 @@ RectTransform:
   m_Father: {fileID: 747854729}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 215.5, y: -720}
-  m_SizeDelta: {x: 409, y: 360}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1630630740
 CanvasRenderer:
@@ -3161,7 +3161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 3.52
   cirleFillscreen: 0
 --- !u!1 &1701100092
@@ -3552,10 +3552,10 @@ RectTransform:
   m_Father: {fileID: 747854729}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 11, y: -360}
-  m_SizeDelta: {x: 409, y: 360}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1846949046
 MonoBehaviour:
@@ -3820,7 +3820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 0.8
   cirleFillscreen: 0
 --- !u!1 &1871840844
@@ -3963,7 +3963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 8.27
   cirleFillscreen: 0
 --- !u!1 &1904645407
@@ -4224,7 +4224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 2.97
   cirleFillscreen: 0
 --- !u!1 &2108692395
@@ -4367,6 +4367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertexCount: 40
-  lineWidth: 0.2
+  lineWidth: 0.05
   radius: 2.33
   cirleFillscreen: 0

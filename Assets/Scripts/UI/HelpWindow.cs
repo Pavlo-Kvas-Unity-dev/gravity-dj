@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HelpWindow : MonoBehaviour
+public class HelpWindow : MonoBehaviour, IWindow
 {
     private Action onCloseAction;
 

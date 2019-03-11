@@ -19,7 +19,11 @@ public class GameController : MonoBehaviour
     
     private int? highScore;
 
+    [SerializeField] private HelpWindow helpWindow;
+    [SerializeField] private MainMenuWindow mainMenuWindow;
+
     // Start is called before the first frame update
+
     private int HighScore
     {
         get
@@ -42,7 +46,7 @@ public class GameController : MonoBehaviour
     {
         SaveHighScore(0);
     }
-    
+
     private static void SaveHighScore(int value)
     {
         PlayerPrefs.SetInt(nameof(highScore), value);
@@ -87,12 +91,13 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
-		Resume();
         Score = 0;
         UpdateScore();
         timeLeft = gameDuration;
 
         UpdateHighScoreUI();
+        
+        ShowMainMenu();
     }
 
     private void UpdateHighScoreUI()
@@ -114,15 +119,27 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    [SerializeField] private HelpWindow helpWindow;
-    
     public void OnHelpButtonClicked()
     {
         Pause();
         helpWindow.Open(OnHelpWindowClosed);
     }
 
-    private void Pause()
+    public void OnMainMenuButtonClicked()
+    {
+        ShowMainMenu();
+    }
+
+    private void ShowMainMenu()
+    {
+        Pause();
+        mainMenuWindow.Open(
+            Resume, 
+            ()=> { helpWindow.Open(null); },
+            Application.Quit);
+    }
+
+    private void Pause() 
     {
         Time.timeScale = 0;
         isGamePlaing = false;
@@ -152,7 +169,6 @@ public class GameController : MonoBehaviour
 
     private void GameOver()
     {
-
         Pause();
         UpdateHighScoreUI();
         gameOverScreen.Show(Score, HighScore);

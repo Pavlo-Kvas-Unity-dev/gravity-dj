@@ -87,12 +87,11 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
-        Time.timeScale = 1;
+		Resume();
         Score = 0;
         UpdateScore();
         timeLeft = gameDuration;
-        isGamePlaing = true;
-        
+
         UpdateHighScoreUI();
     }
 
@@ -115,6 +114,31 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    [SerializeField] private HelpWindow helpWindow;
+    
+    public void OnHelpButtonClicked()
+    {
+        Pause();
+        helpWindow.Open(OnHelpWindowClosed);
+    }
+
+    private void Pause()
+    {
+        Time.timeScale = 0;
+        isGamePlaing = false;
+    }
+
+    public void OnHelpWindowClosed()
+    {
+        Resume();
+    }
+
+    private void Resume()
+    {
+        Time.timeScale = 1;
+        isGamePlaing = true;
+    }
+
     public void OnAgentFlewAway(FlyingAgent flyingAgent)
     {
         Score++;
@@ -128,9 +152,8 @@ public class GameController : MonoBehaviour
 
     private void GameOver()
     {
-        
-        Time.timeScale = 0;
-        isGamePlaing = false;
+
+        Pause();
         UpdateHighScoreUI();
         gameOverScreen.Show(Score, HighScore);
     }

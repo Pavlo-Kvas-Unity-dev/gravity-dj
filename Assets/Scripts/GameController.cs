@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
@@ -64,7 +65,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        StartGame();
+        ShowMainMenu();
     }
 
     private void FixedUpdate()
@@ -97,7 +98,6 @@ public class GameController : MonoBehaviour
 
         UpdateHighScoreUI();
         
-        ShowMainMenu();
     }
 
     private void UpdateHighScoreUI()
@@ -119,22 +119,16 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void OnHelpButtonClicked()
-    {
-        Pause();
-        helpWindow.Open(OnHelpWindowClosed);
-    }
-
     public void OnMainMenuButtonClicked()
     {
-        ShowMainMenu();
+        Pause();
+        ShowMainMenu(true);
     }
 
-    private void ShowMainMenu()
+    private void ShowMainMenu(bool isGamePlaying=false)
     {
-        Pause();
         mainMenuWindow.Open(
-            Resume, 
+            isGamePlaying ? (Action) Resume : StartGame,
             ()=> { helpWindow.Open(null); },
             Application.Quit);
     }

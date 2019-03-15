@@ -127,6 +127,7 @@ public class GameController : MonoBehaviour
 
     private void ShowMainMenu(bool isGamePlaying=false)
     {
+        mainMenuWindow.SetStartGameText(isGamePlaying?"Resume":"Start");
         mainMenuWindow.Open(
             isGamePlaying ? (Action) Resume : StartGame,
             ()=> { helpWindow.Open(null); },

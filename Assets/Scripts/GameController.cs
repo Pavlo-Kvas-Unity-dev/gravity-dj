@@ -95,7 +95,8 @@ public class GameController : MonoBehaviour
         Score = 0;
         UpdateScore();
         timeLeft = gameDuration;
-
+        Resume();
+                
         UpdateHighScoreUI();
         
     }

@@ -41,13 +41,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    [MenuItem("Edit/GravityDJ/ClearHighScore")]
-    
-    public static void ClearHighScore()
-    {
-        SaveHighScore(0);
-    }
-
     private static void SaveHighScore(int value)
     {
         PlayerPrefs.SetInt(nameof(highScore), value);

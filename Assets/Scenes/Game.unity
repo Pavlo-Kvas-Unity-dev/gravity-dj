@@ -3800,7 +3800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd86476626a4b5a4e88e16a720758952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1322026597}
   gameOverText: {fileID: 67694675}
   restartButton: {fileID: 1904645409}
 --- !u!1 &1302097089

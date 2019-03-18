@@ -1,12 +1,19 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GameOverScreen : MonoBehaviour
 {
-    [SerializeField] private GameController gameController;
+    private GameController gameController;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private Button restartButton;
+
+    [Inject]
+    public void Init(GameController gameController)
+    {
+        this.gameController = gameController;
+    }
     
     private void Awake()
     {

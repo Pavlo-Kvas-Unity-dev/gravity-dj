@@ -6,7 +6,6 @@ namespace GravityDJ.Installers
     {
         public override void InstallBindings()
         {
-            base.InstallBindings();
         }
     }
 }

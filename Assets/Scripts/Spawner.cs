@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Assertions;
+using Zenject;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
@@ -31,8 +29,14 @@ public class Spawner : MonoBehaviour
     public bool SpawnOnStart = true;
     CircleCollider2D agentsCircleCollider2D;
 
-    [SerializeField] private GameController gameController;
+    private GameController gameController;
 
+    [Inject]
+    public void Init(GameController gameController)
+    {
+        this.gameController = gameController;
+    }
+    
     // Start is called before the first frame update
     void Awake()
     {

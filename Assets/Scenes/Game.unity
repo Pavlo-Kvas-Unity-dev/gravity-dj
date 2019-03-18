@@ -4116,6 +4116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1322026596}
   - component: {fileID: 1322026597}
+  - component: {fileID: 1322026598}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -4156,6 +4157,24 @@ MonoBehaviour:
   gameDuration: 60
   helpWindow: {fileID: 86010783}
   mainMenuWindow: {fileID: 145882727}
+--- !u!114 &1322026598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322026595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1322026597}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 2068047555}
+  _bindType: 2
 --- !u!1 &1440994393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5678,7 +5697,6 @@ MonoBehaviour:
   SpawnCenter: {fileID: 1115030002}
   InitialSpeed: 5
   SpawnOnStart: 1
-  gameController: {fileID: 1322026597}
 --- !u!4 &1701100094
 Transform:
   m_ObjectHideFlags: 0
@@ -6052,7 +6070,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 3
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

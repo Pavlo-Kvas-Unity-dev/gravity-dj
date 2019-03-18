@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Button = UnityEngine.UI.Button;
+
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private GameOverScreen gameOverScreen;
+    [SerializeField] private Button mainMenuButton;
     
     private int score = 0;
     private bool isGamePlaing = false;
@@ -56,6 +59,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
+    }
+    
     void Start()
     {
         ShowMainMenu();

@@ -47,5 +47,6 @@ namespace InfinityEngine.Localization
         Thai,
         Turkish,
         Vietnamese,
+        Ukrainian
     }
 }

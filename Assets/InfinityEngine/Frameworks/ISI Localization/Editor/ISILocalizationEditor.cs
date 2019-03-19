@@ -826,7 +826,7 @@ namespace InfinityEditor
             {
 
                 dataToGenerate.Add(key, new List<string>());
-                builder.AppendLine($"\t\t\tpublic const string Names = \"{string.Join(", ", array.ToArray())}\";");
+                builder.AppendLine($"\t\t\tpublic const string Names = \"{string.Join(",", array.ToArray())}\";");
                 dataToGenerate[key].Add(builder.ToString());
                 builder.Clear();
 

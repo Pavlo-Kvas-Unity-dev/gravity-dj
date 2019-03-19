@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 26421688}
   - component: {fileID: 26421690}
   - component: {fileID: 26421689}
+  - component: {fileID: 26421691}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -272,6 +273,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26421687}
   m_CullTransparentMesh: 0
+--- !u!114 &26421691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26421687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: RussianLanguageButton
 --- !u!1 &67694673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,7 +1620,7 @@ GameObject:
   - component: {fileID: 272109749}
   - component: {fileID: 272109748}
   m_Layer: 5
-  m_Name: CloseButton
+  m_Name: ReturnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3224,42 +3239,105 @@ MonoBehaviour:
     sceneAsset: {fileID: 0}
   m_loadSceneDelay: 3
   m_languages:
-  - isExpanded: 0
+  - isExpanded: 1
     isBeingAutoTranslated: 0
     translationProgress: 0
     m_flag: {fileID: 2800000, guid: 23f0e7394e44c4d4b90efaf3f960978b, type: 3}
     m_language: 0
-    m_localizedStrings: []
+    m_localizedStrings:
+    - key: EnglishLanguageButton
+      value: English
+    - key: MenuButton
+      value: menu
+    - key: PlayAgainButton
+      value: Play Again
+    - key: SettingsButton
+      value: Settings
+    - key: HelpButton
+      value: Help
+    - key: ExitButton
+      value: Exit
+    - key: ReturnButton
+      value: Return
+    - key: UkrainianLanguageButton
+      value: Ukrainian
+    - key: RussianLanguageButton
+      value: Russian
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: English
     m_languageCode: 
-  - isExpanded: 0
+  - isExpanded: 1
     isBeingAutoTranslated: 0
     translationProgress: 0
     m_flag: {fileID: 0}
     m_language: 32
-    m_localizedStrings: []
+    m_localizedStrings:
+    - key: EnglishLanguageButton
+      value: "\u0410\u043D\u0433\u043B\u0456\u0439\u0441\u044C\u043A\u0430"
+    - key: MenuButton
+      value: "\u043C\u0435\u043D\u044E"
+    - key: PlayAgainButton
+      value: "\u0433\u0440\u0430\u0442\u0438 \u0437\u043D\u043E\u0432\u0443"
+    - key: SettingsButton
+      value: "\u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F"
+    - key: HelpButton
+      value: "\u0434\u043E\u043F\u043E\u043C\u043E\u0433\u0430"
+    - key: ExitButton
+      value: "\u0432\u0438\u0439\u0442\u0438"
+    - key: ReturnButton
+      value: "\u043F\u043E\u0432\u0435\u0440\u043D\u0443\u0442\u0438\u0441\u044F"
+    - key: UkrainianLanguageButton
+      value: "\u0443\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430"
+    - key: RussianLanguageButton
+      value: "\u0440\u043E\u0441\u0456\u0439\u0441\u044C\u043A\u0430"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Ukrainian
     m_languageCode: 
-  - isExpanded: 0
+  - isExpanded: 1
     isBeingAutoTranslated: 0
     translationProgress: 0
     m_flag: {fileID: 2800000, guid: 80d14af81595cfd4cbd9533d44f88131, type: 3}
     m_language: 8
-    m_localizedStrings: []
+    m_localizedStrings:
+    - key: EnglishLanguageButton
+      value: "\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439"
+    - key: MenuButton
+      value: "\u043C\u0435\u043D\u044E"
+    - key: PlayAgainButton
+      value: "\u0418\u0433\u0440\u0430\u0442\u044C \u0441\u043D\u043E\u0432\u0430"
+    - key: SettingsButton
+      value: "\u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+    - key: HelpButton
+      value: "\u043F\u043E\u043C\u043E\u0449\u044C"
+    - key: ExitButton
+      value: "\u0412\u044B\u0439\u0442\u0438"
+    - key: ReturnButton
+      value: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F"
+    - key: UkrainianLanguageButton
+      value: "\u0443\u043A\u0440\u0430\u0438\u043D\u0441\u043A\u0438\u0439"
+    - key: RussianLanguageButton
+      value: "\u0440\u0443\u0441\u0441\u043A\u0438\u0439"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Russian
     m_languageCode: 
-  m_stringKeys: []
+  m_stringKeys:
+  - EnglishLanguageButton
+  - UkrainianLanguageButton
+  - RussianLanguageButton
+  - MenuButton
+  - PlayAgainButton
+  - SettingsButton
+  - HelpButton
+  - ExitButton
+  - ReturnButton
   m_audiosKeys: []
   m_spriteKeys: []
   m_stringKeysRange:
     min: 0
-    max: 0
+    max: 9
   m_spriteKeysRange:
     min: 0
     max: 0
@@ -3604,6 +3682,7 @@ GameObject:
   - component: {fileID: 926968212}
   - component: {fileID: 926968214}
   - component: {fileID: 926968213}
+  - component: {fileID: 926968215}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -3753,6 +3832,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926968211}
   m_CullTransparentMesh: 0
+--- !u!114 &926968215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926968211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: MenuButton
 --- !u!1 &940441909
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,6 +3923,7 @@ GameObject:
   - component: {fileID: 956969476}
   - component: {fileID: 956969478}
   - component: {fileID: 956969477}
+  - component: {fileID: 956969479}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3979,6 +4073,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956969475}
   m_CullTransparentMesh: 0
+--- !u!114 &956969479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956969475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: ReturnButton
 --- !u!1 &979851290
 GameObject:
   m_ObjectHideFlags: 0
@@ -3990,6 +4098,7 @@ GameObject:
   - component: {fileID: 979851291}
   - component: {fileID: 979851293}
   - component: {fileID: 979851292}
+  - component: {fileID: 979851294}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -4139,6 +4248,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979851290}
   m_CullTransparentMesh: 0
+--- !u!114 &979851294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979851290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: EnglishLanguageButton
 --- !u!1 &988801516
 GameObject:
   m_ObjectHideFlags: 0
@@ -4150,6 +4273,7 @@ GameObject:
   - component: {fileID: 988801517}
   - component: {fileID: 988801519}
   - component: {fileID: 988801518}
+  - component: {fileID: 988801520}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -4299,6 +4423,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 988801516}
   m_CullTransparentMesh: 0
+--- !u!114 &988801520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988801516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: PlayAgainButton
 --- !u!1 &1002622151
 GameObject:
   m_ObjectHideFlags: 0
@@ -4546,6 +4684,7 @@ GameObject:
   - component: {fileID: 1156987877}
   - component: {fileID: 1156987879}
   - component: {fileID: 1156987878}
+  - component: {fileID: 1156987880}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -4695,6 +4834,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156987876}
   m_CullTransparentMesh: 0
+--- !u!114 &1156987880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156987876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: UkrainianLanguageButton
 --- !u!1 &1203890645
 GameObject:
   m_ObjectHideFlags: 0
@@ -5083,6 +5236,7 @@ GameObject:
   - component: {fileID: 1270279588}
   - component: {fileID: 1270279590}
   - component: {fileID: 1270279589}
+  - component: {fileID: 1270279591}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -5234,6 +5388,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270279587}
   m_CullTransparentMesh: 0
+--- !u!114 &1270279591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270279587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: SettingsButton
 --- !u!1 &1291594910
 GameObject:
   m_ObjectHideFlags: 0
@@ -5402,6 +5570,7 @@ GameObject:
   - component: {fileID: 1302097090}
   - component: {fileID: 1302097092}
   - component: {fileID: 1302097091}
+  - component: {fileID: 1302097093}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -5551,6 +5720,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302097089}
   m_CullTransparentMesh: 0
+--- !u!114 &1302097093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302097089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: ExitButton
 --- !u!1 &1305875535
 GameObject:
   m_ObjectHideFlags: 0
@@ -6017,6 +6200,7 @@ GameObject:
   - component: {fileID: 1453688192}
   - component: {fileID: 1453688194}
   - component: {fileID: 1453688193}
+  - component: {fileID: 1453688195}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -6166,6 +6350,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453688191}
   m_CullTransparentMesh: 0
+--- !u!114 &1453688195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453688191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: HelpButton
 --- !u!1 &1476713014
 GameObject:
   m_ObjectHideFlags: 0
@@ -6177,6 +6375,7 @@ GameObject:
   - component: {fileID: 1476713015}
   - component: {fileID: 1476713017}
   - component: {fileID: 1476713016}
+  - component: {fileID: 1476713018}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6223,7 +6422,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Close
+  m_text: Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
@@ -6304,7 +6503,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 1
   m_subTextObjects:
@@ -6326,6 +6525,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476713014}
   m_CullTransparentMesh: 0
+--- !u!114 &1476713018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476713014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: ReturnButton
 --- !u!1 &1483235937
 GameObject:
   m_ObjectHideFlags: 0
@@ -8223,7 +8436,7 @@ GameObject:
   - component: {fileID: 1904645410}
   - component: {fileID: 1904645409}
   m_Layer: 5
-  m_Name: RestartButton
+  m_Name: PlayAgainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <strings name="EnglishLanguageButton">Английский</strings>
+  <strings name="MenuButton">меню</strings>
+  <strings name="PlayAgainButton">Играть снова</strings>
+  <strings name="SettingsButton">настройки</strings>
+  <strings name="HelpButton">помощь</strings>
+  <strings name="ExitButton">Выйти</strings>
+  <strings name="ReturnButton">Вернуться</strings>
+  <strings name="UkrainianLanguageButton">украинский</strings>
+  <strings name="RussianLanguageButton">русский</strings>
+</resources>

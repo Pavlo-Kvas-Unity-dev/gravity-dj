@@ -1,4 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <strings name="HelloWorld">Hello world</strings>
+  <strings name="EnglishLanguageButton">English</strings>
+  <strings name="MenuButton">menu</strings>
+  <strings name="PlayAgainButton">Play Again</strings>
+  <strings name="SettingsButton">Settings</strings>
+  <strings name="HelpButton">Help</strings>
+  <strings name="ExitButton">Exit</strings>
+  <strings name="ReturnButton">Return</strings>
+  <strings name="UkrainianLanguageButton">Ukrainian</strings>
+  <strings name="RussianLanguageButton">Russian</strings>
 </resources>

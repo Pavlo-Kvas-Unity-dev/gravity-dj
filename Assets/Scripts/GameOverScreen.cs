@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System;
+using InfinityEngine.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -34,6 +36,6 @@ public class GameOverScreen : MonoBehaviour
     public void Show(int score, int bestScore)
     {
         gameObject.SetActive(true);
-        gameOverText.text = $"Game over. \nYou scored {score} points";
+        gameOverText.text = string.Format(R3.strings.GameOver, score);
     }
 }

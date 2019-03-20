@@ -3454,6 +3454,8 @@ MonoBehaviour:
         to center the stronger gravity force. Gravity is controlled by a slider on
         the right panel. Slider have a insensitive zone(gray color), which means no
         gravity.
+    - key: GameOver
+      value: Game over. You scored {0} points
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: English
@@ -3516,6 +3518,9 @@ MonoBehaviour:
         \u0437\u043E\u043D\u0443 (\u0441\u0456\u0440\u0438\u0439 \u043A\u043E\u043B\u0456\u0440),
         \u0449\u043E \u043E\u0437\u043D\u0430\u0447\u0430\u0454 \u0432\u0456\u0434\u0441\u0443\u0442\u043D\u0456\u0441\u0442\u044C
         \u0433\u0440\u0430\u0432\u0456\u0442\u0430\u0446\u0456\u0457."
+    - key: GameOver
+      value: "\u041A\u0456\u043D\u0435\u0446\u044C \u0433\u0440\u0438. \u0422\u0438
+        \u043D\u0430\u0431\u0440\u0430\u0432 {0} \u043E\u0447\u043E\u043A"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Ukrainian
@@ -3580,31 +3585,45 @@ MonoBehaviour:
         \u0437\u043E\u043D\u0443 (\u0441\u0435\u0440\u044B\u0439 \u0446\u0432\u0435\u0442),
         \u0447\u0442\u043E \u043E\u0437\u043D\u0430\u0447\u0430\u0435\u0442 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435
         \u0433\u0440\u0430\u0432\u0438\u0442\u0430\u0446\u0438\u0438."
+    - key: GameOver
+      value: "\u041A\u043E\u043D\u0435\u0446 \u0438\u0433\u0440\u044B. \u0422\u044B
+        \u043D\u0430\u0431\u0440\u0430\u043B {0} \u043E\u0447\u043A\u043E\u0432"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Russian
     m_languageCode: 
+  - isExpanded: 0
+    isBeingAutoTranslated: 0
+    translationProgress: 0
+    m_flag: {fileID: 2800000, guid: dea00e07013992946b1e6b5e2dd3a471, type: 3}
+    m_language: 1
+    m_localizedStrings: []
+    m_localizedAudio: []
+    m_localizedSprites: []
+    m_languageName: French
+    m_languageCode: 
   m_stringKeys:
   - EnglishLanguageButton
-  - UkrainianLanguageButton
-  - RussianLanguageButton
   - MenuButton
   - PlayAgainButton
   - SettingsButton
   - HelpButton
   - ExitButton
   - ReturnButton
+  - UkrainianLanguageButton
+  - RussianLanguageButton
   - StartButton
   - ResumeButton
   - ScoreFormat
   - BestScoreFormat
   - TimeLeftFormat
   - Help
+  - GameOver
   m_audiosKeys: []
   m_spriteKeys: []
   m_stringKeysRange:
     min: 0
-    max: 15
+    max: 16
   m_spriteKeysRange:
     min: 0
     max: 0

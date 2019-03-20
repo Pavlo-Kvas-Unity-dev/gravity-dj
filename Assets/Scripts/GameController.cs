@@ -129,11 +129,10 @@ public class GameController : MonoBehaviour
 
     private void ShowMainMenu(bool isGamePlaying=false)
     {
-        mainMenuWindow.SetStartGameText(isGamePlaying?"Resume":"Start");
+        mainMenuWindow.Init(isGamePlaying);
         mainMenuWindow.Open(
-            isGamePlaying ? (Action) Resume : StartGame,
-            ()=> { helpWindow.Open(null); },
-            Application.Quit);
+             StartGame, 
+            Resume, ()=> { helpWindow.Open(null); }, Application.Quit);
     }
 
     private void Pause() 

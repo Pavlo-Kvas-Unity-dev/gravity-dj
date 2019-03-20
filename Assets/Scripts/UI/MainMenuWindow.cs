@@ -1,25 +1,33 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuWindow : MonoBehaviour, IWindow
 {
     private Action onPlay;
+    private Action onResume;
     private Action onExit;
     private Action onHelp;
-    
-    [SerializeField] private TextMeshProUGUI startButtonText;
-    
-    public void Open(Action onPlay, Action onHelp, Action onExit)
+
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button resumeButton;
+
+    void Awake()
+    {
+        playButton.onClick.AddListener(OnPlayClicked);
+        resumeButton.onClick.AddListener(OnResumeClicked);
+    }
+
+    public void Open(Action onPlay, Action onResume, Action onHelp, Action onExit)
     {
         this.onPlay = onPlay;
+        this.onResume = onResume;
         this.onHelp = onHelp;
         this.onExit = onExit;
+        
         Open();
     }
-    
+
     public void Open()
     {
         gameObject.SetActive(true);
@@ -30,10 +38,16 @@ public class MainMenuWindow : MonoBehaviour, IWindow
         gameObject.SetActive(false);
     }
 
-    public void OnPlayClicked()
+    private void OnPlayClicked()
     {
         Close();
         onPlay?.Invoke();
+    }
+
+    private void OnResumeClicked()
+    {
+        Close();
+        onResume?.Invoke();
     }
 
     public void OnHelpClicked()
@@ -46,8 +60,11 @@ public class MainMenuWindow : MonoBehaviour, IWindow
         onExit?.Invoke();
     }
 
-    public void SetStartGameText(string text)
+    public void Init(bool isGamePlaying)
     {
-        startButtonText.text = text;
+        playButton.gameObject.SetActive(!isGamePlaying);
+        resumeButton.gameObject.SetActive(isGamePlaying);
     }
+    
+    
 }

@@ -11,4 +11,5 @@
   <strings name="RussianLanguageButton">Russian</strings>
   <strings name="StartButton">Start</strings>
   <strings name="ResumeButton">Resume</strings>
+  <strings name="ScoreFormat">Score: {0}</strings>
 </resources>

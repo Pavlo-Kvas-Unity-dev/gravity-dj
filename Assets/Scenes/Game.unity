@@ -3426,6 +3426,8 @@ MonoBehaviour:
       value: Start
     - key: ResumeButton
       value: Resume
+    - key: ScoreFormat
+      value: 'Score: {0}'
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: English
@@ -3458,6 +3460,8 @@ MonoBehaviour:
       value: "\u041F\u043E\u0447\u0430\u0442\u0438"
     - key: ResumeButton
       value: "\u041F\u0440\u043E\u0434\u043E\u0432\u0436\u0438\u0442\u0438"
+    - key: ScoreFormat
+      value: "\u0420\u0430\u0445\u0443\u043D\u043E\u043A: {0}"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Ukrainian
@@ -3490,6 +3494,8 @@ MonoBehaviour:
       value: "\u043D\u0430\u0447\u0430\u0442\u044C"
     - key: ResumeButton
       value: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
+    - key: ScoreFormat
+      value: "\u041E\u0447\u043A\u0438: {0}"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Russian
@@ -3506,11 +3512,12 @@ MonoBehaviour:
   - ReturnButton
   - StartButton
   - ResumeButton
+  - ScoreFormat
   m_audiosKeys: []
   m_spriteKeys: []
   m_stringKeysRange:
     min: 0
-    max: 11
+    max: 12
   m_spriteKeysRange:
     min: 0
     max: 0

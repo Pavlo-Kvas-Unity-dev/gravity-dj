@@ -4,7 +4,7 @@ namespace InfinityEngine.Localization {
 /// <summary>This class is generated automaticaly by InfinityEngine, it contains constants used by many scripts.  DO NOT EDIT IT !</summary>
 	public static class R3 {
 		public static class strings {
-			public const string Names = "EnglishLanguageButton,UkrainianLanguageButton,RussianLanguageButton,MenuButton,PlayAgainButton,SettingsButton,HelpButton,ExitButton,ReturnButton,StartButton,ResumeButton";
+			public const string Names = "EnglishLanguageButton,UkrainianLanguageButton,RussianLanguageButton,MenuButton,PlayAgainButton,SettingsButton,HelpButton,ExitButton,ReturnButton,StartButton,ResumeButton,ScoreFormat";
 
 			public static ISIString EnglishLanguageButton = new ISIString("EnglishLanguageButton");
 			public static ISIString UkrainianLanguageButton = new ISIString("UkrainianLanguageButton");
@@ -17,6 +17,7 @@ namespace InfinityEngine.Localization {
 			public static ISIString ReturnButton = new ISIString("ReturnButton");
 			public static ISIString StartButton = new ISIString("StartButton");
 			public static ISIString ResumeButton = new ISIString("ResumeButton");
+			public static ISIString ScoreFormat = new ISIString("ScoreFormat");
 		}
 		public static class audios {
 			public const string Names = "";

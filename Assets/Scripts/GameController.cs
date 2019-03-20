@@ -1,4 +1,5 @@
 ﻿using System;
+using InfinityEngine.Localization;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI countdownText;
+    
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private Button mainMenuButton;
     
@@ -61,9 +63,15 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        ISILocalization.onLanguageChanged += OnLanguageChanged;
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
     }
-    
+
+    private void OnLanguageChanged()
+    {
+        UpdateScore();
+    }
+
     void Start()
     {
         ShowMainMenu();
@@ -160,7 +168,7 @@ public class GameController : MonoBehaviour
 
     private void UpdateScore()
     {
-        scoreText.text = $"Score: {Score}";
+        scoreText.text = string.Format(R3.strings.ScoreFormat, Score);
     }
 
     private void GameOver()

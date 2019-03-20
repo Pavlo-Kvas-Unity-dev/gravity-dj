@@ -11,4 +11,5 @@
   <strings name="RussianLanguageButton">русский</strings>
   <strings name="StartButton">начать</strings>
   <strings name="ResumeButton">Продолжить</strings>
+  <strings name="ScoreFormat">Очки: {0}</strings>
 </resources>

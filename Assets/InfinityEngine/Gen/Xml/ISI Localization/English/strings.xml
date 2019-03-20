@@ -9,4 +9,6 @@
   <strings name="ReturnButton">Return</strings>
   <strings name="UkrainianLanguageButton">Ukrainian</strings>
   <strings name="RussianLanguageButton">Russian</strings>
+  <strings name="StartButton">Start</strings>
+  <strings name="ResumeButton">Resume</strings>
 </resources>

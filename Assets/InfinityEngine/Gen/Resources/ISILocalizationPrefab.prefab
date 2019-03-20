@@ -71,6 +71,10 @@ MonoBehaviour:
       value: Ukrainian
     - key: RussianLanguageButton
       value: Russian
+    - key: StartButton
+      value: Start
+    - key: ResumeButton
+      value: Resume
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: English
@@ -99,6 +103,10 @@ MonoBehaviour:
       value: "\u0443\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430"
     - key: RussianLanguageButton
       value: "\u0440\u043E\u0441\u0456\u0439\u0441\u044C\u043A\u0430"
+    - key: StartButton
+      value: "\u041F\u043E\u0447\u0430\u0442\u0438"
+    - key: ResumeButton
+      value: "\u041F\u0440\u043E\u0434\u043E\u0432\u0436\u0438\u0442\u0438"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Ukrainian
@@ -127,6 +135,10 @@ MonoBehaviour:
       value: "\u0443\u043A\u0440\u0430\u0438\u043D\u0441\u043A\u0438\u0439"
     - key: RussianLanguageButton
       value: "\u0440\u0443\u0441\u0441\u043A\u0438\u0439"
+    - key: StartButton
+      value: "\u043D\u0430\u0447\u0430\u0442\u044C"
+    - key: ResumeButton
+      value: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Russian
@@ -141,11 +153,13 @@ MonoBehaviour:
   - HelpButton
   - ExitButton
   - ReturnButton
+  - StartButton
+  - ResumeButton
   m_audiosKeys: []
   m_spriteKeys: []
   m_stringKeysRange:
     min: 0
-    max: 9
+    max: 11
   m_spriteKeysRange:
     min: 0
     max: 0

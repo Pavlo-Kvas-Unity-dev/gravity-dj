@@ -2067,6 +2067,7 @@ GameObject:
   - component: {fileID: 431682458}
   - component: {fileID: 431682460}
   - component: {fileID: 431682459}
+  - component: {fileID: 431682461}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -2216,6 +2217,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431682457}
   m_CullTransparentMesh: 0
+--- !u!114 &431682461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431682457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: StartButton
 --- !u!1 &488955571
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,6 +3422,10 @@ MonoBehaviour:
       value: Ukrainian
     - key: RussianLanguageButton
       value: Russian
+    - key: StartButton
+      value: Start
+    - key: ResumeButton
+      value: Resume
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: English
@@ -3435,6 +3454,10 @@ MonoBehaviour:
       value: "\u0443\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430"
     - key: RussianLanguageButton
       value: "\u0440\u043E\u0441\u0456\u0439\u0441\u044C\u043A\u0430"
+    - key: StartButton
+      value: "\u041F\u043E\u0447\u0430\u0442\u0438"
+    - key: ResumeButton
+      value: "\u041F\u0440\u043E\u0434\u043E\u0432\u0436\u0438\u0442\u0438"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Ukrainian
@@ -3463,6 +3486,10 @@ MonoBehaviour:
       value: "\u0443\u043A\u0440\u0430\u0438\u043D\u0441\u043A\u0438\u0439"
     - key: RussianLanguageButton
       value: "\u0440\u0443\u0441\u0441\u043A\u0438\u0439"
+    - key: StartButton
+      value: "\u043D\u0430\u0447\u0430\u0442\u044C"
+    - key: ResumeButton
+      value: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Russian
@@ -3477,11 +3504,13 @@ MonoBehaviour:
   - HelpButton
   - ExitButton
   - ReturnButton
+  - StartButton
+  - ResumeButton
   m_audiosKeys: []
   m_spriteKeys: []
   m_stringKeysRange:
     min: 0
-    max: 9
+    max: 11
   m_spriteKeysRange:
     min: 0
     max: 0
@@ -7335,6 +7364,7 @@ GameObject:
   - component: {fileID: 1625965304}
   - component: {fileID: 1625965306}
   - component: {fileID: 1625965305}
+  - component: {fileID: 1625965307}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -7484,6 +7514,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625965303}
   m_CullTransparentMesh: 0
+--- !u!114 &1625965307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625965303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653bca03d3acf544a301458f1692cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  key: ResumeButton
 --- !u!1 &1630630738
 GameObject:
   m_ObjectHideFlags: 0

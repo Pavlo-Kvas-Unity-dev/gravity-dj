@@ -9,4 +9,6 @@
   <strings name="ReturnButton">повернутися</strings>
   <strings name="UkrainianLanguageButton">українська</strings>
   <strings name="RussianLanguageButton">російська</strings>
+  <strings name="StartButton">Почати</strings>
+  <strings name="ResumeButton">Продовжити</strings>
 </resources>

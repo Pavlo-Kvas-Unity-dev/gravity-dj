@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour
     {
         if (isGamePlaing)
         {
-            countdownText.text = $"Time left: {(int) timeLeft}";
+            countdownText.text = string.Format(R3.strings.TimeLeftFormat, (int) timeLeft);
             timeLeft -= Time.deltaTime;
 
             if (timeLeft < 0)

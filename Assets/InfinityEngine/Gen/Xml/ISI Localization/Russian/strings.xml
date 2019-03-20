@@ -13,4 +13,5 @@
   <strings name="ResumeButton">Продолжить</strings>
   <strings name="ScoreFormat">Очки: {0}</strings>
   <strings name="BestScoreFormat">Лучший результат: {0}</strings>
+  <strings name="TimeLeftFormat">Оставшееся время: {0}</strings>
 </resources>

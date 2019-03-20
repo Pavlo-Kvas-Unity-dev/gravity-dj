@@ -12,4 +12,5 @@
   <strings name="StartButton">Start</strings>
   <strings name="ResumeButton">Resume</strings>
   <strings name="ScoreFormat">Score: {0}</strings>
+  <strings name="BestScoreFormat">Best score: {0}</strings>
 </resources>

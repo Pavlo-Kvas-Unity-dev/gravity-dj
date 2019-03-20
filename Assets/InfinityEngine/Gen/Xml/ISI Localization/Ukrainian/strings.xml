@@ -12,4 +12,5 @@
   <strings name="StartButton">Почати</strings>
   <strings name="ResumeButton">Продовжити</strings>
   <strings name="ScoreFormat">Рахунок: {0}</strings>
+  <strings name="BestScoreFormat">Кращий результат: {0}</strings>
 </resources>

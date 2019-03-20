@@ -77,6 +77,8 @@ MonoBehaviour:
       value: Resume
     - key: ScoreFormat
       value: 'Score: {0}'
+    - key: BestScoreFormat
+      value: 'Best score: {0}'
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: English
@@ -111,6 +113,9 @@ MonoBehaviour:
       value: "\u041F\u0440\u043E\u0434\u043E\u0432\u0436\u0438\u0442\u0438"
     - key: ScoreFormat
       value: "\u0420\u0430\u0445\u0443\u043D\u043E\u043A: {0}"
+    - key: BestScoreFormat
+      value: "\u041A\u0440\u0430\u0449\u0438\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442:
+        {0}"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Ukrainian
@@ -145,6 +150,9 @@ MonoBehaviour:
       value: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C"
     - key: ScoreFormat
       value: "\u041E\u0447\u043A\u0438: {0}"
+    - key: BestScoreFormat
+      value: "\u041B\u0443\u0447\u0448\u0438\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442:
+        {0}"
     m_localizedAudio: []
     m_localizedSprites: []
     m_languageName: Russian
@@ -162,11 +170,12 @@ MonoBehaviour:
   - StartButton
   - ResumeButton
   - ScoreFormat
+  - BestScoreFormat
   m_audiosKeys: []
   m_spriteKeys: []
   m_stringKeysRange:
     min: 0
-    max: 12
+    max: 13
   m_spriteKeysRange:
     min: 0
     max: 0

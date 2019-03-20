@@ -70,6 +70,7 @@ public class GameController : MonoBehaviour
     private void OnLanguageChanged()
     {
         UpdateScore();
+        UpdateHighScoreUI();
     }
 
     void Start()
@@ -112,7 +113,7 @@ public class GameController : MonoBehaviour
 
     private void UpdateHighScoreUI()
     {
-        bestScoreText.text = $"Best score: {HighScore}";
+        bestScoreText.text = string.Format(R3.strings.BestScoreFormat, HighScore);
     }
 
     private void ReadHighScoreIfNull()

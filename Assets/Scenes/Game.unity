@@ -6212,7 +6212,6 @@ MonoBehaviour:
   countdownText: {fileID: 921902159}
   gameOverScreen: {fileID: 1256457968}
   mainMenuButton: {fileID: 1661966095}
-  gameDuration: 60
   helpWindow: {fileID: 86010783}
   mainMenuWindow: {fileID: 145882727}
 --- !u!114 &1322026598
@@ -9176,7 +9175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 74a173ce9166f664ab0f687f28a67825, type: 2}
   _monoInstallers:
   - {fileID: 2068047554}
   _installerPrefabs: []

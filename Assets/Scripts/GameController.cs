@@ -3,9 +3,11 @@ using InfinityEngine.Localization;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 using Button = UnityEngine.UI.Button;
 
 
@@ -21,14 +23,14 @@ public class GameController : MonoBehaviour
     private int score = 0;
     private bool isGamePlaing = false;
     private float timeLeft;
-    [SerializeField] private float gameDuration = 100f;
+    
     
     private int? highScore;
 
     [SerializeField] private HelpWindow helpWindow;
     [SerializeField] private MainMenuWindow mainMenuWindow;
 
-    // Start is called before the first frame update
+    Settings settings;
 
     private int HighScore
     {
@@ -61,6 +63,12 @@ public class GameController : MonoBehaviour
         }
     }
 
+    [Inject]
+    void Init(Settings settings)
+    {
+        this.settings = settings;
+    }
+    
     void Awake()
     {
         ISILocalization.onLanguageChanged += OnLanguageChanged;
@@ -104,7 +112,7 @@ public class GameController : MonoBehaviour
     {
         Score = 0;
         UpdateScore();
-        timeLeft = gameDuration;
+        timeLeft = settings.gameDuration;
         Resume();
                 
         UpdateHighScoreUI();
@@ -178,4 +186,11 @@ public class GameController : MonoBehaviour
         UpdateHighScoreUI();
         gameOverScreen.Show(Score, HighScore);
     }
+
+    [Serializable]
+    public class Settings
+    {
+        public float gameDuration = 60f;
+    }
+    
 }

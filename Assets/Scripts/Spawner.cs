@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Assertions;
 using Zenject;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject FlyingAgentPrefab;
     public FieldController fieldController;
 
     private float ObjectRadius
@@ -14,38 +14,35 @@ public class Spawner : MonoBehaviour
         {
             if (agentsCircleCollider2D == null)
             {
-                agentsCircleCollider2D = FlyingAgentPrefab.GetComponentInChildren<CircleCollider2D>();
+                agentsCircleCollider2D = settings.flyingAgentPrefab.GetComponentInChildren<CircleCollider2D>();
             }
             return agentsCircleCollider2D.radius;
         }
     }
 
-     
-
-    public float MaxDistanceFromBoundary = 1;
-
-    public Transform SpawnCenter;
-    public int InitialSpeed = 5;
-    public bool SpawnOnStart = true;
     CircleCollider2D agentsCircleCollider2D;
 
     private GameController gameController;
+    private Settings settings;
+
 
     [Inject]
-    public void Init(GameController gameController)
+    public void Init(GameController gameController, Settings settings)
     {
         this.gameController = gameController;
+        this.settings = settings;
     }
-    
+
     // Start is called before the first frame update
+
     void Awake()
     {
-        Assert.IsTrue(MaxDistanceFromBoundary > ObjectRadius);
+        Assert.IsTrue(settings.maxDistanceFromBoundary > ObjectRadius);
     }
 
     void Start()
     {
-        if (SpawnOnStart)
+        if (settings.SpawnOnStart)
         {
             Spawn();
         }
@@ -80,7 +77,7 @@ public class Spawner : MonoBehaviour
         spawnPos = spawnPos.normalized * cappedMagnitude;
 
         //spawn only if no Agent is on the screen
-        var flyingAgentGO = Instantiate(FlyingAgentPrefab, spawnPos, Quaternion.identity);
+        var flyingAgentGO = Instantiate(settings.flyingAgentPrefab, spawnPos, Quaternion.identity);
 
         var movement = flyingAgentGO.GetComponent<Movement>();
 
@@ -92,7 +89,7 @@ public class Spawner : MonoBehaviour
             Spawn();
         });
 
-        movement.Init(InitialSpeed);
+        movement.Init(settings.InitialSpeed);
 
         float RandomCoordInsideBoundaries()
         {
@@ -103,7 +100,7 @@ public class Spawner : MonoBehaviour
 
     private float MinAllowedDistanceFromCenter(float objectRadius)
     {
-        return fieldController.FieldSize/2 - fieldController.BorderSize - MaxDistanceFromBoundary + objectRadius;
+        return fieldController.FieldSize/2 - fieldController.BorderSize - settings.maxDistanceFromBoundary + objectRadius;
     }
 
     void Update()
@@ -113,5 +110,14 @@ public class Spawner : MonoBehaviour
         {
             Spawn();
         }
+    }
+
+    [Serializable]
+    public class Settings
+    {
+        public GameObject flyingAgentPrefab;
+        public float maxDistanceFromBoundary = 1;
+        public int InitialSpeed = 5;
+        public bool SpawnOnStart = true;
     }
 }

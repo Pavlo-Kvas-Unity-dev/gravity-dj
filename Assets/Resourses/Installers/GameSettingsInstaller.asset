@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameSettings:
     gameDuration: 60
+  SpawnerSettings:
+    flyingAgentPrefab: {fileID: 460188742633554749, guid: 034c687266922fc4f91bd7ed95fc3437,
+      type: 3}
+    maxDistanceFromBoundary: 1
+    InitialSpeed: 5
+    SpawnOnStart: 1

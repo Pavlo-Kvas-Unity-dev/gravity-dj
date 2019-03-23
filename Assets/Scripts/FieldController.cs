@@ -1,28 +1,56 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class FieldController : MonoBehaviour
 {
     [SerializeField] private Transform boundaryParent;
-    public int FieldSize = 12;
+
+    [Serializable]
+    public class Settings
+    {
+        public int fieldSize = 12;
+        public float cellSize = 1f;
+        public List<Vector2Int>  holeCoordList = new List<Vector2Int>();
+    }
+
     [SerializeField] private GameObject boundaryPrefab;
 
     [SerializeField] private Transform spawnCenter;
 
-    [SerializeField] public float cellSize = 1f;
 
-    public float BorderSize => cellSize;
+    public float BorderSize => CellSize;
 
-    [SerializeField] private List<Vector2Int>  holeCoordList = new List<Vector2Int>();
+
+    public int FieldSize//todo inline
+    {
+        get { return settings.fieldSize; }
+        set { settings.fieldSize = value; }
+    }
+
+    public float CellSize
+    {
+        get { return settings.cellSize; }
+        set { settings.cellSize = value; }
+    }
+
     private GameObject[,] field;
 
+    private Settings settings;
+    
     public GameObject this[Vector2Int coord]
     {
         get { return field[coord.x, coord.y]; }
         set { field[coord.x, coord.y] = value; }      
     }
 
+    [Inject]
+    void Init(Settings settings)
+    {
+        this.settings = settings;
+    }
+    
     void Awake()
     {
         field = new GameObject[FieldSize,FieldSize];
@@ -34,7 +62,7 @@ public class FieldController : MonoBehaviour
             SpawnBorderTile(FieldSize-1, y);
         }
 
-        foreach (var holeCoord in holeCoordList)
+        foreach (var holeCoord in settings.holeCoordList)
         {
             var borderTile = this[holeCoord];
             if (borderTile != null)
@@ -53,11 +81,11 @@ public class FieldController : MonoBehaviour
 
     private Vector2 GetPosByFieldCoordinates(int x, int y)
     {
-        return GetBottomLeftCoord() + Vector2.up *(y * cellSize) + Vector2.right*(x * cellSize);
+        return GetBottomLeftCoord() + Vector2.up *(y * CellSize) + Vector2.right*(x * CellSize);
     }
 
     private Vector2 GetBottomLeftCoord()
     {
-        return (Vector2)spawnCenter.transform.position + (Vector2.down  + Vector2.left)*(FieldSize/2 - cellSize/2);
+        return (Vector2)spawnCenter.transform.position + (Vector2.down  + Vector2.left)*(FieldSize/2 - CellSize/2);
     }
 }

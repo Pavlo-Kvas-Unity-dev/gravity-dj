@@ -20,3 +20,9 @@ MonoBehaviour:
     maxDistanceFromBoundary: 1
     InitialSpeed: 5
     SpawnOnStart: 1
+  FieldSettings:
+    fieldSize: 12
+    cellSize: 1
+    holeCoordList:
+    - {x: 5, y: 0}
+    - {x: 6, y: 0}

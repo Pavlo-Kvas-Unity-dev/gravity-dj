@@ -8,11 +8,13 @@ namespace GravityDJ.Installers
     {
         public GameController.Settings GameSettings;
         public Spawner.Settings SpawnerSettings;
+        public FieldController.Settings FieldSettings;
         
         public override void InstallBindings()
         {
             Container.BindInstance(GameSettings);
             Container.BindInstance(SpawnerSettings);
+            Container.BindInstance(FieldSettings);
         }
     }
 }

@@ -83,7 +83,7 @@ public class GravityController : MonoBehaviour
             Color.Lerp(neutralColor, negColor, Math.Abs(gravityStrengthZeroShiftModified));
 
         float minDist = 1f;
-        float maxDist = Mathf.Sqrt(2)*(FieldController.FieldSize / 2 - FieldController.cellSize);
+        float maxDist = Mathf.Sqrt(2)*(FieldController.FieldSize / 2 - FieldController.CellSize);
         float farthestDistCoef = CalcDistanceCoef(maxDist);
         float closestDistCoef  = CalcDistanceCoef(minDist);
 

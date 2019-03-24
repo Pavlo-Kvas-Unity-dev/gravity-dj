@@ -1553,6 +1553,7 @@ GameObject:
   - component: {fileID: 243806707}
   - component: {fileID: 243806710}
   - component: {fileID: 243806708}
+  - component: {fileID: 243806711}
   m_Layer: 0
   m_Name: Gravity
   m_TagString: Untagged
@@ -1572,7 +1573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d67a79a94aa0d46b96b123fe83e66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityStrengthSliderController: {fileID: 1483235940}
   FieldController: {fileID: 154322509}
   gravityStrengthSlider: {fileID: 1483235939}
   M: 1000000000000
@@ -1686,6 +1686,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &243806711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243806706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 243806707}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!1 &246381911
 GameObject:
   m_ObjectHideFlags: 0
@@ -6819,6 +6837,7 @@ GameObject:
   - component: {fileID: 1483235938}
   - component: {fileID: 1483235940}
   - component: {fileID: 1483235939}
+  - component: {fileID: 1483235941}
   m_Layer: 5
   m_Name: GravityStrengthSlider
   m_TagString: Untagged
@@ -6921,6 +6940,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zeroRegionLE: {fileID: 1086731729}
+--- !u!114 &1483235941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483235937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1483235940}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!1 &1493507478
 GameObject:
   m_ObjectHideFlags: 0
@@ -8152,6 +8189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1701100094}
   - component: {fileID: 1701100093}
+  - component: {fileID: 1701100095}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -8186,6 +8224,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1701100095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701100092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1701100093}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!1 &1796083573
 GameObject:
   m_ObjectHideFlags: 0

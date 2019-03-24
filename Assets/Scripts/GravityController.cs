@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GravityController : MonoBehaviour
 {
-    [SerializeField] private GravityStrengthSliderController gravityStrengthSliderController;
+    private GravityStrengthSliderController gravityStrengthSliderController;
     public FieldController FieldController;
 
     [SerializeField] private Slider gravityStrengthSlider;
@@ -24,7 +25,12 @@ public class GravityController : MonoBehaviour
     [SerializeField] private float gravitySliderZeroThreshold = .15f;
     [SerializeField] private List<Circle> circles;
 
-
+    [Inject]
+    void Init(GravityStrengthSliderController gravityStrengthSliderController)
+    {
+        this.gravityStrengthSliderController = gravityStrengthSliderController;
+    }
+    
     private void Awake()
     {
         collider = GetComponentInChildren<CircleCollider2D>();
@@ -151,5 +157,10 @@ public class GravityController : MonoBehaviour
             SetGravityStrength(gravityStrengthSliderValue+deltaStrength, true);
             Debug.Log(deltaStrength);
         }
+    }
+
+    public void Reset()
+    {
+        gravityStrengthSliderController.Reset();
     }
 }

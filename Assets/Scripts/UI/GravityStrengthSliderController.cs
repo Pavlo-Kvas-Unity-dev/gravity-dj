@@ -15,7 +15,7 @@ public class GravityStrengthSliderController : MonoBehaviour
     {
         slider = GetComponent<Slider>();
     }
-
+    
     public void SetZeroThreshold(float zeroThreshold)
     {
         StartCoroutine(SetZeroThresholdCoroutine(zeroThreshold));
@@ -29,5 +29,10 @@ public class GravityStrengthSliderController : MonoBehaviour
 
         zeroRegionLE.minHeight =
             zeroRegionLE.preferredHeight = parentHeight * zeroThreshold;
+    }
+
+    public void Reset()
+    {
+        slider.value = 0;
     }
 }

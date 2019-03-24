@@ -31,6 +31,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private MainMenuWindow mainMenuWindow;
 
     Settings settings;
+    private Spawner spawner;
+    private GravityController gravityController;
 
     private int HighScore
     {
@@ -64,9 +66,11 @@ public class GameController : MonoBehaviour
     }
 
     [Inject]
-    void Init(Settings settings)
+    void Init(Settings settings, Spawner spawner, GravityController gravityController)
     {
         this.settings = settings;
+        this.spawner = spawner;
+        this.gravityController = gravityController;
     }
     
     void Awake()
@@ -110,12 +114,15 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
+        gravityController.Reset();
         Score = 0;
         UpdateScore();
         timeLeft = settings.gameDuration;
         Resume();
                 
         UpdateHighScoreUI();
+        
+        spawner.Spawn();
         
     }
 
@@ -134,8 +141,8 @@ public class GameController : MonoBehaviour
 
     public void OnRestart()
     {
-//        StartGame(); 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartGame(); 
+//        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void OnMainMenuButtonClicked()

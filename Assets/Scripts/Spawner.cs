@@ -24,6 +24,7 @@ public class Spawner : MonoBehaviour
 
     private GameController gameController;
     private Settings settings;
+    private FlyingAgent spawnedAgent;
 
 
     [Inject]
@@ -38,14 +39,6 @@ public class Spawner : MonoBehaviour
     void Awake()
     {
         Assert.IsTrue(settings.maxDistanceFromBoundary > ObjectRadius);
-    }
-
-    void Start()
-    {
-        if (settings.SpawnOnStart)
-        {
-            Spawn();
-        }
     }
 
     private void OnDrawGizmos()
@@ -76,14 +69,22 @@ public class Spawner : MonoBehaviour
 
         spawnPos = spawnPos.normalized * cappedMagnitude;
 
+        //only one ball at time
+        if (spawnedAgent != null)
+        {
+            spawnedAgent.isAlive = false;
+            Destroy(spawnedAgent.gameObject);
+        }
+
         //spawn only if no Agent is on the screen
+
         var flyingAgentGO = Instantiate(settings.flyingAgentPrefab, spawnPos, Quaternion.identity);
 
         var movement = flyingAgentGO.GetComponent<Movement>();
 
-        var flyingAgent = flyingAgentGO.GetComponent<FlyingAgent>();
-
-        flyingAgent.flyAway += new FlyingAgent.OnAgentFlyThroughHoleEventHandler(sender =>
+        spawnedAgent = flyingAgentGO.GetComponent<FlyingAgent>();
+       
+        spawnedAgent.flyAway += new FlyingAgent.OnAgentFlyThroughHoleEventHandler(sender =>
         {
             gameController.OnAgentFlewAway(sender);
             Spawn();

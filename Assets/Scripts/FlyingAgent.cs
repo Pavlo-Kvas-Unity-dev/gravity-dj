@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class FlyingAgent : MonoBehaviour
 {
+    public bool isAlive = true;
+
     public delegate void OnAgentFlyThroughHoleEventHandler(FlyingAgent sender);
 
     public event OnAgentFlyThroughHoleEventHandler flyAway;

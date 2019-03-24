@@ -6,6 +6,10 @@ public class AgentsPassedThroughHoleDetector : MonoBehaviour
 {
     private void OnTriggerExit2D(Collider2D other)
     {
-        other.gameObject.GetComponent<FlyingAgent>().OnFliedThroughTheHole();
+        var flyingAgent = other.gameObject.GetComponent<FlyingAgent>();
+        if (flyingAgent.isAlive)
+        {
+            flyingAgent.OnFliedThroughTheHole();
+        }
     }
 }

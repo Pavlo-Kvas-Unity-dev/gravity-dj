@@ -60,7 +60,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_text
-    value: Play
+    value: Text
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_isRightToLeft
@@ -224,7 +224,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontSizeMax
-    value: 72
+    value: 40
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_fontStyle
@@ -356,19 +356,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_margin.x
-    value: 0
+    value: 10
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_margin.y
-    value: 0
+    value: 10
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_margin.z
-    value: 0
+    value: 10
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_margin.w
-    value: 0
+    value: 10
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_textInfo.textComponent
@@ -424,7 +424,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_isInputParsingRequired
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_inputSource

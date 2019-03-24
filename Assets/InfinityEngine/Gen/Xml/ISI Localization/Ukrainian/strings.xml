@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <strings name="EnglishLanguageButton">Англійська</strings>
+  <strings name="EnglishLanguageButton">English</strings>
   <strings name="MenuButton">меню</strings>
   <strings name="PlayAgainButton">грати знову</strings>
   <strings name="SettingsButton">налаштування</strings>
@@ -8,7 +8,7 @@
   <strings name="ExitButton">вийти</strings>
   <strings name="ReturnButton">повернутися</strings>
   <strings name="UkrainianLanguageButton">українська</strings>
-  <strings name="RussianLanguageButton">російська</strings>
+  <strings name="RussianLanguageButton">русский</strings>
   <strings name="StartButton">Почати</strings>
   <strings name="ResumeButton">Продовжити</strings>
   <strings name="ScoreFormat">Рахунок: {0}</strings>

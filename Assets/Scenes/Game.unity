@@ -1081,14 +1081,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundaryParent: {fileID: 1802131978}
-  FieldSize: 12
   boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
     type: 3}
   spawnCenter: {fileID: 1115030002}
-  cellSize: 1
-  holeCoordList:
-  - {x: 5, y: 0}
-  - {x: 6, y: 0}
 --- !u!4 &154322510
 Transform:
   m_ObjectHideFlags: 0
@@ -3434,9 +3429,9 @@ MonoBehaviour:
     - key: ReturnButton
       value: Return
     - key: UkrainianLanguageButton
-      value: Ukrainian
+      value: "\u0443\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430"
     - key: RussianLanguageButton
-      value: Russian
+      value: "\u0440\u0443\u0441\u0441\u043A\u0438\u0439"
     - key: StartButton
       value: Start
     - key: ResumeButton
@@ -3467,7 +3462,7 @@ MonoBehaviour:
     m_language: 32
     m_localizedStrings:
     - key: EnglishLanguageButton
-      value: "\u0410\u043D\u0433\u043B\u0456\u0439\u0441\u044C\u043A\u0430"
+      value: English
     - key: MenuButton
       value: "\u043C\u0435\u043D\u044E"
     - key: PlayAgainButton
@@ -3483,7 +3478,7 @@ MonoBehaviour:
     - key: UkrainianLanguageButton
       value: "\u0443\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430"
     - key: RussianLanguageButton
-      value: "\u0440\u043E\u0441\u0456\u0439\u0441\u044C\u043A\u0430"
+      value: "\u0440\u0443\u0441\u0441\u043A\u0438\u0439"
     - key: StartButton
       value: "\u041F\u043E\u0447\u0430\u0442\u0438"
     - key: ResumeButton
@@ -3532,7 +3527,7 @@ MonoBehaviour:
     m_language: 8
     m_localizedStrings:
     - key: EnglishLanguageButton
-      value: "\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439"
+      value: English
     - key: MenuButton
       value: "\u043C\u0435\u043D\u044E"
     - key: PlayAgainButton
@@ -3546,7 +3541,7 @@ MonoBehaviour:
     - key: ReturnButton
       value: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F"
     - key: UkrainianLanguageButton
-      value: "\u0443\u043A\u0440\u0430\u0438\u043D\u0441\u043A\u0438\u0439"
+      value: "\u0443\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430"
     - key: RussianLanguageButton
       value: "\u0440\u0443\u0441\u0441\u043A\u0438\u0439"
     - key: StartButton
@@ -3604,14 +3599,14 @@ MonoBehaviour:
     m_languageCode: 
   m_stringKeys:
   - EnglishLanguageButton
+  - UkrainianLanguageButton
+  - RussianLanguageButton
   - MenuButton
   - PlayAgainButton
   - SettingsButton
   - HelpButton
   - ExitButton
   - ReturnButton
-  - UkrainianLanguageButton
-  - RussianLanguageButton
   - StartButton
   - ResumeButton
   - ScoreFormat
@@ -8176,13 +8171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0b9c6a1b8bb5041b73625ef7d2e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlyingAgentPrefab: {fileID: 460188742633554749, guid: 034c687266922fc4f91bd7ed95fc3437,
-    type: 3}
   fieldController: {fileID: 154322509}
-  MaxDistanceFromBoundary: 1.7
-  SpawnCenter: {fileID: 1115030002}
-  InitialSpeed: 5
-  SpawnOnStart: 1
 --- !u!4 &1701100094
 Transform:
   m_ObjectHideFlags: 0

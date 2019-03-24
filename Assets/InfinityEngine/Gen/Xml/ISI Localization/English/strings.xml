@@ -7,8 +7,8 @@
   <strings name="HelpButton">Help</strings>
   <strings name="ExitButton">Exit</strings>
   <strings name="ReturnButton">Return</strings>
-  <strings name="UkrainianLanguageButton">Ukrainian</strings>
-  <strings name="RussianLanguageButton">Russian</strings>
+  <strings name="UkrainianLanguageButton">українська</strings>
+  <strings name="RussianLanguageButton">русский</strings>
   <strings name="StartButton">Start</strings>
   <strings name="ResumeButton">Resume</strings>
   <strings name="ScoreFormat">Score: {0}</strings>

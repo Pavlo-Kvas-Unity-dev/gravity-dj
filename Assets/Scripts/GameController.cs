@@ -14,7 +14,7 @@ using Button = UnityEngine.UI.Button;
 public class GameController : MonoBehaviour
 {
     [Inject(Id="score")] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI bestScoreText;
+    [Inject(Id="bestScore")] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI countdownText;
     
     [SerializeField] private GameOverScreen gameOverScreen;

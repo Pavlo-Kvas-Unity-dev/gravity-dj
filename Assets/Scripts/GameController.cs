@@ -13,7 +13,7 @@ using Button = UnityEngine.UI.Button;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [Inject(Id="score")] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI countdownText;
     

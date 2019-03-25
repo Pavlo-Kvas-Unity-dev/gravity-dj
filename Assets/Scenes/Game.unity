@@ -6220,7 +6220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fdb70f6fb1f28d4082a8ccb87bcbc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1630630741}
+  scoreText: {fileID: 0}
   bestScoreText: {fileID: 1846949046}
   countdownText: {fileID: 921902159}
   gameOverScreen: {fileID: 1256457968}
@@ -7683,6 +7683,7 @@ GameObject:
   - component: {fileID: 1630630739}
   - component: {fileID: 1630630740}
   - component: {fileID: 1630630741}
+  - component: {fileID: 1630630742}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -7832,6 +7833,24 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1630630742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630630738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1630630741}
+  _identifier: score
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!1 &1647050310
 GameObject:
   m_ObjectHideFlags: 0

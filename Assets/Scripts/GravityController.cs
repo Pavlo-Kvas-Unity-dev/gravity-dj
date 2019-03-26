@@ -6,6 +6,11 @@ using Zenject;
 
 public class GravityController : MonoBehaviour
 {
+    public GameObject circlePrefab;
+    
+    public float innerCircleRadius;
+    public float outerCircleRadius;
+    
     private GravityStrengthSliderController gravityStrengthSliderController;
     [Inject] FieldController FieldController;
 
@@ -21,7 +26,7 @@ public class GravityController : MonoBehaviour
     [SerializeField] private Vector2 gravityStrengthRange;
     private readonly double gravityConstant = 6.67408E-11;
     [SerializeField] private float gravitySliderZeroThreshold = .15f;
-    [SerializeField] private List<Circle> circles;
+    private List<Circle> circles =new List<Circle>();
 
     [Inject]
     void Init(GravityStrengthSliderController gravityStrengthSliderController)
@@ -33,12 +38,29 @@ public class GravityController : MonoBehaviour
     {
         collider = GetComponentInChildren<CircleCollider2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        
+        CreateCircles(); 
     }
 
     private void Start()
     {
+        
+        
         InitSliders();
         gravityStrengthSliderController.SetZeroThreshold(gravitySliderZeroThreshold);
+    }
+
+    private void CreateCircles()
+    {
+        for (float curCircleRadius = innerCircleRadius; curCircleRadius < outerCircleRadius; curCircleRadius += .5f)
+        {
+            var circleGO = Instantiate(circlePrefab);
+            circleGO.transform.SetParent(transform);
+            var circle = circleGO.GetComponent<Circle>();
+            circles.Add(circle);
+
+            circle.Init(curCircleRadius);
+        }
     }
 
     private void InitSliders()

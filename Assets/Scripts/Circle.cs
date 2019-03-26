@@ -10,7 +10,7 @@ public class Circle : MonoBehaviour
     public float radius;
     public bool cirleFillscreen;
 
-    private LineRenderer lineRenderer;
+    [SerializeField] private LineRenderer lineRenderer;
 
     private void OnValidate()
     {
@@ -19,13 +19,13 @@ public class Circle : MonoBehaviour
 
     void Awake()
     {
-        lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        SetupCircle();
     }
 
-    private void SetupCircle()
+    public void Init(float curCircleRadius)
     {
+        radius = curCircleRadius;
+        
         SetWidth(lineWidth);
 
         if (cirleFillscreen)

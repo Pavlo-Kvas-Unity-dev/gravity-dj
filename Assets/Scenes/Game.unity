@@ -1630,8 +1630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d67a79a94aa0d46b96b123fe83e66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FieldController: {fileID: 154322509}
-  gravityStrengthSlider: {fileID: 1483235939}
   M: 1000000000000
   gravityStrengthChangeSpeed: 1.4
   gravitationFalloffCoef: 1.5
@@ -7001,18 +6999,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 243806707}
-        m_MethodName: OnStrengthChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1483235940
@@ -8335,7 +8322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0b9c6a1b8bb5041b73625ef7d2e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldController: {fileID: 154322509}
 --- !u!4 &1701100094
 Transform:
   m_ObjectHideFlags: 0

@@ -9,8 +9,6 @@ public class GravityController : MonoBehaviour
     private GravityStrengthSliderController gravityStrengthSliderController;
     [Inject] FieldController FieldController;
 
-    [SerializeField] private Slider gravityStrengthSlider;
-
     public double M = 500000;
     
     private float gravityStrengthZeroShiftModified = 0f;
@@ -45,7 +43,7 @@ public class GravityController : MonoBehaviour
 
     private void InitSliders()
     {
-        InitSlider(gravityStrengthSlider, gravityStrengthRange);
+        InitSlider(gravityStrengthSliderController.Slider, gravityStrengthRange);
         SetGravityStrength(gravityStrengthZeroShiftModified, true);
 
         void InitSlider(Slider slider, Vector2 allowedValueRange)
@@ -116,7 +114,7 @@ public class GravityController : MonoBehaviour
         
         if (updateUI)
         {
-            gravityStrengthSlider.value = gravityStrengthSliderValue;
+            gravityStrengthSliderController.Slider.value = gravityStrengthSliderValue;
         }
     }
 

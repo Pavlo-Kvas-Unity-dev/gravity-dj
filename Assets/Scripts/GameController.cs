@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     [Inject(Id="bestScore")] private TextMeshProUGUI bestScoreText;
     [Inject(Id="gameCountdown")] private TextMeshProUGUI countdownText;
     
-    [SerializeField] private GameOverScreen gameOverScreen;
+    [Inject] private GameOverScreen gameOverScreen;
     [Inject(Id="mainMenuButton")] private Button mainMenuButton;
     
     private int score = 0;

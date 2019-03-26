@@ -602,6 +602,7 @@ GameObject:
   - component: {fileID: 86010782}
   - component: {fileID: 86010783}
   - component: {fileID: 86010781}
+  - component: {fileID: 86010784}
   m_Layer: 5
   m_Name: HelpWindow
   m_TagString: Untagged
@@ -679,6 +680,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7379d626f84924fa9ee2602e78198c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &86010784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86010779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 86010783}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &106520852
 GameObject:
   m_ObjectHideFlags: 0

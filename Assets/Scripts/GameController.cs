@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
     
     private int? highScore;
 
-    [SerializeField] private HelpWindow helpWindow;
+    [Inject] private HelpWindow helpWindow;
     [SerializeField] private MainMenuWindow mainMenuWindow;
 
     Settings settings;

@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     [Inject(Id="gameCountdown")] private TextMeshProUGUI countdownText;
     
     [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private Button mainMenuButton;
+    [Inject(Id="mainMenuButton")] private Button mainMenuButton;
     
     private int score = 0;
     private bool isGamePlaing = false;

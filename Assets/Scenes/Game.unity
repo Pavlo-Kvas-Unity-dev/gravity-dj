@@ -6240,7 +6240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1256457968}
-  mainMenuButton: {fileID: 1661966095}
   helpWindow: {fileID: 86010783}
   mainMenuWindow: {fileID: 145882727}
 --- !u!114 &1322026598
@@ -8085,6 +8084,7 @@ GameObject:
   - component: {fileID: 1661966096}
   - component: {fileID: 1661966095}
   - component: {fileID: 1661966094}
+  - component: {fileID: 1661966098}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -8214,6 +8214,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661966092}
   m_CullTransparentMesh: 0
+--- !u!114 &1661966098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661966092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1661966095}
+  _identifier: mainMenuButton
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1701100092
 GameObject:
   m_ObjectHideFlags: 0

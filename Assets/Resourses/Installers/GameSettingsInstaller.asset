@@ -21,6 +21,8 @@ MonoBehaviour:
     InitialSpeed: 5
     SpawnOnStart: 1
   FieldSettings:
+    boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
+      type: 3}
     fieldSize: 12
     cellSize: 1
     holeCoordList:

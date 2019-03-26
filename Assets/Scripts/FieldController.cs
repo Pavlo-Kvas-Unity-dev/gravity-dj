@@ -10,12 +10,12 @@ public class FieldController : MonoBehaviour
     [Serializable]
     public class Settings
     {
+        public GameObject boundaryPrefab;
+        
         public int fieldSize = 12;
         public float cellSize = 1f;
         public List<Vector2Int>  holeCoordList = new List<Vector2Int>();
     }
-
-    [SerializeField] private GameObject boundaryPrefab;
 
     [SerializeField] private Transform spawnCenter;
 
@@ -74,7 +74,7 @@ public class FieldController : MonoBehaviour
 
     private void SpawnBorderTile(int x, int y)
     {
-        var boundaryTile = Instantiate(boundaryPrefab, GetPosByFieldCoordinates(x, y), Quaternion.identity);
+        var boundaryTile = Instantiate(settings.boundaryPrefab, GetPosByFieldCoordinates(x, y), Quaternion.identity);
         boundaryTile.transform.parent = boundaryParent;
         field[x,y] = boundaryTile;
     }

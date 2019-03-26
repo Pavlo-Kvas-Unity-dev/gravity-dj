@@ -7,6 +7,8 @@ public class FieldController : MonoBehaviour
 {
     [Inject(Id="boundaryParent")] private Transform boundaryParent;
 
+    [Inject(Id="fieldCenter")] private Transform spawnCenter;
+
     [Serializable]
     public class Settings
     {
@@ -16,8 +18,6 @@ public class FieldController : MonoBehaviour
         public float cellSize = 1f;
         public List<Vector2Int>  holeCoordList = new List<Vector2Int>();
     }
-
-    [SerializeField] private Transform spawnCenter;
 
 
     public float BorderSize => CellSize;

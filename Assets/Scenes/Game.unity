@@ -602,6 +602,7 @@ GameObject:
   - component: {fileID: 86010782}
   - component: {fileID: 86010783}
   - component: {fileID: 86010781}
+  - component: {fileID: 86010784}
   m_Layer: 5
   m_Name: HelpWindow
   m_TagString: Untagged
@@ -679,6 +680,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7379d626f84924fa9ee2602e78198c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &86010784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86010779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 86010783}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &106520852
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +965,7 @@ GameObject:
   - component: {fileID: 145882727}
   - component: {fileID: 145882725}
   - component: {fileID: 145882724}
+  - component: {fileID: 145882728}
   m_Layer: 5
   m_Name: MainMenuWindow
   m_TagString: Untagged
@@ -1051,6 +1071,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 1440994396}
   resumeButton: {fileID: 176518267}
+--- !u!114 &145882728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145882722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 145882727}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &154322508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1099,7 @@ GameObject:
   m_Component:
   - component: {fileID: 154322510}
   - component: {fileID: 154322509}
+  - component: {fileID: 154322511}
   m_Layer: 0
   m_Name: FieldController
   m_TagString: Untagged
@@ -1080,10 +1119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0417c19877d9cc746935701a4ceaa90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundaryParent: {fileID: 1802131978}
-  boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
-    type: 3}
-  spawnCenter: {fileID: 1115030002}
 --- !u!4 &154322510
 Transform:
   m_ObjectHideFlags: 0
@@ -1099,6 +1134,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &154322511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154322508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 154322509}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &162804269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,8 +1626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d67a79a94aa0d46b96b123fe83e66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FieldController: {fileID: 154322509}
-  gravityStrengthSlider: {fileID: 1483235939}
   M: 1000000000000
   gravityStrengthChangeSpeed: 1.4
   gravitationFalloffCoef: 1.5
@@ -3821,6 +3872,7 @@ GameObject:
   - component: {fileID: 921902158}
   - component: {fileID: 921902160}
   - component: {fileID: 921902159}
+  - component: {fileID: 921902161}
   m_Layer: 5
   m_Name: CountdownText
   m_TagString: Untagged
@@ -3970,6 +4022,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921902157}
   m_CullTransparentMesh: 0
+--- !u!114 &921902161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921902157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 921902159}
+  _identifier: gameCountdown
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &926968211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4951,8 +5021,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1115030002}
+  - component: {fileID: 1115030003}
   m_Layer: 0
-  m_Name: SpawnCenter
+  m_Name: FiledCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4972,6 +5043,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1115030003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115030001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1115030002}
+  _identifier: fieldCenter
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1156987876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5445,6 +5534,7 @@ GameObject:
   - component: {fileID: 1256457967}
   - component: {fileID: 1256457968}
   - component: {fileID: 1256457966}
+  - component: {fileID: 1256457969}
   m_Layer: 5
   m_Name: GameOverWindow
   m_TagString: Untagged
@@ -5524,6 +5614,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 67694675}
   restartButton: {fileID: 1904645409}
+--- !u!114 &1256457969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256457964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1256457968}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1270279587
 GameObject:
   m_ObjectHideFlags: 0
@@ -6220,13 +6328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fdb70f6fb1f28d4082a8ccb87bcbc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1630630741}
-  bestScoreText: {fileID: 1846949046}
-  countdownText: {fileID: 921902159}
-  gameOverScreen: {fileID: 1256457968}
-  mainMenuButton: {fileID: 1661966095}
-  helpWindow: {fileID: 86010783}
-  mainMenuWindow: {fileID: 145882727}
 --- !u!114 &1322026598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6913,18 +7014,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 243806707}
-        m_MethodName: OnStrengthChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1483235940
@@ -7683,6 +7773,7 @@ GameObject:
   - component: {fileID: 1630630739}
   - component: {fileID: 1630630740}
   - component: {fileID: 1630630741}
+  - component: {fileID: 1630630742}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -7832,6 +7923,24 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1630630742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630630738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1630630741}
+  _identifier: score
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!1 &1647050310
 GameObject:
   m_ObjectHideFlags: 0
@@ -8050,6 +8159,7 @@ GameObject:
   - component: {fileID: 1661966096}
   - component: {fileID: 1661966095}
   - component: {fileID: 1661966094}
+  - component: {fileID: 1661966098}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -8179,6 +8289,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661966092}
   m_CullTransparentMesh: 0
+--- !u!114 &1661966098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661966092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1661966095}
+  _identifier: mainMenuButton
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1701100092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8209,7 +8337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0b9c6a1b8bb5041b73625ef7d2e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldController: {fileID: 154322509}
 --- !u!4 &1701100094
 Transform:
   m_ObjectHideFlags: 0
@@ -8347,6 +8474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1802131978}
+  - component: {fileID: 1802131979}
   m_Layer: 0
   m_Name: BoundaryParent
   m_TagString: Untagged
@@ -8368,6 +8496,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1802131979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802131977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1802131978}
+  _identifier: boundaryParent
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1814693565
 GameObject:
   m_ObjectHideFlags: 0
@@ -8482,6 +8628,7 @@ GameObject:
   - component: {fileID: 1846949045}
   - component: {fileID: 1846949047}
   - component: {fileID: 1846949046}
+  - component: {fileID: 1846949048}
   m_Layer: 5
   m_Name: BestScoreText
   m_TagString: Untagged
@@ -8631,6 +8778,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846949044}
   m_CullTransparentMesh: 0
+--- !u!114 &1846949048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846949044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1846949046}
+  _identifier: bestScore
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1853991664
 GameObject:
   m_ObjectHideFlags: 0

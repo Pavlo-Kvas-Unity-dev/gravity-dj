@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [RequireComponent(typeof(Slider))]
 public class GravityStrengthSliderController : MonoBehaviour
@@ -9,13 +10,26 @@ public class GravityStrengthSliderController : MonoBehaviour
     private Slider slider;
 
     public LayoutElement zeroRegionLE;
+
+    [Inject] private GravityController gravityController;
     
-    // Start is called before the first frame update
-    void Awake()
+    public Slider Slider
     {
-        slider = GetComponent<Slider>();
+        get
+        {
+            if (slider == null)
+            {
+                slider = GetComponent<Slider>();
+            };
+            return slider;
+        }
     }
-    
+
+    private void Awake()
+    {
+        Slider.onValueChanged.AddListener(gravityController.OnStrengthChanged);
+    }
+
     public void SetZeroThreshold(float zeroThreshold)
     {
         StartCoroutine(SetZeroThresholdCoroutine(zeroThreshold));
@@ -31,8 +45,8 @@ public class GravityStrengthSliderController : MonoBehaviour
             zeroRegionLE.preferredHeight = parentHeight * zeroThreshold;
     }
 
-    public void Reset()
+    public void Reset() //todo rename
     {
-        slider.value = 0;
+        Slider.value = 0;
     }
 }

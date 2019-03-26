@@ -13,12 +13,12 @@ using Button = UnityEngine.UI.Button;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI bestScoreText;
-    [SerializeField] private TextMeshProUGUI countdownText;
+    [Inject(Id="score")] private TextMeshProUGUI scoreText;
+    [Inject(Id="bestScore")] private TextMeshProUGUI bestScoreText;
+    [Inject(Id="gameCountdown")] private TextMeshProUGUI countdownText;
     
-    [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private Button mainMenuButton;
+    [Inject] private GameOverScreen gameOverScreen;
+    [Inject(Id="mainMenuButton")] private Button mainMenuButton;
     
     private int score = 0;
     private bool isGamePlaing = false;
@@ -27,8 +27,8 @@ public class GameController : MonoBehaviour
     
     private int? highScore;
 
-    [SerializeField] private HelpWindow helpWindow;
-    [SerializeField] private MainMenuWindow mainMenuWindow;
+    [Inject] private HelpWindow helpWindow;
+    [Inject] private MainMenuWindow mainMenuWindow;
 
     Settings settings;
     private Spawner spawner;

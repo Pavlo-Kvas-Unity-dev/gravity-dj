@@ -28,3 +28,14 @@ MonoBehaviour:
     holeCoordList:
     - {x: 5, y: 0}
     - {x: 6, y: 0}
+  GravitySettings:
+    circlePrefab: {fileID: 6771677265091953395, guid: b1357bfc462881847ac6ae728813b583,
+      type: 3}
+    innerCircleRadius: 0.5
+    outerCircleRadius: 10
+    gravityStrengthChangeSpeed: 1.4
+    M: 1000000000000
+    gravitationFalloffCoef: 1.5
+    allowedAccelerationRange: {x: -150, y: 150}
+    gravityStrengthRange: {x: -1, y: 1}
+    gravitySliderZeroThreshold: 0.15

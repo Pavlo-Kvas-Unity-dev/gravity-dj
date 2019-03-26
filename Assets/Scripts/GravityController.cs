@@ -6,34 +6,31 @@ using Zenject;
 
 public class GravityController : MonoBehaviour
 {
-    public GameObject circlePrefab;
-    
-    public float innerCircleRadius;
-    public float outerCircleRadius;
-    
+    private Settings settings;
+
     private GravityStrengthSliderController gravityStrengthSliderController;
+
     [Inject] FieldController FieldController;
 
-    public double M = 500000;
-    
     private float gravityStrengthZeroShiftModified = 0f;
+
     private float gravityStrengthSliderValue;
+
     private SpriteRenderer spriteRenderer;
+
     private CircleCollider2D collider;
-    [SerializeField] private float gravityStrengthChangeSpeed;
-    public float gravitationFalloffCoef = 2;
-    [SerializeField] private Vector2 allowedAccelerationRange;
-    [SerializeField] private Vector2 gravityStrengthRange;
+
     private readonly double gravityConstant = 6.67408E-11;
-    [SerializeField] private float gravitySliderZeroThreshold = .15f;
-    private List<Circle> circles =new List<Circle>();
+
+    private List<Circle> circles = new List<Circle>();
 
     [Inject]
-    void Init(GravityStrengthSliderController gravityStrengthSliderController)
+    void Init(GravityStrengthSliderController gravityStrengthSliderController, Settings settings)
     {
         this.gravityStrengthSliderController = gravityStrengthSliderController;
+        this.settings = settings;
     }
-    
+
     private void Awake()
     {
         collider = GetComponentInChildren<CircleCollider2D>();
@@ -47,14 +44,14 @@ public class GravityController : MonoBehaviour
         
         
         InitSliders();
-        gravityStrengthSliderController.SetZeroThreshold(gravitySliderZeroThreshold);
+        gravityStrengthSliderController.SetZeroThreshold(settings.gravitySliderZeroThreshold);
     }
 
     private void CreateCircles()
     {
-        for (float curCircleRadius = innerCircleRadius; curCircleRadius < outerCircleRadius; curCircleRadius += .5f)
+        for (float curCircleRadius = settings.innerCircleRadius; curCircleRadius < settings.outerCircleRadius; curCircleRadius += .5f)
         {
-            var circleGO = Instantiate(circlePrefab);
+            var circleGO = Instantiate(settings.circlePrefab);
             circleGO.transform.SetParent(transform);
             var circle = circleGO.GetComponent<Circle>();
             circles.Add(circle);
@@ -65,7 +62,7 @@ public class GravityController : MonoBehaviour
 
     private void InitSliders()
     {
-        InitSlider(gravityStrengthSliderController.Slider, gravityStrengthRange);
+        InitSlider(gravityStrengthSliderController.Slider, settings.gravityStrengthRange);
         SetGravityStrength(gravityStrengthZeroShiftModified, true);
 
         void InitSlider(Slider slider, Vector2 allowedValueRange)
@@ -87,16 +84,16 @@ public class GravityController : MonoBehaviour
 
     public void SetGravityStrength(float newGravityStrengthNorm, bool updateUI)
     {
-        gravityStrengthZeroShiftModified = gravityStrengthSliderValue = Mathf.Clamp(newGravityStrengthNorm, gravityStrengthRange.x, gravityStrengthRange.y);
+        gravityStrengthZeroShiftModified = gravityStrengthSliderValue = Mathf.Clamp(newGravityStrengthNorm, settings.gravityStrengthRange.x, settings.gravityStrengthRange.y);
         
         //interpret near zero values as zero
         if (gravityStrengthZeroShiftModified > 0)
         {
-            gravityStrengthZeroShiftModified = Mathf.InverseLerp(gravitySliderZeroThreshold, gravityStrengthRange.y, gravityStrengthZeroShiftModified);
+            gravityStrengthZeroShiftModified = Mathf.InverseLerp(settings.gravitySliderZeroThreshold, settings.gravityStrengthRange.y, gravityStrengthZeroShiftModified);
         }
         else
         {
-            gravityStrengthZeroShiftModified = -1 * Mathf.InverseLerp(-gravitySliderZeroThreshold, gravityStrengthRange.x, gravityStrengthZeroShiftModified);
+            gravityStrengthZeroShiftModified = -1 * Mathf.InverseLerp(-(float) settings.gravitySliderZeroThreshold, settings.gravityStrengthRange.x, gravityStrengthZeroShiftModified);
         }
         
         var posColor = Color.green;
@@ -116,7 +113,7 @@ public class GravityController : MonoBehaviour
 
         float CalcDistanceCoef(float dist)
         {
-            return 1.0f/Mathf.Pow(dist, gravitationFalloffCoef);
+            return 1.0f/Mathf.Pow(dist, settings.gravitationFalloffCoef);
         }
 
         foreach (var circle in circles)
@@ -157,10 +154,10 @@ public class GravityController : MonoBehaviour
 
     private float CalcAcceleration(float distance)
     {
-        float acceleration = (float) (gravityConstant * M * gravityStrengthZeroShiftModified /
-                                      (Mathf.Pow(distance, gravitationFalloffCoef)));
+        float acceleration = (float) (gravityConstant * settings.M * gravityStrengthZeroShiftModified /
+                                      (Mathf.Pow(distance, settings.gravitationFalloffCoef)));
 
-        acceleration = Mathf.Clamp(acceleration, allowedAccelerationRange.x, allowedAccelerationRange.y);
+        acceleration = Mathf.Clamp(acceleration, settings.allowedAccelerationRange.x, settings.allowedAccelerationRange.y);
         return acceleration;
     }
 
@@ -173,7 +170,7 @@ public class GravityController : MonoBehaviour
         var vert = Input.GetAxis("Vertical");
         if (Mathf.Abs(vert) > Mathf.Epsilon)
         {
-            var deltaStrength = Time.deltaTime * gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
+            var deltaStrength = Time.deltaTime * settings.gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
             SetGravityStrength(gravityStrengthSliderValue+deltaStrength, true);
             Debug.Log(deltaStrength);
         }
@@ -182,5 +179,19 @@ public class GravityController : MonoBehaviour
     public void Reset()
     {
         gravityStrengthSliderController.Reset();
+    }
+
+    [Serializable]
+    public class Settings
+    {
+        public GameObject circlePrefab;
+        public float innerCircleRadius = 0.5f;
+        public float outerCircleRadius = 10f;
+        public float gravityStrengthChangeSpeed = 1.4f;
+        public double M = 500000;
+        public float gravitationFalloffCoef = 1.5f;
+        public Vector2 allowedAccelerationRange = new Vector2(-150, 150);
+        public Vector2 gravityStrengthRange = new Vector2(-1, 1);
+        public float gravitySliderZeroThreshold = .15f;
     }
 }

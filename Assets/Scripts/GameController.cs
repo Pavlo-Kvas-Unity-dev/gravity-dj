@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
     private int? highScore;
 
     [Inject] private HelpWindow helpWindow;
-    [SerializeField] private MainMenuWindow mainMenuWindow;
+    [Inject] private MainMenuWindow mainMenuWindow;
 
     Settings settings;
     private Spawner spawner;

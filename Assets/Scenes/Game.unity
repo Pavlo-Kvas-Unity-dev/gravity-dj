@@ -965,6 +965,7 @@ GameObject:
   - component: {fileID: 145882727}
   - component: {fileID: 145882725}
   - component: {fileID: 145882724}
+  - component: {fileID: 145882728}
   m_Layer: 5
   m_Name: MainMenuWindow
   m_TagString: Untagged
@@ -1070,6 +1071,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 1440994396}
   resumeButton: {fileID: 176518267}
+--- !u!114 &145882728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145882722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 145882727}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &154322508
 GameObject:
   m_ObjectHideFlags: 0
@@ -6277,7 +6296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fdb70f6fb1f28d4082a8ccb87bcbc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  helpWindow: {fileID: 86010783}
   mainMenuWindow: {fileID: 145882727}
 --- !u!114 &1322026598
 MonoBehaviour:

@@ -16,10 +16,6 @@ public class GravityController : MonoBehaviour
 
     private float gravityStrengthSliderValue;
 
-    private SpriteRenderer spriteRenderer;
-
-    private CircleCollider2D collider;
-
     private readonly double gravityConstant = 6.67408E-11;
 
     private List<Circle> circles = new List<Circle>();
@@ -33,16 +29,11 @@ public class GravityController : MonoBehaviour
 
     private void Awake()
     {
-        collider = GetComponentInChildren<CircleCollider2D>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        
         CreateCircles(); 
     }
 
     private void Start()
     {
-        
-        
         InitSliders();
         gravityStrengthSliderController.SetZeroThreshold(settings.gravitySliderZeroThreshold);
     }
@@ -128,8 +119,6 @@ public class GravityController : MonoBehaviour
             
             circle.SetColor(circleColor);
         }
-        
-        spriteRenderer.color = sliderColor;
         
         if (updateUI)
         {

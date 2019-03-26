@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-    public FieldController fieldController;
+    [Inject] FieldController fieldController;
 
     private float ObjectRadius
     {

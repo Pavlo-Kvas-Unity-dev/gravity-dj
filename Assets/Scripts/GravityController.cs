@@ -7,7 +7,7 @@ using Zenject;
 public class GravityController : MonoBehaviour
 {
     private GravityStrengthSliderController gravityStrengthSliderController;
-    public FieldController FieldController;
+    [Inject] FieldController FieldController;
 
     [SerializeField] private Slider gravityStrengthSlider;
 

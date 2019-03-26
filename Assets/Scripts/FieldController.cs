@@ -5,7 +5,7 @@ using Zenject;
 
 public class FieldController : MonoBehaviour
 {
-    [SerializeField] private Transform boundaryParent;
+    [Inject(Id="boundaryParent")] private Transform boundaryParent;
 
     [Serializable]
     public class Settings

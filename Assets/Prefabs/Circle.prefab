@@ -49,6 +49,7 @@ MonoBehaviour:
   radius: 0.5
   cirleFillscreen: 0
   lineRenderer: {fileID: 6771677265091953406}
+  drawGizmos: 0
 --- !u!120 &6771677265091953406
 LineRenderer:
   m_ObjectHideFlags: 0

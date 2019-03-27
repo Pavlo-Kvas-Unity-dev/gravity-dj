@@ -11,6 +11,7 @@ public class Circle : MonoBehaviour
     public bool cirleFillscreen;
 
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private bool drawGizmos;
 
     private void OnValidate()
     {
@@ -57,6 +58,8 @@ public class Circle : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!drawGizmos) return;
+        
         float deltaTheta = (2f * Mathf.PI) / vertexCount;
         float theta = 0f;
 

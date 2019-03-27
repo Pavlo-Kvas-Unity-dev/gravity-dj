@@ -43,7 +43,10 @@ public class Spawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        DrawSpawnBoundary();
+        if (Application.isPlaying)
+        {
+            DrawSpawnBoundary();
+        }
     }
 
     private void DrawSpawnBoundary()

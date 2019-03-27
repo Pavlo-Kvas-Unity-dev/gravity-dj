@@ -28,6 +28,7 @@ MonoBehaviour:
     holeCoordList:
     - {x: 5, y: 0}
     - {x: 6, y: 0}
+    fieldCenter: {x: 0, y: 0}
   GravitySettings:
     circlePrefab: {fileID: 6771677265091953395, guid: b1357bfc462881847ac6ae728813b583,
       type: 3}
@@ -39,3 +40,6 @@ MonoBehaviour:
     allowedAccelerationRange: {x: -150, y: 150}
     gravityStrengthRange: {x: -1, y: 1}
     gravitySliderZeroThreshold: 0.15
+  GameInstaller:
+    boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
+      type: 3}

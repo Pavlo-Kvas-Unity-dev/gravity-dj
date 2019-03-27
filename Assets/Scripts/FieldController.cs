@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using GravityDJ;
 using UnityEngine;
 using Zenject;
 
 public class FieldController : MonoBehaviour
 {
-    [Inject(Id="boundaryParent")] private Transform boundaryParent;
-
     [Serializable]
     public class Settings
     {
-        public GameObject boundaryPrefab;
-        
         public int fieldSize = 12;
         public float cellSize = 1f;
         public List<Vector2Int>  holeCoordList = new List<Vector2Int>();
@@ -37,7 +34,8 @@ public class FieldController : MonoBehaviour
     private GameObject[,] field;
 
     private Settings settings;
-    
+    private Boundary.Factory boundaryFactory;
+
     public GameObject this[Vector2Int coord]
     {
         get { return field[coord.x, coord.y]; }
@@ -45,9 +43,10 @@ public class FieldController : MonoBehaviour
     }
 
     [Inject]
-    void Init(Settings settings)
+    void Init(Settings settings, Boundary.Factory boundaryFactory)
     {
         this.settings = settings;
+        this.boundaryFactory = boundaryFactory;
     }
     
     void Awake()
@@ -73,9 +72,10 @@ public class FieldController : MonoBehaviour
 
     private void SpawnBorderTile(int x, int y)
     {
-        var boundaryTile = Instantiate(settings.boundaryPrefab, GetPosByFieldCoordinates(x, y), Quaternion.identity);
-        boundaryTile.transform.parent = boundaryParent;
-        field[x,y] = boundaryTile;
+        var boundary = boundaryFactory.Create();
+        boundary.transform.position = GetPosByFieldCoordinates(x, y);
+        
+        field[x,y] = boundary.gameObject;
     }
 
     private Vector2 GetPosByFieldCoordinates(int x, int y)

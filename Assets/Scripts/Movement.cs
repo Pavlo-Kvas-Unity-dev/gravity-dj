@@ -1,12 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Movement : MonoBehaviour
+namespace GravityDJ
 {
-    public void Init(int initialSpeed)
+    public class Movement : MonoBehaviour
     {
-        var rigidbody2D = GetComponent<Rigidbody2D>();
-        rigidbody2D.velocity = Random.insideUnitCircle * initialSpeed;
+        private Rigidbody2D rb2D;
+        void Awake()
+        {
+            rb2D = GetComponent<Rigidbody2D>();
+        }
+    
+        public void Init(int initialSpeed)
+        {
+            rb2D.velocity = Random.insideUnitCircle * initialSpeed;
+        }
+    
+        public void ApplyVelocity(Vector2 deltaVelocity)
+        {
+            rb2D.velocity += deltaVelocity;
+        }
+    
     }
 }

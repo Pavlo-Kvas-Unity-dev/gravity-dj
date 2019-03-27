@@ -1,4 +1,5 @@
 ﻿using System;
+using GravityDJ;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Zenject;
@@ -123,5 +124,20 @@ public class Spawner : MonoBehaviour
         public float maxDistanceFromBoundary = 1;
         public int InitialSpeed = 5;
         public bool SpawnOnStart = true;
+    }
+
+    public bool TryGetAgent(out FlyingAgent flyingAgent)
+    {
+        if (spawnedAgent != null)
+        {
+            flyingAgent = spawnedAgent;
+            return true;
+        }
+        else
+        {
+            flyingAgent = null;
+            return false;
+        }
+        
     }
 }

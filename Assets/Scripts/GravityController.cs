@@ -11,7 +11,8 @@ public class GravityController : MonoBehaviour
     private GravityStrengthSliderController gravityStrengthSliderController;
 
     [Inject] FieldController FieldController;
-
+    [Inject] private Spawner spawner;
+ 
     private float gravityStrengthZeroShiftModified = 0f;
 
     private float gravityStrengthSliderValue;
@@ -126,21 +127,6 @@ public class GravityController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("gravity contact");
-        //add pulling force
-        
-        var agentsCenterOfMass = collision.attachedRigidbody.worldCenterOfMass;
-        //acceleration due to gravity g = GM/r2
-        var distance = ((Vector2)transform.position - agentsCenterOfMass);
-        //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
-        float acceleration = CalcAcceleration(distance.magnitude);
-        Debug.Log(acceleration);
-        
-        collision.attachedRigidbody.velocity += (distance.normalized * acceleration * Time.deltaTime);
-    }
-
     private float CalcAcceleration(float distance)
     {
         float acceleration = (float) (gravityConstant * settings.M * gravityStrengthZeroShiftModified /
@@ -162,6 +148,26 @@ public class GravityController : MonoBehaviour
             var deltaStrength = Time.deltaTime * settings.gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
             SetGravityStrength(gravityStrengthSliderValue+deltaStrength, true);
             Debug.Log(deltaStrength);
+        }
+        
+        UpdateAgent();
+    }
+
+    private void UpdateAgent()
+    {
+        if (spawner.TryGetAgent(out FlyingAgent agent))
+        {
+            Debug.Log("gravity contact");
+            //add pulling force
+
+            Vector2 agentsCenterOfMass = agent.transform.position;
+            //acceleration due to gravity g = GM/r2
+            var distance = ((Vector2) transform.position - agentsCenterOfMass);
+            //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
+            float acceleration = CalcAcceleration(distance.magnitude);
+            Debug.Log(acceleration);
+
+            agent.ApplyVelocity((distance.normalized * acceleration * Time.deltaTime));
         }
     }
 

@@ -7,8 +7,6 @@ public class FieldController : MonoBehaviour
 {
     [Inject(Id="boundaryParent")] private Transform boundaryParent;
 
-    [Inject(Id="fieldCenter")] private Transform spawnCenter;
-
     [Serializable]
     public class Settings
     {
@@ -17,6 +15,7 @@ public class FieldController : MonoBehaviour
         public int fieldSize = 12;
         public float cellSize = 1f;
         public List<Vector2Int>  holeCoordList = new List<Vector2Int>();
+        public Vector2 fieldCenter = new Vector2(0,0);
     }
 
 
@@ -86,6 +85,6 @@ public class FieldController : MonoBehaviour
 
     private Vector2 GetBottomLeftCoord()
     {
-        return (Vector2)spawnCenter.transform.position + (Vector2.down  + Vector2.left)*(FieldSize/2 - CellSize/2);
+        return settings.fieldCenter + (Vector2.down  + Vector2.left)*(FieldSize/2 - CellSize/2);
     }
 }

@@ -7,6 +7,7 @@ namespace GravityDJ.Installers
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<GameController>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.BindInterfacesAndSelfTo<Spawner>().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }

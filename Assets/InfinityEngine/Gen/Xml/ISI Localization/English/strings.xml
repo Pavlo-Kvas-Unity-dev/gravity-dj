@@ -14,6 +14,6 @@
   <strings name="ScoreFormat">Score: {0}</strings>
   <strings name="BestScoreFormat">Best score: {0}</strings>
   <strings name="TimeLeftFormat">Time left: {0}</strings>
-  <strings name="Help">You task is to shoot as many balls into the hole as you can until time is up. You can influence the balls trajectory with gravity, which can pull(green color) and push(red color) the the ball to/from center of the field. The closer to center the stronger gravity force. Gravity is controlled by a slider on the right panel. Slider have a insensitive zone(gray color), which means no gravity.</strings>
+  <strings name="Help">You task is to shoot balls into the target(blue cells) until time is up. You can influence the balls trajectory with gravity, which can pull(green color) and push(red color) the the ball to/from center of the field. The closer to center the stronger gravity force. Gravity is controlled by a slider on the right panel. Slider have a insensitive zone(gray color), which means no gravity.</strings>
   <strings name="GameOver">Game over. You scored {0} points</strings>
 </resources>

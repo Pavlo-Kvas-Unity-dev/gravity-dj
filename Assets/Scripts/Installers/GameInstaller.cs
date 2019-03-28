@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace GravityDJ.Installers
 {
@@ -19,12 +20,17 @@ namespace GravityDJ.Installers
             Container.BindFactory<Boundary, Boundary.Factory>()
                 .FromComponentInNewPrefab(settings.boundaryPrefab)
                 .UnderTransformGroup("Boundaries");
+
+            Container.BindFactory<Target, Target.Factory>()
+                .FromComponentInNewPrefab(settings.targetPrefab)
+                .UnderTransformGroup("Targets");
         }
         
         [Serializable]
         public class Settings
         {
-            public GameObject boundaryPrefab;    
+            public GameObject boundaryPrefab;
+            public GameObject targetPrefab;
         }
     }
 }

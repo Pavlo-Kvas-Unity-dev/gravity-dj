@@ -21,8 +21,6 @@ MonoBehaviour:
     InitialSpeed: 5
     SpawnOnStart: 1
   FieldSettings:
-    boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
-      type: 3}
     fieldSize: 12
     cellSize: 1
     holeCoordList:
@@ -42,4 +40,6 @@ MonoBehaviour:
     gravitySliderZeroThreshold: 0.15
   GameInstaller:
     boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
+      type: 3}
+    targetPrefab: {fileID: 946524792112723589, guid: 6607241b62960244abb4e9cebdbaec12,
       type: 3}

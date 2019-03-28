@@ -35,6 +35,7 @@ public class FieldController : MonoBehaviour
 
     private Settings settings;
     private Boundary.Factory boundaryFactory;
+    private Target.Factory targetFactory;
 
     public GameObject this[Vector2Int coord]
     {
@@ -42,40 +43,64 @@ public class FieldController : MonoBehaviour
         set { field[coord.x, coord.y] = value; }      
     }
 
+    public GameObject this[int x, int y]
+    {
+        get => field[x, y];
+        set => field[x, y] = value;
+    }
+    
     [Inject]
-    void Init(Settings settings, Boundary.Factory boundaryFactory)
+    void Init(Settings settings, Boundary.Factory boundaryFactory, Target.Factory targetFactory)
     {
         this.settings = settings;
         this.boundaryFactory = boundaryFactory;
+        this.targetFactory = targetFactory;
     }
     
     void Awake()
     {
         field = new GameObject[FieldSize,FieldSize];
-        for (int x = 0, y = 0; x < FieldSize && y < FieldSize; x++, y++)
-        {
-            SpawnBorderTile(x, FieldSize - 1);
-            SpawnBorderTile(x, 0);
-            SpawnBorderTile(0, y);
-            SpawnBorderTile(FieldSize-1, y);
-        }
-
+        
         foreach (var holeCoord in settings.holeCoordList)
         {
-            var borderTile = this[holeCoord];
-            if (borderTile != null)
-            {
-                Destroy(borderTile);   
-            }
+            TrySpawnTarget(holeCoord);
+        }
+
+        for (int x = 0, y = 0; x < FieldSize && y < FieldSize; x++, y++)
+        {
+            TrySpawnBorderTile(x, FieldSize - 1);
+            TrySpawnBorderTile(x, 0);
+            TrySpawnBorderTile(0, y);
+            TrySpawnBorderTile(FieldSize-1, y);
         }
     }
 
-    private void SpawnBorderTile(int x, int y)
+    private bool TrySpawnTarget(Vector2Int holeCoord)
     {
+        if (this[holeCoord] != null) return false;
+        
+        var target = targetFactory.Create();
+        target.transform.position = GetPosByFieldCoordinates(holeCoord);
+        this[holeCoord] = target.gameObject;
+
+        return true;
+    }
+
+    private bool TrySpawnBorderTile(int x, int y)
+    {
+        if (this[x, y] != null) return false;
+        
         var boundary = boundaryFactory.Create();
         boundary.transform.position = GetPosByFieldCoordinates(x, y);
         
         field[x,y] = boundary.gameObject;
+        
+        return true;
+    }
+
+    private Vector2 GetPosByFieldCoordinates(Vector2Int coord)
+    {
+        return GetPosByFieldCoordinates(coord.x, coord.y);
     }
 
     private Vector2 GetPosByFieldCoordinates(int x, int y)

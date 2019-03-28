@@ -21,7 +21,7 @@ public class FlyingAgent : MonoBehaviour
         movement = GetComponent<Movement>();
     }
 
-    public void OnFliedThroughTheHole()
+    public void OnTargetHit()
     {
         NumAgents--;
         Destroy(this.gameObject);

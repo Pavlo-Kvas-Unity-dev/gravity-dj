@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace GravityDJ
 {
@@ -78,6 +79,10 @@ namespace GravityDJ
             lineRenderer.material.color = color;
             lineRenderer.endColor = color;
             lineRenderer.startColor = color;
+        }
+
+        public class Factory:PlaceholderFactory<Circle>
+        {
         }
     }
 }

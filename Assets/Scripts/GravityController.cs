@@ -23,6 +23,7 @@ namespace GravityDJ
         private readonly double gravityConstant = 6.67408E-11;
 
         private List<Circle> circles = new List<Circle>();
+        private Circle.Factory circleFactory;
 
 
         public float GravityStrengthZeroShiftModified
@@ -38,10 +39,11 @@ namespace GravityDJ
         }
 
         [Inject]
-        void Init(GravityStrengthSliderController gravityStrengthSliderController, Settings settings)
+        void Init(GravityStrengthSliderController gravityStrengthSliderController, Settings settings, Circle.Factory circleFactory)
         {
             this.gravityStrengthSliderController = gravityStrengthSliderController;
             this.settings = settings;
+            this.circleFactory = circleFactory;
         }
 
         private void Awake()
@@ -59,9 +61,8 @@ namespace GravityDJ
         {
             for (float curCircleRadius = settings.innerCircleRadius; curCircleRadius < settings.outerCircleRadius; curCircleRadius += .5f)
             {
-                var circleGO = Instantiate(settings.circlePrefab);
-                circleGO.transform.SetParent(transform);
-                var circle = circleGO.GetComponent<Circle>();
+                Circle circle = circleFactory.Create();
+
                 circles.Add(circle);
 
                 circle.Init(curCircleRadius);
@@ -178,7 +179,6 @@ namespace GravityDJ
         [Serializable]
         public class Settings
         {
-            public GameObject circlePrefab;
             public float innerCircleRadius = 0.5f;
             public float outerCircleRadius = 10f;
             public float gravityStrengthChangeSpeed = 1.4f;

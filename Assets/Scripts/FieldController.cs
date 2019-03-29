@@ -7,18 +7,7 @@ namespace GravityDJ
 {
     public class FieldController : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            public int fieldSize = 12;
-            public float cellSize = 1f;
-            public List<Vector2Int>  holeCoordList = new List<Vector2Int>();
-            public Vector2 fieldCenter = new Vector2(0,0);
-        }
-
-
         public float BorderSize => CellSize;
-
 
         public int FieldSize//todo inline
         {
@@ -35,7 +24,9 @@ namespace GravityDJ
         private GameObject[,] field;
 
         private Settings settings;
+
         private Boundary.Factory boundaryFactory;
+
         private Target.Factory targetFactory;
 
         public GameObject this[Vector2Int coord]
@@ -49,7 +40,7 @@ namespace GravityDJ
             get => field[x, y];
             set => field[x, y] = value;
         }
-    
+
         [Inject]
         void Init(Settings settings, Boundary.Factory boundaryFactory, Target.Factory targetFactory)
         {
@@ -57,7 +48,7 @@ namespace GravityDJ
             this.boundaryFactory = boundaryFactory;
             this.targetFactory = targetFactory;
         }
-    
+
         void Awake()
         {
             field = new GameObject[FieldSize,FieldSize];
@@ -112,6 +103,15 @@ namespace GravityDJ
         private Vector2 GetBottomLeftCoord()
         {
             return settings.fieldCenter + (Vector2.down  + Vector2.left)*(FieldSize/2 - CellSize/2);
+        }
+
+        [Serializable]
+        public class Settings
+        {
+            public int fieldSize = 12;
+            public float cellSize = 1f;
+            public List<Vector2Int>  holeCoordList = new List<Vector2Int>();
+            public Vector2 fieldCenter = new Vector2(0,0);
         }
     }
 }

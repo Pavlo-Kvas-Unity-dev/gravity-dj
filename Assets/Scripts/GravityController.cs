@@ -110,7 +110,7 @@ namespace GravityDJ
 
             foreach (var circle in circles)
             {
-                var distanceCoef = CalcDistanceCoef(circle.radius);
+                var distanceCoef = CalcDistanceCoef(circle.Radius);
             
                 float t = Mathf.InverseLerp(farthestDistCoef, closestDistCoef, distanceCoef);
 

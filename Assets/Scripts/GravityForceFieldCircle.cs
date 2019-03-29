@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
 using Zenject;
 
 namespace GravityDJ
@@ -6,72 +7,88 @@ namespace GravityDJ
     [RequireComponent	(typeof(LineRenderer))]
     public class GravityForceFieldCircle : MonoBehaviour
     {
-        public int vertexCount = 40;
-        public float lineWidth = 0.2f;
-        public float radius;
-        public bool cirleFillscreen;
+        [SerializeField] private int vertexCount = 40;
+        [SerializeField] private float lineWidth = 0.05f;
+        [SerializeField] private float radius;
 
         [SerializeField] private LineRenderer lineRenderer;
+        [SerializeField] private string lineRendererShader = "Sprites/Default";
+        
         [SerializeField] private bool drawGizmos;
+
+        public float Radius
+        {
+            get { return radius; }
+            set { radius = value; }
+        }
+
+        void Awake()
+        {
+            Assert.IsNotNull(lineRenderer);
+            lineRenderer.material = new Material(Shader.Find(lineRendererShader));
+            
+            SetWidth(lineWidth);
+            lineRenderer.positionCount = vertexCount;
+        }
 
         private void OnValidate()
         {
             SetWidth(lineWidth);
         }
 
-        void Awake()
-        {
-            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        }
-
-        public void Init(float curCircleRadius)
-        {
-            radius = curCircleRadius;
-        
-            SetWidth(lineWidth);
-
-            if (cirleFillscreen)
-            {
-                radius = Vector3.Distance(Camera.main.ScreenToWorldPoint(new Vector3(0f, Camera.main.pixelRect.yMax, 0f)),
-                             Camera.main.ScreenToWorldPoint(new Vector3(0f, Camera.main.pixelRect.yMin, 0f))) * .5f -
-                         lineWidth;
-            }
-
-            float deltaTheta = (2f * Mathf.PI) / vertexCount;
-            float theta = 0;
-
-            lineRenderer.positionCount = vertexCount;
-            for (int i = 0; i < lineRenderer.positionCount; i++)
-            {
-                Vector3 pos = new Vector3(radius*Mathf.Cos(theta), radius*Mathf.Sin(theta), 0f);
-                lineRenderer.SetPosition(i, pos);
-                theta += deltaTheta;
-            }
-        }
-
-        private void SetWidth(float circleWidth)
-        {
-            if (lineRenderer == null) return;
-        
-            lineRenderer.widthMultiplier = circleWidth;
-        }
-
-
         private void OnDrawGizmos()
         {
             if (!drawGizmos) return;
         
-            float deltaTheta = (2f * Mathf.PI) / vertexCount;
-            float theta = 0f;
+            float angleStep = GetAngleStep();
+            float angle = 0f;
 
-            Vector3 oldPos = Vector3.zero;
+            Vector2 prevVertexPos = Vector2.zero;
+            
+            Vector2 circleCenter = transform.position;
+            
             for (int i = 0; i < vertexCount + 1; i++)
             {
-                Vector3 pos = new Vector3	(radius	* Mathf.Cos	(theta), radius	* Mathf.Sin	(theta), 0f);
-                Gizmos.DrawLine(oldPos, transform.position + pos);
-                oldPos = transform.position + pos;
-                theta += deltaTheta;
+                Vector2 vertexOffset = CircleVertPosFromAngle(angle, Radius);
+
+                var vertexPos = circleCenter + vertexOffset;
+                
+                Gizmos.DrawLine(prevVertexPos, vertexPos);
+
+                prevVertexPos = vertexPos;
+                angle += angleStep;
             }
+        }
+
+        public void Init(float radius)
+        {
+            Radius = radius;
+
+            float angleStep = GetAngleStep();
+            float angle = 0;
+
+            for (int i = 0; i < lineRenderer.positionCount; i++)
+            {
+                Vector2 vertexOffset = CircleVertPosFromAngle(angle, Radius);
+                
+                lineRenderer.SetPosition(i, vertexOffset);
+                angle += angleStep;
+            }
+        }
+
+        private float GetAngleStep()
+        {
+            return (2f * Mathf.PI) / vertexCount;
+        }
+
+        private Vector2 CircleVertPosFromAngle(float angle, float radius)
+        {
+            return radius * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        }
+
+        private void SetWidth(float circleWidth)
+        {
+            lineRenderer.widthMultiplier = circleWidth;
         }
 
         public void SetColor(Color color)

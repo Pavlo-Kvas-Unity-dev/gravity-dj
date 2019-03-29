@@ -47,8 +47,8 @@ MonoBehaviour:
   vertexCount: 40
   lineWidth: 0.05
   radius: 0.5
-  cirleFillscreen: 0
   lineRenderer: {fileID: 6771677265091953406}
+  lineRendererShader: Sprites/Default
   drawGizmos: 0
 --- !u!120 &6771677265091953406
 LineRenderer:

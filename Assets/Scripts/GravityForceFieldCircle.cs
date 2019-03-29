@@ -4,7 +4,7 @@ using Zenject;
 namespace GravityDJ
 {
     [RequireComponent	(typeof(LineRenderer))]
-    public class Circle : MonoBehaviour
+    public class GravityForceFieldCircle : MonoBehaviour
     {
         public int vertexCount = 40;
         public float lineWidth = 0.2f;
@@ -81,7 +81,7 @@ namespace GravityDJ
             lineRenderer.startColor = color;
         }
 
-        public class Factory:PlaceholderFactory<Circle>
+        public class Factory:PlaceholderFactory<GravityForceFieldCircle>
         {
         }
     }

@@ -22,8 +22,8 @@ namespace GravityDJ
 
         private readonly double gravityConstant = 6.67408E-11;
 
-        private List<Circle> circles = new List<Circle>();
-        private Circle.Factory circleFactory;
+        private List<GravityForceFieldCircle> circles = new List<GravityForceFieldCircle>();
+        private GravityForceFieldCircle.Factory circleFactory;
 
 
         public float GravityStrengthZeroShiftModified
@@ -39,7 +39,7 @@ namespace GravityDJ
         }
 
         [Inject]
-        void Init(GravityStrengthSliderController gravityStrengthSliderController, Settings settings, Circle.Factory circleFactory)
+        void Init(GravityStrengthSliderController gravityStrengthSliderController, Settings settings, GravityForceFieldCircle.Factory circleFactory)
         {
             this.gravityStrengthSliderController = gravityStrengthSliderController;
             this.settings = settings;
@@ -61,7 +61,7 @@ namespace GravityDJ
         {
             for (float curCircleRadius = settings.innerCircleRadius; curCircleRadius < settings.outerCircleRadius; curCircleRadius += .5f)
             {
-                Circle circle = circleFactory.Create();
+                GravityForceFieldCircle circle = circleFactory.Create();
 
                 circles.Add(circle);
 

@@ -25,7 +25,7 @@ namespace GravityDJ.Installers
                 .FromComponentInNewPrefab(settings.targetPrefab)
                 .UnderTransformGroup("Targets");
 
-            Container.BindFactory<Circle, Circle.Factory>()
+            Container.BindFactory<GravityForceFieldCircle, GravityForceFieldCircle.Factory>()
                 .FromComponentInNewPrefab(settings.circlePrefab)
                 .UnderTransformGroup("GravityCircles");
         }

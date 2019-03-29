@@ -1,5 +1,8 @@
-public interface IWindow
+namespace GravityDJ.UI
 {
-    void Open();
-    void Close();
+    public interface IWindow
+    {
+        void Open();
+        void Close();
+    }
 }

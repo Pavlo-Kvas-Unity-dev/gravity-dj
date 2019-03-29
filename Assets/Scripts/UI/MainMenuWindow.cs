@@ -2,69 +2,72 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuWindow : MonoBehaviour, IWindow
+namespace GravityDJ.UI
 {
-    private Action onPlay;
-    private Action onResume;
-    private Action onExit;
-    private Action onHelp;
-
-    [SerializeField] private Button playButton;
-    [SerializeField] private Button resumeButton;
-
-    void Awake()
+    public class MainMenuWindow : MonoBehaviour, IWindow
     {
-        playButton.onClick.AddListener(OnPlayClicked);
-        resumeButton.onClick.AddListener(OnResumeClicked);
-    }
+        private Action onPlay;
+        private Action onResume;
+        private Action onExit;
+        private Action onHelp;
 
-    public void Open(Action onPlay, Action onResume, Action onHelp, Action onExit)
-    {
-        this.onPlay = onPlay;
-        this.onResume = onResume;
-        this.onHelp = onHelp;
-        this.onExit = onExit;
+        [SerializeField] private Button playButton;
+        [SerializeField] private Button resumeButton;
+
+        void Awake()
+        {
+            playButton.onClick.AddListener(OnPlayClicked);
+            resumeButton.onClick.AddListener(OnResumeClicked);
+        }
+
+        public void Open(Action onPlay, Action onResume, Action onHelp, Action onExit)
+        {
+            this.onPlay = onPlay;
+            this.onResume = onResume;
+            this.onHelp = onHelp;
+            this.onExit = onExit;
         
-        Open();
-    }
+            Open();
+        }
 
-    public void Open()
-    {
-        gameObject.SetActive(true);
-    }
+        public void Open()
+        {
+            gameObject.SetActive(true);
+        }
 
-    public void Close()
-    {
-        gameObject.SetActive(false);
-    }
+        public void Close()
+        {
+            gameObject.SetActive(false);
+        }
 
-    private void OnPlayClicked()
-    {
-        Close();
-        onPlay?.Invoke();
-    }
+        private void OnPlayClicked()
+        {
+            Close();
+            onPlay?.Invoke();
+        }
 
-    private void OnResumeClicked()
-    {
-        Close();
-        onResume?.Invoke();
-    }
+        private void OnResumeClicked()
+        {
+            Close();
+            onResume?.Invoke();
+        }
 
-    public void OnHelpClicked()
-    {
-        onHelp?.Invoke();
-    }
+        public void OnHelpClicked()
+        {
+            onHelp?.Invoke();
+        }
 
-    public void OnExitClicked()
-    {
-        onExit?.Invoke();
-    }
+        public void OnExitClicked()
+        {
+            onExit?.Invoke();
+        }
 
-    public void Init(bool isGamePlaying)
-    {
-        playButton.gameObject.SetActive(!isGamePlaying);
-        resumeButton.gameObject.SetActive(isGamePlaying);
-    }
+        public void Init(bool isGamePlaying)
+        {
+            playButton.gameObject.SetActive(!isGamePlaying);
+            resumeButton.gameObject.SetActive(isGamePlaying);
+        }
     
     
+    }
 }

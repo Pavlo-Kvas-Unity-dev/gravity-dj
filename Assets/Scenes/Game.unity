@@ -5766,7 +5766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6da23eb407629741b99b3e63f7cfa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zeroRegionLE: {fileID: 1086731729}
+  zeroGravityRegionLayoutElement: {fileID: 1086731729}
+  sliderBodyTransform: {fileID: 504441965}
 --- !u!114 &1483235941
 MonoBehaviour:
   m_ObjectHideFlags: 0

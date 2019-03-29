@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -8,47 +10,67 @@ namespace GravityDJ.UI
     [RequireComponent(typeof(Slider))]
     public class GravityStrengthSliderController : MonoBehaviour
     {
+        [SerializeField] private LayoutElement zeroGravityRegionLayoutElement;
+        [SerializeField] private RectTransform sliderBodyTransform;
+
         private Slider slider;
 
-        public LayoutElement zeroRegionLE;
-
         [Inject] private GravityController gravityController;
-    
-        public Slider Slider
-        {
-            get
-            {
-                if (slider == null)
-                {
-                    slider = GetComponent<Slider>();
-                };
-                return slider;
-            }
-        }
+        [Inject] private GravityController.Settings gravitySettings;
 
         private void Awake()
         {
-            Slider.onValueChanged.AddListener(gravityController.OnStrengthChanged);
+            InitSlider();
         }
 
-        public void SetZeroThreshold(float zeroThreshold)
+        public void Reset() 
         {
-            StartCoroutine(SetZeroThresholdCoroutine(zeroThreshold));
+            slider.value = 0;
         }
 
-        private IEnumerator SetZeroThresholdCoroutine(float zeroThreshold)
+        private void SetZeroThreshold(float zeroRegionSizeNorm)
+        {
+            StartCoroutine(SetZeroThresholdCoroutine(zeroRegionSizeNorm));
+        }
+
+        private IEnumerator SetZeroThresholdCoroutine(float zeroRegionSizeNorm)
         {
             //wait until layout group is updated
             yield return new WaitForEndOfFrame();
-            var parentHeight = ((RectTransform) (zeroRegionLE.transform.parent)).rect.height;
 
-            zeroRegionLE.minHeight =
-                zeroRegionLE.preferredHeight = parentHeight * zeroThreshold;
+            var zeroRegionSize = sliderBodyTransform.rect.height * zeroRegionSizeNorm;
+            
+            zeroGravityRegionLayoutElement.minHeight = zeroGravityRegionLayoutElement.preferredHeight = zeroRegionSize;
         }
 
-        public void Reset() //todo rename
+        private void InitSlider()
         {
-            Slider.value = 0;
+            slider = GetComponent<Slider>();
+            
+            slider.onValueChanged.AddListener(gravityController.OnStrengthChanged);
+
+            SetRange();
+
+            SetZeroThreshold(gravitySettings.gravitySliderZeroThreshold);
+        }
+
+        private void SetRange()
+        {
+            var sliderMinValue = gravitySettings.gravityStrengthRange.x;
+            var sliderMaxValue = gravitySettings.gravityStrengthRange.y;
+
+            if (Math.Abs(slider.minValue - sliderMinValue) > Mathf.Epsilon ||
+                Math.Abs(slider.maxValue - sliderMaxValue) > Mathf.Epsilon)
+            {
+                Debug.LogWarning($"slider's min/max values on {slider.gameObject.name} doesn't match settings, fixing it");
+                slider.minValue = sliderMinValue;
+                slider.maxValue = sliderMaxValue;
+            }
+        }
+
+        public void UpdateValue(float newValue)
+        {
+            slider.value = newValue;
         }
     }
 }

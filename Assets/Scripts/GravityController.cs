@@ -24,6 +24,19 @@ namespace GravityDJ
 
         private List<Circle> circles = new List<Circle>();
 
+
+        public float GravityStrengthZeroShiftModified
+        {
+            set { gravityStrengthZeroShiftModified = value; }
+            get { return gravityStrengthZeroShiftModified; }
+        }
+
+        public float GravityStrengthSliderValue
+        {
+            set { gravityStrengthSliderValue = value; }
+            get { return gravityStrengthSliderValue; }
+        }
+
         [Inject]
         void Init(GravityStrengthSliderController gravityStrengthSliderController, Settings settings)
         {
@@ -38,8 +51,8 @@ namespace GravityDJ
 
         private void Start()
         {
-            InitSliders();
-            gravityStrengthSliderController.SetZeroThreshold(settings.gravitySliderZeroThreshold);
+            SetGravityStrength(GravityStrengthZeroShiftModified, true);
+            
         }
 
         private void CreateCircles()
@@ -52,23 +65,6 @@ namespace GravityDJ
                 circles.Add(circle);
 
                 circle.Init(curCircleRadius);
-            }
-        }
-
-        private void InitSliders()
-        {
-            InitSlider(gravityStrengthSliderController.Slider, settings.gravityStrengthRange);
-            SetGravityStrength(gravityStrengthZeroShiftModified, true);
-
-            void InitSlider(Slider slider, Vector2 allowedValueRange)
-            {
-                if (Math.Abs(slider.minValue - allowedValueRange.x) > Mathf.Epsilon ||
-                    Math.Abs(slider.maxValue - allowedValueRange.y) > Mathf.Epsilon)
-                {
-                    Debug.LogWarning($"slider's min/max values on {slider.gameObject.name} doesn't match settings, fixing it");
-                    slider.minValue = allowedValueRange.x;
-                    slider.maxValue = allowedValueRange.y;
-                }
             }
         }
 
@@ -126,7 +122,7 @@ namespace GravityDJ
         
             if (updateUI)
             {
-                gravityStrengthSliderController.Slider.value = gravityStrengthSliderValue;
+                gravityStrengthSliderController.UpdateValue(GravityStrengthSliderValue);
             }
         }
 

@@ -91,7 +91,7 @@ namespace GravityDJ
         {
             if (this[x, y] != null) return false;
         
-            var boundary = boundaryFactory.Create();
+            Boundary boundary = boundaryFactory.Create();
             boundary.transform.position = GetPosByFieldCoordinates(x, y);
         
             field[x,y] = boundary.gameObject;

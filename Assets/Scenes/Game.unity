@@ -2222,9 +2222,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 729048785}
+  - component: {fileID: 729048786}
   - component: {fileID: 729048788}
   - component: {fileID: 729048787}
-  - component: {fileID: 729048786}
   m_Layer: 5
   m_Name: GameFieldPlaceholder
   m_TagString: Untagged
@@ -2263,6 +2263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5f4251f9648994ab37366110f11b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetHeightTransform: {fileID: 1647050311}
 --- !u!114 &729048787
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ namespace GravityDJ.Installers
             Container.BindInterfacesAndSelfTo<Spawner>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesAndSelfTo<FieldController>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesAndSelfTo<GravityController>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScoreController>().AsSingle();
             
             Container.BindFactory<Boundary, Boundary.Factory>()
                 .FromComponentInNewPrefab(settings.boundaryPrefab)

@@ -150,24 +150,24 @@ namespace GravityDJ
                 Debug.Log(deltaStrength);
             }
         
-            UpdateAgent();
+            UpdateBall();
         }
 
-        private void UpdateAgent()
+        private void UpdateBall()
         {
-            if (spawner.TryGetAgent(out FlyingAgent agent))
+            if (spawner.TryGetBall(out Ball ball))
             {
                 Debug.Log("gravity contact");
                 //add pulling force
 
-                Vector2 agentsCenterOfMass = agent.transform.position;
+                Vector2 agentsCenterOfMass = ball.transform.position;
                 //acceleration due to gravity g = GM/r2
                 var distance = ((Vector2) transform.position - agentsCenterOfMass);
                 //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
                 float acceleration = CalcAcceleration(distance.magnitude);
                 Debug.Log(acceleration);
 
-                agent.ApplyVelocity((distance.normalized * acceleration * Time.deltaTime));
+                ball.ApplyVelocity((distance.normalized * acceleration * Time.deltaTime));
             }
         }
 

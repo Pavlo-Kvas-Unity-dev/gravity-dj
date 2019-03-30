@@ -1,15 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GravityDJ
 {
-    public class FlyingAgent : MonoBehaviour
+    public class Ball : MonoBehaviour
     {
-        public bool isAlive = true;
         private Movement movement;
-
-        public delegate void OnAgentFlyThroughHoleEventHandler(FlyingAgent sender);
-
-        public event OnAgentFlyThroughHoleEventHandler flyAway;
+        
+        public event Action<Ball> flyAway;
     
         public static int NumAgents { get; private set; } = 0;
 

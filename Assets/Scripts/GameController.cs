@@ -174,7 +174,7 @@ namespace GravityDJ
             isGamePlaing = true;
         }
 
-        public void OnAgentFlewAway(FlyingAgent flyingAgent)
+        public void OnTargetHit(Ball ball)
         {
             Score++;
             UpdateScore();

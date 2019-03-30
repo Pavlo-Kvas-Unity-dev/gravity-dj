@@ -26,7 +26,7 @@ namespace GravityDJ
 
         private GameController gameController;
         private Settings settings;
-        private FlyingAgent spawnedAgent;
+        private Ball ball;
 
 
         [Inject]
@@ -75,25 +75,24 @@ namespace GravityDJ
             spawnPos = spawnPos.normalized * cappedMagnitude;
 
             //only one ball at time
-            if (spawnedAgent != null)
+            if (ball != null)
             {
-                spawnedAgent.isAlive = false;
-                Destroy(spawnedAgent.gameObject);
+                Destroy(ball.gameObject);
             }
 
             //spawn only if no Agent is on the screen
 
-            var flyingAgentGO = Instantiate(settings.flyingAgentPrefab, spawnPos, Quaternion.identity);
+            var ballGO = Instantiate(settings.flyingAgentPrefab, spawnPos, Quaternion.identity);//todo use factory
 
-            var movement = flyingAgentGO.GetComponent<Movement>();
+            var movement = ballGO.GetComponent<Movement>();
 
-            spawnedAgent = flyingAgentGO.GetComponent<FlyingAgent>();
+            ball = ballGO.GetComponent<Ball>();
        
-            spawnedAgent.flyAway += new FlyingAgent.OnAgentFlyThroughHoleEventHandler(sender =>
+            ball.flyAway += (Ball sender) =>
             {
-                gameController.OnAgentFlewAway(sender);
+                gameController.OnTargetHit(sender);
                 Spawn();
-            });
+            };
 
             movement.Init(settings.InitialSpeed);
 
@@ -127,16 +126,16 @@ namespace GravityDJ
             public bool SpawnOnStart = true;
         }
 
-        public bool TryGetAgent(out FlyingAgent flyingAgent)
+        public bool TryGetBall(out Ball ball)
         {
-            if (spawnedAgent != null)
+            if (this.ball != null)
             {
-                flyingAgent = spawnedAgent;
+                ball = this.ball;
                 return true;
             }
             else
             {
-                flyingAgent = null;
+                ball = null;
                 return false;
             }
         

@@ -28,8 +28,6 @@ MonoBehaviour:
     - {x: 6, y: 0}
     fieldCenter: {x: 0, y: 0}
   GravitySettings:
-    circlePrefab: {fileID: 6771677265091953395, guid: b1357bfc462881847ac6ae728813b583,
-      type: 3}
     innerCircleRadius: 0.5
     outerCircleRadius: 10
     gravityStrengthChangeSpeed: 1.4
@@ -42,4 +40,6 @@ MonoBehaviour:
     boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
       type: 3}
     targetPrefab: {fileID: 946524792112723589, guid: 6607241b62960244abb4e9cebdbaec12,
+      type: 3}
+    circlePrefab: {fileID: 6771677265091953395, guid: b1357bfc462881847ac6ae728813b583,
       type: 3}

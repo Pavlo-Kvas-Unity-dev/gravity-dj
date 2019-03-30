@@ -27,13 +27,15 @@ namespace GravityDJ
         private GameController gameController;
         private Settings settings;
         private Ball ball;
+        private GravityController gravityController;
 
 
         [Inject]
-        public void Init(GameController gameController, Settings settings)
+        public void Init(GameController gameController, Settings settings, GravityController gravityController)
         {
             this.gameController = gameController;
             this.settings = settings;
+            this.gravityController = gravityController;
         }
 
         // Start is called before the first frame update
@@ -95,7 +97,7 @@ namespace GravityDJ
             };
 
             movement.Init(settings.InitialSpeed);
-
+            gravityController.SetMovement(movement);
             float RandomCoordInsideBoundaries()
             {
                 float coord = Random.Range(0f, spawnableFieldSize);

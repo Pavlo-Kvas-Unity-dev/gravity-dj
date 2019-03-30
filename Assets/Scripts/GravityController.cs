@@ -24,6 +24,7 @@ namespace GravityDJ
 
         private List<GravityForceFieldCircle> circles = new List<GravityForceFieldCircle>();
         private GravityForceFieldCircle.Factory circleFactory;
+        private Movement movement;
 
 
         public float GravityStrengthZeroShiftModified
@@ -150,25 +151,24 @@ namespace GravityDJ
                 Debug.Log(deltaStrength);
             }
         
-            UpdateBall();
+            UpdateMovement();
         }
 
-        private void UpdateBall()
+        private void UpdateMovement()
         {
-            if (spawner.TryGetBall(out Ball ball))
-            {
-                Debug.Log("gravity contact");
-                //add pulling force
+            if (movement == null) return;
+            
+            Debug.Log("gravity contact");
+            //add pulling force
 
-                Vector2 agentsCenterOfMass = ball.transform.position;
-                //acceleration due to gravity g = GM/r2
-                var distance = ((Vector2) transform.position - agentsCenterOfMass);
-                //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
-                float acceleration = CalcAcceleration(distance.magnitude);
-                Debug.Log(acceleration);
+            Vector2 ballsCenterOfMass = movement.transform.position;
+            //acceleration due to gravity g = GM/r2
+            var distance = ((Vector2) transform.position - ballsCenterOfMass);
+            //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
+            float acceleration = CalcAcceleration(distance.magnitude);
+            Debug.Log(acceleration);
 
-                ball.ApplyVelocity((distance.normalized * acceleration * Time.deltaTime));
-            }
+            movement.ApplyVelocity(distance.normalized * acceleration * Time.deltaTime);
         }
 
         public void Reset()
@@ -187,6 +187,11 @@ namespace GravityDJ
             public Vector2 allowedAccelerationRange = new Vector2(-150, 150);
             public Vector2 gravityStrengthRange = new Vector2(-1, 1);
             public float gravitySliderZeroThreshold = .15f;
+        }
+
+        public void SetMovement(Movement movement)
+        {
+            this.movement = movement;
         }
     }
 }

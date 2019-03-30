@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace GravityDJ
 {
@@ -11,6 +12,10 @@ namespace GravityDJ
         {
             Destroy(this.gameObject);
             targetHit.Invoke(this);
+        }
+
+        public class Factory:PlaceholderFactory<Ball>
+        {
         }
     }
 }

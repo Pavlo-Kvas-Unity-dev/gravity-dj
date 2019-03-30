@@ -15,11 +15,8 @@ MonoBehaviour:
   GameSettings:
     gameDuration: 60
   SpawnerSettings:
-    flyingAgentPrefab: {fileID: 460188742633554749, guid: 034c687266922fc4f91bd7ed95fc3437,
-      type: 3}
     maxDistanceFromBoundary: 1
     InitialSpeed: 5
-    SpawnOnStart: 1
   FieldSettings:
     fieldSize: 12
     cellSize: 1
@@ -42,4 +39,6 @@ MonoBehaviour:
     targetPrefab: {fileID: 946524792112723589, guid: 6607241b62960244abb4e9cebdbaec12,
       type: 3}
     circlePrefab: {fileID: 6771677265091953395, guid: b1357bfc462881847ac6ae728813b583,
+      type: 3}
+    ballPrefab: {fileID: 460188742633554749, guid: 034c687266922fc4f91bd7ed95fc3437,
       type: 3}

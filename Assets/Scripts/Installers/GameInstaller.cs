@@ -28,6 +28,9 @@ namespace GravityDJ.Installers
             Container.BindFactory<GravityForceFieldCircle, GravityForceFieldCircle.Factory>()
                 .FromComponentInNewPrefab(settings.circlePrefab)
                 .UnderTransformGroup("GravityCircles");
+
+            Container.BindFactory<Ball, Ball.Factory>()
+                .FromComponentInNewPrefab(settings.ballPrefab);
         }
         
         [Serializable]
@@ -36,6 +39,7 @@ namespace GravityDJ.Installers
             public GameObject boundaryPrefab;
             public GameObject targetPrefab;
             public GameObject circlePrefab;
+            public GameObject ballPrefab;
         }
     }
 }

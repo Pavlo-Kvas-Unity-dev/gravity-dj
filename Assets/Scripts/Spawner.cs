@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using Zenject;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace GravityDJ
@@ -10,32 +11,22 @@ namespace GravityDJ
     {
         [Inject] FieldController fieldController;
 
-        private float ObjectRadius
-        {
-            get
-            {
-                if (agentsCircleCollider2D == null)
-                {
-                    agentsCircleCollider2D = settings.flyingAgentPrefab.GetComponentInChildren<CircleCollider2D>();
-                }
-                return agentsCircleCollider2D.radius;
-            }
-        }
-
-        CircleCollider2D agentsCircleCollider2D;
+        private float ObjectRadius => 0.5f;//todo
 
         private GameController gameController;
         private Settings settings;
         private Ball ball;
         private GravityController gravityController;
+        private Ball.Factory ballFactory;
 
 
         [Inject]
-        public void Init(GameController gameController, Settings settings, GravityController gravityController)
+        public void Init(GameController gameController, Settings settings, GravityController gravityController, Ball.Factory ballFactory)
         {
             this.gameController = gameController;
             this.settings = settings;
             this.gravityController = gravityController;
+            this.ballFactory = ballFactory;
         }
 
         // Start is called before the first frame update
@@ -84,17 +75,17 @@ namespace GravityDJ
 
             //spawn only if no Agent is on the screen
 
-            var ballGO = Instantiate(settings.flyingAgentPrefab, spawnPos, Quaternion.identity);//todo use factory
+            ball = ballFactory.Create();
+            ball.transform.position = spawnPos;
 
-            var movement = ballGO.GetComponent<Movement>();
 
-            ball = ballGO.GetComponent<Ball>();
-       
             ball.targetHit += (Ball sender) =>
             {
                 gameController.OnTargetHit(sender);
                 Spawn();
             };
+            
+            var movement = ball.GetComponent<Movement>();
 
             movement.Init(settings.InitialSpeed);
             gravityController.SetMovement(movement);
@@ -122,25 +113,8 @@ namespace GravityDJ
         [Serializable]
         public class Settings
         {
-            public GameObject flyingAgentPrefab;
             public float maxDistanceFromBoundary = 1;
             public int InitialSpeed = 5;
-            public bool SpawnOnStart = true;
-        }
-
-        public bool TryGetBall(out Ball ball)
-        {
-            if (this.ball != null)
-            {
-                ball = this.ball;
-                return true;
-            }
-            else
-            {
-                ball = null;
-                return false;
-            }
-        
         }
     }
 }

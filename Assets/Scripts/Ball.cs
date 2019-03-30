@@ -5,20 +5,12 @@ namespace GravityDJ
 {
     public class Ball : MonoBehaviour
     {
-        public event Action<Ball> flyAway;
-    
-        public static int NumAgents { get; private set; } = 0;
-
-        void Awake()
-        {
-            NumAgents++;
-        }
+        public event Action<Ball> targetHit;
 
         public void OnTargetHit()
         {
-            NumAgents--;
             Destroy(this.gameObject);
-            flyAway.Invoke(this);
+            targetHit.Invoke(this);
         }
     }
 }

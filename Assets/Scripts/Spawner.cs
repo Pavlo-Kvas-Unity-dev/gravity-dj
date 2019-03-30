@@ -90,7 +90,7 @@ namespace GravityDJ
 
             ball = ballGO.GetComponent<Ball>();
        
-            ball.flyAway += (Ball sender) =>
+            ball.targetHit += (Ball sender) =>
             {
                 gameController.OnTargetHit(sender);
                 Spawn();

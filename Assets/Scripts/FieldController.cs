@@ -7,8 +7,24 @@ namespace GravityDJ
 {
     public class FieldController : MonoBehaviour
     {
+        private float? maxPlayableRadius;
+        
         public float BorderSize => CellSize;
 
+        public float FarthestFieldPointRadius
+        {
+            get
+            {
+                if (!maxPlayableRadius.HasValue)
+                {
+                    maxPlayableRadius = Mathf.Sqrt(2) * ((float)FieldSize / 2 - CellSize);
+                }
+
+                return maxPlayableRadius.Value;
+            }
+            
+        }
+        
         public int FieldSize//todo inline
         {
             get { return settings.fieldSize; }

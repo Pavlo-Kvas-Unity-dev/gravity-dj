@@ -11,6 +11,8 @@ namespace GravityDJ
         
         public float BorderSize => CellSize;
 
+        public float MovableFieldSize => FieldSize - 2 * BorderSize;
+
         public float FarthestFieldPointRadius
         {
             get

@@ -47,6 +47,12 @@ namespace GravityDJ
             ISILocalization.onLanguageChanged += OnLanguageChanged;
             mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
             gameOverScreen.RestartGame += StartGame;
+            spawner.ballSpawned += OnBallSpawned;
+        }
+
+        private void OnBallSpawned(Ball ball)
+        {
+            ball.targetHit += OnTargetHit;
         }
 
         void Start()

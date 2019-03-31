@@ -37,6 +37,7 @@ namespace GravityDJ
 
         private void Awake()
         {
+            spawner.ballSpawned += OnBallSpawned;
             CreateCircles(); 
         }
 
@@ -134,6 +135,7 @@ namespace GravityDJ
 
             movement.ApplyVelocity(toCenterVector.normalized * acceleration * Time.deltaTime);
         }
+
         /// <summary>
         /// acceleration due to gravity g = GM/r2
         /// gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
@@ -159,9 +161,9 @@ namespace GravityDJ
             gravityStrengthSliderController.Reset();
         }
 
-        public void SetMovement(Movement movement)
+        private void OnBallSpawned(Ball ball)
         {
-            this.movement = movement;
+            movement = ball.GetComponent<Movement>();
         }
 
         [Serializable]

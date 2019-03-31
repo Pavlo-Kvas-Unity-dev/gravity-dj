@@ -6,12 +6,12 @@ namespace GravityDJ
 {
     public class Ball : MonoBehaviour
     {
-        public event Action<Ball> targetHit;
+        public event Action targetHit;
 
         public void OnTargetHit()
         {
             Destroy(this.gameObject);
-            targetHit.Invoke(this);
+            targetHit.Invoke();
         }
 
         public class Factory:PlaceholderFactory<Ball>

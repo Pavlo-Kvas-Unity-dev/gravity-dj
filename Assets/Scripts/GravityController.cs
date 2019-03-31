@@ -14,29 +14,18 @@ namespace GravityDJ
         private GravityStrengthSliderController gravityStrengthSliderController;
 
         [Inject] FieldController FieldController;
+        
         [Inject] private Spawner spawner;
  
-        private float gravityStrengthZeroShiftModified = 0f;
-
-        private float gravityStrengthSliderValue;
+        private float gravityNorm = 0f;
 
         private readonly double gravityConstant = 6.67408E-11;
 
         private List<GravityForceFieldCircle> circles = new List<GravityForceFieldCircle>();
+        
         private GravityForceFieldCircle.Factory circleFactory;
-
-
-        public float GravityStrengthZeroShiftModified
-        {
-            set { gravityStrengthZeroShiftModified = value; }
-            get { return gravityStrengthZeroShiftModified; }
-        }
-
-        public float GravityStrengthSliderValue
-        {
-            set { gravityStrengthSliderValue = value; }
-            get { return gravityStrengthSliderValue; }
-        }
+        
+        private Movement movement;
 
         [Inject]
         void Init(GravityStrengthSliderController gravityStrengthSliderController, Settings settings, GravityForceFieldCircle.Factory circleFactory)
@@ -48,127 +37,123 @@ namespace GravityDJ
 
         private void Awake()
         {
+            spawner.ballSpawned += OnBallSpawned;
             CreateCircles(); 
         }
 
         private void Start()
         {
-            SetGravityStrength(GravityStrengthZeroShiftModified, true);
-            
-        }
-
-        private void CreateCircles()
-        {
-            for (float curCircleRadius = settings.innerCircleRadius; curCircleRadius < settings.outerCircleRadius; curCircleRadius += .5f)
-            {
-                GravityForceFieldCircle circle = circleFactory.Create();
-
-                circles.Add(circle);
-
-                circle.Init(curCircleRadius);
-            }
-        }
-
-        public void OnStrengthChanged(float gravityStrengthNorm)
-        {
-            SetGravityStrength(gravityStrengthNorm, false);
-        }
-
-        public void SetGravityStrength(float newGravityStrengthNorm, bool updateUI)
-        {
-            gravityStrengthZeroShiftModified = gravityStrengthSliderValue = Mathf.Clamp(newGravityStrengthNorm, settings.gravityStrengthRange.x, settings.gravityStrengthRange.y);
-        
-            //interpret near zero values as zero
-            if (gravityStrengthZeroShiftModified > 0)
-            {
-                gravityStrengthZeroShiftModified = Mathf.InverseLerp(settings.gravitySliderZeroThreshold, settings.gravityStrengthRange.y, gravityStrengthZeroShiftModified);
-            }
-            else
-            {
-                gravityStrengthZeroShiftModified = -1 * Mathf.InverseLerp(-(float) settings.gravitySliderZeroThreshold, settings.gravityStrengthRange.x, gravityStrengthZeroShiftModified);
-            }
-        
-            var posColor = Color.green;
-            var negColor = Color.red;
-            var neutralColor = Color.white;
-            var targetColor = gravityStrengthZeroShiftModified > 0 ? posColor : negColor;
-
-            var sliderColor = gravityStrengthZeroShiftModified > 0 ?
-                Color.Lerp(neutralColor, posColor, gravityStrengthZeroShiftModified) : 
-                Color.Lerp(neutralColor, negColor, Math.Abs(gravityStrengthZeroShiftModified));
-
-            float minDist = 1f;
-            float maxDist = Mathf.Sqrt(2)*(FieldController.FieldSize / 2 - FieldController.CellSize);
-            float farthestDistCoef = CalcDistanceCoef(maxDist);
-            float closestDistCoef  = CalcDistanceCoef(minDist);
-
-
-            float CalcDistanceCoef(float dist)
-            {
-                return 1.0f/Mathf.Pow(dist, settings.gravitationFalloffCoef);
-            }
-
-            foreach (var circle in circles)
-            {
-                var distanceCoef = CalcDistanceCoef(circle.Radius);
-            
-                float t = Mathf.InverseLerp(farthestDistCoef, closestDistCoef, distanceCoef);
-
-                var circleColor = Color.Lerp(neutralColor, targetColor, t);
-            
-                circleColor.a = Mathf.Abs(gravityStrengthZeroShiftModified);
-            
-                circle.SetColor(circleColor);
-            }
-        
-            if (updateUI)
-            {
-                gravityStrengthSliderController.UpdateValue(GravityStrengthSliderValue);
-            }
-        }
-
-        private float CalcAcceleration(float distance)
-        {
-            float acceleration = (float) (gravityConstant * settings.M * gravityStrengthZeroShiftModified /
-                                          (Mathf.Pow(distance, settings.gravitationFalloffCoef)));
-
-            acceleration = Mathf.Clamp(acceleration, settings.allowedAccelerationRange.x, settings.allowedAccelerationRange.y);
-            return acceleration;
+            SetGravity(gravityNorm, true);
         }
 
         private void Update()
         {
-            //read input for changing gravity extents
-            var hor = Input.GetAxis("Horizontal");
-        
-            //read input for changing gravity density
-            var vert = Input.GetAxis("Vertical");
-            if (Mathf.Abs(vert) > Mathf.Epsilon)
-            {
-                var deltaStrength = Time.deltaTime * settings.gravityStrengthChangeSpeed * (vert > 0 ? 1 : -1 );
-                SetGravityStrength(gravityStrengthSliderValue+deltaStrength, true);
-                Debug.Log(deltaStrength);
-            }
-        
-            UpdateAgent();
+            UpdateMovement();
         }
 
-        private void UpdateAgent()
+        private void CreateCircles()
         {
-            if (spawner.TryGetAgent(out FlyingAgent agent))
+            for (float radius = settings.innerCircleRadius;
+                radius < settings.outerCircleRadius; 
+                radius += settings.circleRadiusStep)
             {
-                Debug.Log("gravity contact");
-                //add pulling force
-
-                Vector2 agentsCenterOfMass = agent.transform.position;
-                //acceleration due to gravity g = GM/r2
-                var distance = ((Vector2) transform.position - agentsCenterOfMass);
-                //gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
-                float acceleration = CalcAcceleration(distance.magnitude);
-                Debug.Log(acceleration);
-
-                agent.ApplyVelocity((distance.normalized * acceleration * Time.deltaTime));
+                var circle = circleFactory.Create();
+                
+                circle.Init(radius);
+                circles.Add(circle);
             }
+        }
+
+        public void OnGravitySliderValueChanged(float gravitySliderValue)
+        {
+            SetGravity(gravitySliderValue, false);
+        }
+
+        private void SetGravity(float newGravitySliderValue, bool updateUI)
+        {
+            //check bounds
+            newGravitySliderValue = Mathf.Clamp(newGravitySliderValue, -1, 1);
+
+            if (updateUI)
+            {
+                gravityStrengthSliderController.UpdateValue(newGravitySliderValue);
+            }
+
+            gravityNorm = CalcGravityNorm(newGravitySliderValue);
+
+            UpdateGravityVisuals();
+        }
+
+        private void UpdateGravityVisuals()
+        {
+            var pullingGravityColor = Color.green;
+            var pushingGravityColor = Color.red;
+            var noGravityColor = Color.white;
+            var gravityColor = gravityNorm > 0 ? pullingGravityColor : pushingGravityColor;
+
+            float minDistCoef = DistanceCoef(FieldController.FarthestFieldPointRadius);
+            float maxDistCoef = DistanceCoef(settings.maxGravityRadius); //todo
+
+            foreach (var circle in circles)
+            {
+                var distanceCoef = DistanceCoef(circle.Radius);
+
+                float t = Mathf.InverseLerp(minDistCoef, maxDistCoef, distanceCoef);
+
+                var color = Color.Lerp(noGravityColor, gravityColor, t);
+
+                color.a = Mathf.Abs(gravityNorm);
+
+                circle.SetColor(color);
+            }
+        }
+
+        private float DistanceCoef(float dist)
+        {
+            return 1.0f / Mathf.Pow(dist, settings.gravitationFalloffCoef);
+        }
+
+        /// <summary>
+        /// map gravity slider value range (-gravitySliderZeroThreshold, gravitySliderZeroThreshold) to zero
+        /// </summary>
+        /// <param name="sliderValue"></param>
+        private float CalcGravityNorm(float sliderValue)
+        {
+            return Mathf.Sign(sliderValue) *
+                   Mathf.InverseLerp(settings.gravitySliderZeroThreshold, 1, Mathf.Abs(sliderValue));
+        }
+
+        private void UpdateMovement()
+        {
+            if (movement == null) return;
+            
+            Vector2 ballsCenterOfMass = movement.transform.position;
+
+            var toCenterVector = ((Vector2) transform.position - ballsCenterOfMass);
+            
+            float acceleration = CalcAcceleration(toCenterVector.magnitude);
+
+            movement.ApplyVelocity(toCenterVector.normalized * acceleration * Time.deltaTime);
+        }
+
+        /// <summary>
+        /// acceleration due to gravity g = GM/r2
+        /// gravitational constant G = 6.67408 × 10-11 m3 kg-1 s-2
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        
+        private float CalcAcceleration(float distance)
+        {
+            double G = gravityConstant * gravityNorm;
+
+            float acc = (float) ( G * settings.M * DistanceCoef(distance));
+
+            acc = Mathf.Clamp(
+                acc, 
+                settings.allowedAccelerationRange.x, 
+                settings.allowedAccelerationRange.y);
+            return acc;
         }
 
         public void Reset()
@@ -176,17 +161,22 @@ namespace GravityDJ
             gravityStrengthSliderController.Reset();
         }
 
+        private void OnBallSpawned(Ball ball)
+        {
+            movement = ball.GetComponent<Movement>();
+        }
+
         [Serializable]
         public class Settings
         {
+            public float circleRadiusStep = .5f;
             public float innerCircleRadius = 0.5f;
             public float outerCircleRadius = 10f;
-            public float gravityStrengthChangeSpeed = 1.4f;
             public double M = 500000;
             public float gravitationFalloffCoef = 1.5f;
             public Vector2 allowedAccelerationRange = new Vector2(-150, 150);
-            public Vector2 gravityStrengthRange = new Vector2(-1, 1);
             public float gravitySliderZeroThreshold = .15f;
+            public float maxGravityRadius = 1f;
         }
     }
 }

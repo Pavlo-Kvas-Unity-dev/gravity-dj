@@ -5,6 +5,7 @@ namespace GravityDJ
     public class Movement : MonoBehaviour
     {
         private Rigidbody2D rb2D;
+        
         void Awake()
         {
             rb2D = GetComponent<Rigidbody2D>();

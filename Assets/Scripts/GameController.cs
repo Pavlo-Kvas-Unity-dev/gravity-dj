@@ -11,76 +11,48 @@ namespace GravityDJ
 {
     public class GameController : MonoBehaviour
     {
-        [Inject(Id="score")] private TextMeshProUGUI scoreText;
-        [Inject(Id="bestScore")] private TextMeshProUGUI bestScoreText;
         [Inject(Id="gameCountdown")] private TextMeshProUGUI countdownText;
-    
-        [Inject] private GameOverScreen gameOverScreen;
+
         [Inject(Id="mainMenuButton")] private Button mainMenuButton;
-    
-        private int score = 0;
-        private bool isGamePlaing = false;
-        private float timeLeft;
-    
-    
-        private int? highScore;
+
+        [Inject] private GameOverScreen gameOverScreen;
 
         [Inject] private HelpWindow helpWindow;
+
         [Inject] private MainMenuWindow mainMenuWindow;
 
         Settings settings;
+
         private Spawner spawner;
+
         private GravityController gravityController;
+        
+        private ScoreController scoreController;
 
-        private int HighScore
-        {
-            get
-            {
-                ReadHighScoreIfNull();
-            
-                return highScore.Value;
-            }
-            set
-            {
-                highScore = value;
-                SaveHighScore(value);
-                UpdateHighScoreUI();
-            }
-        }
+        private bool isGamePlaing = false;
 
-        private static void SaveHighScore(int value)
-        {
-            PlayerPrefs.SetInt(nameof(highScore), value);
-        }
-
-        public int Score
-        {
-            get { return score; }
-            set
-            {
-                score = value;
-                UpdateHighScore();
-            }
-        }
+        private float countdown;
 
         [Inject]
-        void Init(Settings settings, Spawner spawner, GravityController gravityController)
+        void Init(Settings settings, Spawner spawner, GravityController gravityController, ScoreController scoreController)
         {
             this.settings = settings;
             this.spawner = spawner;
             this.gravityController = gravityController;
+            this.scoreController = scoreController;
         }
     
         void Awake()
         {
             ISILocalization.onLanguageChanged += OnLanguageChanged;
             mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
+            gameOverScreen.RestartGame += StartGame;
+            spawner.ballSpawned += OnBallSpawned;
         }
 
-        private void OnLanguageChanged()
+        private void OnBallSpawned(Ball ball)
         {
-            UpdateScore();
-            UpdateHighScoreUI();
+            ball.targetHit += OnTargetHit;
         }
 
         void Start()
@@ -92,58 +64,47 @@ namespace GravityDJ
         {
             if (isGamePlaing)
             {
-                countdownText.text = string.Format(R3.strings.TimeLeftFormat, (int) timeLeft);
-                timeLeft -= Time.deltaTime;
+                UpdateCountdown();
 
-                if (timeLeft < 0)
+                if (countdown < 0)
                 {
                     GameOver();
                 }
             }
         }
 
-        private void UpdateHighScore()
+        private void UpdateCountdown()
         {
-            if (HighScore < Score)
-            {
-                HighScore = Score;
-            }
+            UpdateCountdownUI();
+            countdown -= Time.deltaTime;
+        }
+
+        private void OnLanguageChanged()
+        {
+            scoreController.UpdateUI();
+            UpdateCountdownUI();
+        }
+
+        private void UpdateCountdownUI()
+        {
+            countdownText.text = string.Format(R3.strings.TimeLeftFormat, (int) countdown);
         }
 
         private void StartGame()
         {
             gravityController.Reset();
-            Score = 0;
-            UpdateScore();
-            timeLeft = settings.gameDuration;
+            ResetCountdown();
             Resume();
-                
-            UpdateHighScoreUI();
-        
+            scoreController.Reset();
             spawner.Spawn();
-        
         }
 
-        private void UpdateHighScoreUI()
+        private void ResetCountdown()
         {
-            bestScoreText.text = string.Format(R3.strings.BestScoreFormat, HighScore);
+            countdown = settings.gameDuration;
         }
 
-        private void ReadHighScoreIfNull()
-        {
-            if (!highScore.HasValue)
-            {
-                highScore = PlayerPrefs.GetInt(nameof(highScore), 0);
-            }
-        }
-
-        public void OnRestart()
-        {
-            StartGame(); 
-//        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-        public void OnMainMenuButtonClicked()
+        private void OnMainMenuButtonClicked()
         {
             Pause();
             ShowMainMenu(true);
@@ -163,33 +124,21 @@ namespace GravityDJ
             isGamePlaing = false;
         }
 
-        public void OnHelpWindowClosed()
-        {
-            Resume();
-        }
-
         private void Resume()
         {
             Time.timeScale = 1;
             isGamePlaing = true;
         }
 
-        public void OnAgentFlewAway(FlyingAgent flyingAgent)
+        public void OnTargetHit()
         {
-            Score++;
-            UpdateScore();
-        }
-
-        private void UpdateScore()
-        {
-            scoreText.text = string.Format(R3.strings.ScoreFormat, Score);
+            scoreController.Score++;
         }
 
         private void GameOver()
         {
             Pause();
-            UpdateHighScoreUI();
-            gameOverScreen.Show(Score, HighScore);
+            gameOverScreen.Show(scoreController);
         }
 
         [Serializable]
@@ -197,6 +146,5 @@ namespace GravityDJ
         {
             public float gameDuration = 60f;
         }
-    
     }
 }

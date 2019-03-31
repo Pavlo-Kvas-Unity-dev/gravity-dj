@@ -16,6 +16,7 @@ namespace GravityDJ.Installers
             Container.BindInterfacesAndSelfTo<Spawner>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesAndSelfTo<FieldController>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesAndSelfTo<GravityController>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScoreController>().AsSingle();
             
             Container.BindFactory<Boundary, Boundary.Factory>()
                 .FromComponentInNewPrefab(settings.boundaryPrefab)
@@ -28,6 +29,9 @@ namespace GravityDJ.Installers
             Container.BindFactory<GravityForceFieldCircle, GravityForceFieldCircle.Factory>()
                 .FromComponentInNewPrefab(settings.circlePrefab)
                 .UnderTransformGroup("GravityCircles");
+
+            Container.BindFactory<Ball, Ball.Factory>()
+                .FromComponentInNewPrefab(settings.ballPrefab);
         }
         
         [Serializable]
@@ -36,6 +40,7 @@ namespace GravityDJ.Installers
             public GameObject boundaryPrefab;
             public GameObject targetPrefab;
             public GameObject circlePrefab;
+            public GameObject ballPrefab;
         }
     }
 }

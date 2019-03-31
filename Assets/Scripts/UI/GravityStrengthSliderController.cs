@@ -47,7 +47,7 @@ namespace GravityDJ.UI
         {
             slider = GetComponent<Slider>();
             
-            slider.onValueChanged.AddListener(gravityController.OnStrengthChanged);
+            slider.onValueChanged.AddListener(gravityController.OnGravitySliderValueChanged);
 
             SetRange();
 
@@ -56,16 +56,8 @@ namespace GravityDJ.UI
 
         private void SetRange()
         {
-            var sliderMinValue = gravitySettings.gravityStrengthRange.x;
-            var sliderMaxValue = gravitySettings.gravityStrengthRange.y;
-
-            if (Math.Abs(slider.minValue - sliderMinValue) > Mathf.Epsilon ||
-                Math.Abs(slider.maxValue - sliderMaxValue) > Mathf.Epsilon)
-            {
-                Debug.LogWarning($"slider's min/max values on {slider.gameObject.name} doesn't match settings, fixing it");
-                slider.minValue = sliderMinValue;
-                slider.maxValue = sliderMaxValue;
-            }
+            slider.minValue = -1;
+            slider.maxValue = 1;
         }
 
         public void UpdateValue(float newValue)

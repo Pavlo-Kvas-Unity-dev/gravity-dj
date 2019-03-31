@@ -1,46 +1,51 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Experimental.XR.Interaction;
 using Zenject;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace GravityDJ
 {
     public class Spawner : MonoBehaviour
     {
+        public event Action<Ball> ballSpawned;
         [Inject] FieldController fieldController;
 
-        private float ObjectRadius
-        {
-            get
-            {
-                if (agentsCircleCollider2D == null)
-                {
-                    agentsCircleCollider2D = settings.flyingAgentPrefab.GetComponentInChildren<CircleCollider2D>();
-                }
-                return agentsCircleCollider2D.radius;
-            }
-        }
-
-        CircleCollider2D agentsCircleCollider2D;
 
         private GameController gameController;
         private Settings settings;
-        private FlyingAgent spawnedAgent;
+        private Ball ball;
+        private GravityController gravityController;
+        private Ball.Factory ballFactory;
 
+        private float ObjectRadius => settings.objectRadius;
 
         [Inject]
-        public void Init(GameController gameController, Settings settings)
+        public void Init(GameController gameController, Settings settings, GravityController gravityController, Ball.Factory ballFactory)
         {
             this.gameController = gameController;
             this.settings = settings;
+            this.gravityController = gravityController;
+            this.ballFactory = ballFactory;
         }
-
-        // Start is called before the first frame update
 
         void Awake()
         {
             Assert.IsTrue(settings.maxDistanceFromBoundary > ObjectRadius);
+        }
+
+        void Update()
+        {
+            #if UNITY_EDITOR
+            
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Spawn();
+            }
+            
+            #endif
         }
 
         private void OnDrawGizmos()
@@ -61,85 +66,59 @@ namespace GravityDJ
 
         public void Spawn()
         {
-            float spawnableFieldSize = fieldController.FieldSize - 2 * fieldController.BorderSize;
+            //only one ball at time
+            if (ball != null)
+            {
+                Destroy(ball.gameObject);
+            }
 
-            var xPos = RandomCoordInsideBoundaries();
-            var yPos = RandomCoordInsideBoundaries();
+            ball = ballFactory.Create();
+            ball.transform.position = RandomSpawnPos();
+            ball.targetHit += Spawn;
+            
+            var movement = ball.GetComponent<Movement>();
+
+            movement.Init(settings.InitialSpeed);
+            
+            ballSpawned.Invoke(ball);
+        }
+
+        private Vector2 RandomSpawnPos()
+        {
+            float movableFieldSize = fieldController.MovableFieldSize;
+
+            var xPos = RandomCoordInsideBoundaries(movableFieldSize);
+
+            var yPos = RandomCoordInsideBoundaries(movableFieldSize);
+
+            float RandomCoordInsideBoundaries(float coordRange)
+            {
+                float coord = Random.Range(0f, coordRange);
+                return Mathf.Clamp(coord, ObjectRadius, coordRange - ObjectRadius);
+            }
 
             var spawnPos = new Vector2(xPos, yPos);
 
-            spawnPos -= Vector2.one * spawnableFieldSize/2;
+            spawnPos -= Vector2.one * movableFieldSize / 2;
 
             float cappedMagnitude = Mathf.Max(spawnPos.magnitude, MinAllowedDistanceFromCenter(ObjectRadius) + ObjectRadius);
 
             spawnPos = spawnPos.normalized * cappedMagnitude;
 
-            //only one ball at time
-            if (spawnedAgent != null)
-            {
-                spawnedAgent.isAlive = false;
-                Destroy(spawnedAgent.gameObject);
-            }
-
-            //spawn only if no Agent is on the screen
-
-            var flyingAgentGO = Instantiate(settings.flyingAgentPrefab, spawnPos, Quaternion.identity);
-
-            var movement = flyingAgentGO.GetComponent<Movement>();
-
-            spawnedAgent = flyingAgentGO.GetComponent<FlyingAgent>();
-       
-            spawnedAgent.flyAway += new FlyingAgent.OnAgentFlyThroughHoleEventHandler(sender =>
-            {
-                gameController.OnAgentFlewAway(sender);
-                Spawn();
-            });
-
-            movement.Init(settings.InitialSpeed);
-
-            float RandomCoordInsideBoundaries()
-            {
-                float coord = Random.Range(0f, spawnableFieldSize);
-                return Mathf.Clamp(coord, ObjectRadius, spawnableFieldSize - ObjectRadius);
-            }
+            return spawnPos;
         }
 
         private float MinAllowedDistanceFromCenter(float objectRadius)
         {
-            return fieldController.FieldSize/2 - fieldController.BorderSize - settings.maxDistanceFromBoundary + objectRadius;
-        }
-
-        void Update()
-        {
-        
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                Spawn();
-            }
+            return fieldController.MovableFieldSize/2 - settings.maxDistanceFromBoundary + objectRadius;
         }
 
         [Serializable]
         public class Settings
         {
-            public GameObject flyingAgentPrefab;
+            public float objectRadius = 0.5f;
             public float maxDistanceFromBoundary = 1;
             public int InitialSpeed = 5;
-            public bool SpawnOnStart = true;
-        }
-
-        public bool TryGetAgent(out FlyingAgent flyingAgent)
-        {
-            if (spawnedAgent != null)
-            {
-                flyingAgent = spawnedAgent;
-                return true;
-            }
-            else
-            {
-                flyingAgent = null;
-                return false;
-            }
-        
         }
     }
 }

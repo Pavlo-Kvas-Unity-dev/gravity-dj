@@ -15,11 +15,9 @@ MonoBehaviour:
   GameSettings:
     gameDuration: 60
   SpawnerSettings:
-    flyingAgentPrefab: {fileID: 460188742633554749, guid: 034c687266922fc4f91bd7ed95fc3437,
-      type: 3}
+    objectRadius: 0.5
     maxDistanceFromBoundary: 1
     InitialSpeed: 5
-    SpawnOnStart: 1
   FieldSettings:
     fieldSize: 12
     cellSize: 1
@@ -28,18 +26,20 @@ MonoBehaviour:
     - {x: 6, y: 0}
     fieldCenter: {x: 0, y: 0}
   GravitySettings:
+    circleRadiusStep: 0.5
     innerCircleRadius: 0.5
     outerCircleRadius: 10
-    gravityStrengthChangeSpeed: 1.4
     M: 1000000000000
     gravitationFalloffCoef: 1.5
     allowedAccelerationRange: {x: -150, y: 150}
-    gravityStrengthRange: {x: -1, y: 1}
     gravitySliderZeroThreshold: 0.15
+    maxGravityRadius: 1
   GameInstaller:
     boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
       type: 3}
     targetPrefab: {fileID: 946524792112723589, guid: 6607241b62960244abb4e9cebdbaec12,
       type: 3}
     circlePrefab: {fileID: 6771677265091953395, guid: b1357bfc462881847ac6ae728813b583,
+      type: 3}
+    ballPrefab: {fileID: 460188742633554749, guid: 034c687266922fc4f91bd7ed95fc3437,
       type: 3}

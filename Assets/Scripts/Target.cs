@@ -7,13 +7,10 @@ namespace GravityDJ
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var flyingAgent = other.gameObject.GetComponent<FlyingAgent>();
-            if (flyingAgent == null) return;
+            var ball = other.gameObject.GetComponent<Ball>();
+            if (ball == null) return;
             
-            if (flyingAgent.isAlive)
-            {
-                flyingAgent.OnTargetHit();
-            }
+            ball.OnTargetHit();
         }
         
         public class Factory:PlaceholderFactory<Target>//todo add UsedImplicitlyAttribute 

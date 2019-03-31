@@ -1,4 +1,5 @@
-﻿using InfinityEngine.Localization;
+﻿using System;
+using InfinityEngine.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,16 +9,11 @@ namespace GravityDJ
 {
     public class GameOverScreen : MonoBehaviour
     {
-        private GameController gameController;
         [SerializeField] private TextMeshProUGUI gameOverText;
         [SerializeField] private Button restartButton;
-
-        [Inject]
-        public void Init(GameController gameController)
-        {
-            this.gameController = gameController;
-        }
-    
+        
+        public event Action RestartGame;
+        
         private void Awake()
         {
             restartButton.onClick.AddListener(OnRestartButtonClicked);
@@ -26,7 +22,7 @@ namespace GravityDJ
         private void OnRestartButtonClicked()
         {
             Hide();
-            gameController.OnRestart();
+            RestartGame.Invoke();
         }
 
         private void Hide()
@@ -34,10 +30,10 @@ namespace GravityDJ
             gameObject.SetActive(false);
         }
 
-        public void Show(int score, int bestScore)
+        public void Show(ScoreController scoreController)
         {
             gameObject.SetActive(true);
-            gameOverText.text = string.Format(R3.strings.GameOver, score);
+            gameOverText.text = string.Format(R3.strings.GameOver, scoreController.Score);
         }
     }
 }

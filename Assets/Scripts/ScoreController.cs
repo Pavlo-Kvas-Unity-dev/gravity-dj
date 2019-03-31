@@ -7,54 +7,50 @@ namespace GravityDJ
 {
     public class ScoreController
     {
-        [Inject(Id="score")] internal TextMeshProUGUI scoreText;
+        [Inject(Id="score")] private TextMeshProUGUI scoreText;
 
         [Inject(Id="bestScore")] private TextMeshProUGUI bestScoreText;
 
-        private int? highScore;
+        private int highScore;
+
         private int score = 0;
 
-        public int HighScore
+        private int HighScore
         {
-            get
-            {
-                ReadHighScoreIfNull();
-            
-                return highScore.Value;
-            }
-            private set
+            get => highScore;
+
+            set
             {
                 highScore = value;
                 SaveHighScore(value);
                 UpdateHighScoreUI();
             }
         }
-        
+
         public int Score
         {
-            get { return score; }
+            get => score;
             set
             {
                 score = value;
-                UpdateHighScore();
+
                 UpdateScoreUI();
-            }
-        }
-        
-        private void UpdateHighScore()
-        {
-            if (HighScore < Score)
-            {
-                HighScore = Score;
+                
+                if (HighScore < score)
+                {
+                    HighScore = score;
+                }
             }
         }
 
-        private void ReadHighScoreIfNull()
+        public ScoreController()
         {
-            if (!highScore.HasValue)
-            {
-                highScore = PlayerPrefs.GetInt(nameof(highScore), 0);
-            }
+            ReadSavedHighScore();
+        }
+
+        private void ReadSavedHighScore()
+        {
+            highScore = PlayerPrefs.GetInt(nameof(highScore), 0);
         }
 
         private void SaveHighScore(int value)

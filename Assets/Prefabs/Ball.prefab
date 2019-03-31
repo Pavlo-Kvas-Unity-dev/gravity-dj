@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4710109291720696979}
   - component: {fileID: 2248786658513959372}
   m_Layer: 0
-  m_Name: FlyingAgent
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

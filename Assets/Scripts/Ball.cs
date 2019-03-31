@@ -6,10 +6,15 @@ namespace GravityDJ
 {
     public class Ball : MonoBehaviour
     {
+        private bool isTargetHit = false;
+        
         public event Action targetHit;
 
         public void OnTargetHit()
         {
+            if (isTargetHit) return;
+
+            isTargetHit = true;
             Destroy(this.gameObject);
             targetHit.Invoke();
         }

@@ -15,6 +15,7 @@ MonoBehaviour:
   GameSettings:
     gameDuration: 60
   SpawnerSettings:
+    objectRadius: 0.5
     maxDistanceFromBoundary: 1
     InitialSpeed: 5
   FieldSettings:
@@ -25,14 +26,14 @@ MonoBehaviour:
     - {x: 6, y: 0}
     fieldCenter: {x: 0, y: 0}
   GravitySettings:
+    circleRadiusStep: 0.5
     innerCircleRadius: 0.5
     outerCircleRadius: 10
-    gravityStrengthChangeSpeed: 1.4
     M: 1000000000000
     gravitationFalloffCoef: 1.5
     allowedAccelerationRange: {x: -150, y: 150}
-    gravityStrengthRange: {x: -1, y: 1}
     gravitySliderZeroThreshold: 0.15
+    maxGravityRadius: 1
   GameInstaller:
     boundaryPrefab: {fileID: 946524792112723589, guid: 9ce2cddd6ec1fc2489eff106c0f27a27,
       type: 3}

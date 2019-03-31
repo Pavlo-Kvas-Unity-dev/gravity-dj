@@ -31,7 +31,7 @@ namespace GravityDJ
 
         private bool isGamePlaing = false;
 
-        private float timeLeft;
+        private float countdown;
 
         [Inject]
         void Init(Settings settings, Spawner spawner, GravityController gravityController, ScoreController scoreController)
@@ -46,11 +46,7 @@ namespace GravityDJ
         {
             ISILocalization.onLanguageChanged += OnLanguageChanged;
             mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
-        }
-
-        private void OnLanguageChanged()
-        {
-            scoreController.UpdateUI();
+            gameOverScreen.RestartGame += StartGame;
         }
 
         void Start()
@@ -62,35 +58,47 @@ namespace GravityDJ
         {
             if (isGamePlaing)
             {
-                countdownText.text = string.Format(R3.strings.TimeLeftFormat, (int) timeLeft);
-                timeLeft -= Time.deltaTime;
+                UpdateCountdown();
 
-                if (timeLeft < 0)
+                if (countdown < 0)
                 {
                     GameOver();
                 }
             }
         }
 
+        private void UpdateCountdown()
+        {
+            UpdateCountdownUI();
+            countdown -= Time.deltaTime;
+        }
+
+        private void OnLanguageChanged()
+        {
+            scoreController.UpdateUI();
+            UpdateCountdownUI();
+        }
+
+        private void UpdateCountdownUI()
+        {
+            countdownText.text = string.Format(R3.strings.TimeLeftFormat, (int) countdown);
+        }
+
         private void StartGame()
         {
             gravityController.Reset();
-            timeLeft = settings.gameDuration;
+            ResetCountdown();
             Resume();
-
             scoreController.Reset();
-
             spawner.Spawn();
-        
         }
 
-        public void OnRestart()
+        private void ResetCountdown()
         {
-            StartGame(); 
-//        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            countdown = settings.gameDuration;
         }
 
-        public void OnMainMenuButtonClicked()
+        private void OnMainMenuButtonClicked()
         {
             Pause();
             ShowMainMenu(true);
@@ -110,27 +118,21 @@ namespace GravityDJ
             isGamePlaing = false;
         }
 
-        public void OnHelpWindowClosed()
-        {
-            Resume();
-        }
-
         private void Resume()
         {
             Time.timeScale = 1;
             isGamePlaing = true;
         }
 
-        public void OnTargetHit(Ball ball)
+        public void OnTargetHit()
         {
             scoreController.Score++;
-            
         }
 
         private void GameOver()
         {
             Pause();
-            gameOverScreen.Show(scoreController.Score, scoreController.HighScore);
+            gameOverScreen.Show(scoreController);
         }
 
         [Serializable]
@@ -138,6 +140,5 @@ namespace GravityDJ
         {
             public float gameDuration = 60f;
         }
-    
     }
 }

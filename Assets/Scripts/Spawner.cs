@@ -81,7 +81,7 @@ namespace GravityDJ
 
             ball.targetHit += (Ball sender) =>
             {
-                gameController.OnTargetHit(sender);
+                gameController.OnTargetHit();
                 Spawn();
             };
             

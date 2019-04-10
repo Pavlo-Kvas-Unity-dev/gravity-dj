@@ -3139,8 +3139,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1417833632}
-        m_MethodName: Open
+      - m_Target: {fileID: 145882727}
+        m_MethodName: OnSettingsClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5146,6 +5146,7 @@ GameObject:
   - component: {fileID: 1417833634}
   - component: {fileID: 1417833632}
   - component: {fileID: 1417833633}
+  - component: {fileID: 1417833635}
   m_Layer: 5
   m_Name: SettingsWindow
   m_TagString: Untagged
@@ -5223,6 +5224,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417833630}
   m_CullTransparentMesh: 0
+--- !u!114 &1417833635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417833630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1417833632}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1440994393
 GameObject:
   m_ObjectHideFlags: 0

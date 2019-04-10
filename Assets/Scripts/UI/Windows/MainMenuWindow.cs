@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace GravityDJ.UI
 {
@@ -13,6 +14,8 @@ namespace GravityDJ.UI
 
         [SerializeField] private Button playButton;
         [SerializeField] private Button resumeButton;
+        
+        [Inject] private SettingsWindow settingsWindow;
 
         void Awake()
         {
@@ -52,6 +55,11 @@ namespace GravityDJ.UI
             onResume?.Invoke();
         }
 
+        public void OnSettingsClicked()
+        {
+            settingsWindow.Open();
+        }
+        
         public void OnHelpClicked()
         {
             onHelp?.Invoke();

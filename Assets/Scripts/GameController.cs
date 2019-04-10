@@ -17,8 +17,6 @@ namespace GravityDJ
 
         [Inject] private GameOverScreen gameOverScreen;
 
-        [Inject] private HelpWindow helpWindow;
-
         [Inject] private MainMenuWindow mainMenuWindow;
 
         Settings settings;
@@ -115,7 +113,12 @@ namespace GravityDJ
             mainMenuWindow.Init(isGamePlaying);
             mainMenuWindow.Open(
                 StartGame, 
-                Resume, ()=> { helpWindow.Open(null); }, Application.Quit);
+                Resume, OnHelpButtonClicked, Application.Quit);
+        }
+
+        private void OnHelpButtonClicked()
+        {
+            WindowManager.Instance.OpenWindow("Help");
         }
 
         private void Pause() 

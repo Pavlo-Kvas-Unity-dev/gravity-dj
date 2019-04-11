@@ -226,6 +226,7 @@
                 windowRectTransform.anchorMax = Vector2.one;
                 windowRectTransform.sizeDelta = Vector2.zero;
                 windowRectTransform.localScale = Vector3.one;
+                windowRectTransform.anchoredPosition = Vector2.zero;
             }
         }
 

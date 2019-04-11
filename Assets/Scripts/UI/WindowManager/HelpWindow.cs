@@ -1,10 +1,6 @@
-﻿namespace GravityDJ.UI
+﻿namespace GravityDJ.UI.WindowManager
 {
     public class HelpWindow : WindowBase
     {
-        public void OnReturnButtonClicked()
-        {
-            WindowManager.Instance.CloseWindow(gameObject.scene.name);
-        }
     }
 }

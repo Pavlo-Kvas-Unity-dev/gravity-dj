@@ -5,6 +5,7 @@ namespace GravityDJ.UI
 {
     public class WindowBase : MonoBehaviour, IWindow
     {
+        
         private Action onCloseAction;
 
         public void Open()

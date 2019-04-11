@@ -1,11 +1,12 @@
 ﻿using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-    using UnityEngine;
-    using UnityEngine.SceneManagement;
-
+namespace GravityDJ.UI.WindowManager
+{
     [AddComponentMenu("Slash/Windows/Window Manager")]
     public class WindowManager : MonoBehaviour, IWindowManager
     {
@@ -406,3 +407,4 @@
 
         #endregion
     }
+}

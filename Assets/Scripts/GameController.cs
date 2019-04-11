@@ -1,5 +1,6 @@
 ﻿using System;
 using GravityDJ.UI;
+using GravityDJ.UI.WindowManager;
 using InfinityEngine.Localization;
 using TMPro;
 using UnityEngine;

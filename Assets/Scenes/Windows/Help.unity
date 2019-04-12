@@ -124,6 +124,8 @@ GameObject:
   - component: {fileID: 1017327833}
   - component: {fileID: 1017327831}
   - component: {fileID: 1017327832}
+  - component: {fileID: 1017327835}
+  - component: {fileID: 1017327834}
   m_Layer: 5
   m_Name: HelpWindow
   m_TagString: Untagged
@@ -201,6 +203,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017327829}
   m_CullTransparentMesh: 0
+--- !u!114 &1017327834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017327829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c716e1bf0700ff447b82031ee4985716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 1017327835}
+  AnimatorOpenedParameter: is_open
+--- !u!95 &1017327835
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017327829}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a4b927cc73dd986469cc809b24931775, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1117917491
 GameObject:
   m_ObjectHideFlags: 0
